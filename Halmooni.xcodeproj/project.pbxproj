@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C639ADC2BF9C8CF00420610 /* HalmooniApp.swift */; };
-		2C639ADF2BF9C8CF00420610 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C639ADE2BF9C8CF00420610 /* ContentView.swift */; };
+		2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C639ADE2BF9C8CF00420610 /* MainTabView.swift */; };
 		2C639AE12BF9C8D000420610 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AE02BF9C8D000420610 /* Assets.xcassets */; };
 		2C639AE42BF9C8D000420610 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AE32BF9C8D000420610 /* Preview Assets.xcassets */; };
+		2C639AEB2BF9C90F00420610 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AEA2BF9C90F00420610 /* .gitignore */; };
+		2C639AF22BF9CC3000420610 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C639AF02BF9CC3000420610 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C639AD92BF9C8CF00420610 /* Halmooni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Halmooni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C639ADC2BF9C8CF00420610 /* HalmooniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalmooniApp.swift; sourceTree = "<group>"; };
-		2C639ADE2BF9C8CF00420610 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2C639ADE2BF9C8CF00420610 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		2C639AE02BF9C8D000420610 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C639AE32BF9C8D000420610 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2C639AEA2BF9C90F00420610 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2C639AED2BF9CB7900420610 /* Halmooni.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Halmooni.entitlements; sourceTree = "<group>"; };
+		2C639AEE2BF9CB9600420610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2C639AF12BF9CC3000420610 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,7 @@
 		2C639AD02BF9C8CF00420610 = {
 			isa = PBXGroup;
 			children = (
+				2C639AEA2BF9C90F00420610 /* .gitignore */,
 				2C639ADB2BF9C8CF00420610 /* Halmooni */,
 				2C639ADA2BF9C8CF00420610 /* Products */,
 			);
@@ -51,8 +58,11 @@
 		2C639ADB2BF9C8CF00420610 /* Halmooni */ = {
 			isa = PBXGroup;
 			children = (
+				2C639AEF2BF9CC2200420610 /* Model */,
+				2C639AEE2BF9CB9600420610 /* Info.plist */,
+				2C639AED2BF9CB7900420610 /* Halmooni.entitlements */,
+				2C639AEC2BF9C92C00420610 /* Views */,
 				2C639ADC2BF9C8CF00420610 /* HalmooniApp.swift */,
-				2C639ADE2BF9C8CF00420610 /* ContentView.swift */,
 				2C639AE02BF9C8D000420610 /* Assets.xcassets */,
 				2C639AE22BF9C8D000420610 /* Preview Content */,
 			);
@@ -65,6 +75,22 @@
 				2C639AE32BF9C8D000420610 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2C639AEC2BF9C92C00420610 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C639AEF2BF9CC2200420610 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C639AF02BF9CC3000420610 /* Model.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C639AE42BF9C8D000420610 /* Preview Assets.xcassets in Resources */,
+				2C639AEB2BF9C90F00420610 /* .gitignore in Resources */,
 				2C639AE12BF9C8D000420610 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +164,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C639ADF2BF9C8CF00420610 /* ContentView.swift in Sources */,
+				2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
+				2C639AF22BF9CC3000420610 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,12 +297,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Halmooni/Halmooni.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halmooni/Preview Content\"";
 				DEVELOPMENT_TEAM = VF8R3A969C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Halmooni/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -298,12 +328,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Halmooni/Halmooni.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halmooni/Preview Content\"";
 				DEVELOPMENT_TEAM = VF8R3A969C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Halmooni/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,6 +376,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2C639AF02BF9CC3000420610 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2C639AF12BF9CC3000420610 /* Model.xcdatamodel */,
+			);
+			currentVersion = 2C639AF12BF9CC3000420610 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2C639AD12BF9C8CF00420610 /* Project object */;
 }
