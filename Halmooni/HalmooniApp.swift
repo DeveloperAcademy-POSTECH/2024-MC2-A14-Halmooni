@@ -10,8 +10,11 @@ import SwiftUI
 @main
 struct HalmooniApp: App {
     var body: some Scene {
+        let managedObject = PersistentController.shared
+        
         WindowGroup {
             MainTabView()
+                .environment(\.managedObjectContext, managedObject.container.viewContext)
         }
     }
 }
