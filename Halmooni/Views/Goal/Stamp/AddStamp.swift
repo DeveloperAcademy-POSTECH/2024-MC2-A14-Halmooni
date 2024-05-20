@@ -1,12 +1,13 @@
 //
-//  addStamp.swift
+//  AddStamp.swift
 //  Halmooni
 //
-//  Created by 추서연 on 5/19/24.
+//  Created by 추서연 on 5/20/24.
 //
+
 import SwiftUI
 
-struct addStamp: View {
+struct AddStamp: View {
     @State private var showModal = false
     var tokenSum: Int
     var tokenUsed: Int
@@ -21,19 +22,19 @@ struct addStamp: View {
                     Image(systemName: "plus.app")
                         .resizable()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(.primaryColor)
+                        .foregroundColor(Color("PrimColor"))
                 })
             }
             .padding(16)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .sheet(isPresented: $showModal) {
-                addStampDetail(tokenSum: tokenSum, tokenUsed: tokenUsed)
+                AddStampDetail(tokenSum: tokenSum, tokenUsed: tokenUsed)
             }
         }
     }
 }
 
 #Preview {
-    addStamp(tokenSum: 15, tokenUsed: 8)
+    AddStamp(tokenSum: 15, tokenUsed: 8)
 }

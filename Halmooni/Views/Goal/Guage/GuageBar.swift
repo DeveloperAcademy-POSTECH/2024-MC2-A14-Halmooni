@@ -1,16 +1,16 @@
 //
-//  guageBar.swift
+//  GuageBar.swift
 //  Halmooni
 //
-//  Created by 추서연 on 5/19/24.
+//  Created by 추서연 on 5/20/24.
 //
 
 import SwiftUI
 
-struct gaugeBar: View {
+struct GaugeBar: View {
     
     @State private var progress = 0.6
-
+    
     var body: some View {
         VStack {
             Text("할머니께 편지를 전달하러 가는 중이에요")
@@ -18,17 +18,17 @@ struct gaugeBar: View {
             Gauge(value: progress) {
                 HStack{
                     Image(systemName: "figure.run")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .offset(x: CGFloat(progress) * 300 - 150 , y: 0)
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .offset(x: CGFloat(progress) * 300 - 150 , y: 0)
                     Image(systemName: "house.and.flag.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .offset(x: 150 , y: 0)
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .offset(x: 150 , y: 0)
                 }
-                                    
+                
             }
-            .tint(.primaryColor)
+            .tint(Color("PrimColor"))
             .frame(width: 300, height: 20)
             .padding(16)
             
@@ -40,5 +40,5 @@ struct gaugeBar: View {
 }
 
 #Preview {
-    gaugeBar()
+    GaugeBar()
 }

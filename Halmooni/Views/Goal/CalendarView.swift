@@ -12,7 +12,6 @@ struct CalendarView: View {
     @State var offset: CGSize = CGSize()
     @State var uploadDate: Set<Date> = [Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 2))!,Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 11))!]
     
-    
     var body: some View {
         VStack {
             headerView
@@ -97,7 +96,7 @@ private struct CellView: View {
                     Group {
                         if selected {
                             Image(systemName: "heart.fill")
-                                .foregroundColor(.primaryColor)
+                                .foregroundColor(Color("PrimColor"))
                         }
                     }
                 )

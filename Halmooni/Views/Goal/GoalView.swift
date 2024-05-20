@@ -13,24 +13,25 @@ struct GoalView: View {
     
     var body: some View {
         ZStack {
-            Color.bgColor.edgesIgnoringSafeArea(.all)
+            Color("BgColor").edgesIgnoringSafeArea(.all)
             
-            VStack {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("목표 관리")
+                    .padding(16)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
                 HStack {
-                    currentStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
+                    CurrentStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
                     Spacer()
-                    addStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
+                    AddStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
                 }
-                gaugeBar()
+                GaugeBar()
                 CalendarView(month: Date())
             }
             .padding(16)
         }
     }
 }
-
-// Preview code
-import SwiftUI
 
 #Preview {
     GoalView()
