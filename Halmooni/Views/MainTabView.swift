@@ -22,6 +22,7 @@ struct MainTabView: View {
                     Text("목표 관리")
                 }
             
+            
             // TODO: - 모아보기 View 넣어주세요
             Text("모아보기뷰")
                 .tabItem {
