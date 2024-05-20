@@ -15,9 +15,8 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             // TODO: - 목표관리 View 넣어주세요
-            Text("목표관리뷰")
+            GoalView()
                 .tabItem {
-                    // 수정 예정
                     Image(systemName: "scope")
                     Text("목표 관리")
                 }
