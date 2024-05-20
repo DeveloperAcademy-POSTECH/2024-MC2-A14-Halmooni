@@ -24,6 +24,7 @@
 		464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DE2BFB270100259B3F /* CurrentStamp.swift */; };
 		464117E72BFB270100259B3F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E02BFB270100259B3F /* CalendarView.swift */; };
 		464117E82BFB270100259B3F /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E12BFB270100259B3F /* GoalView.swift */; };
+		B93C32992BFB34A1007699BB /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C32982BFB34A1007699BB /* Title.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		464117DE2BFB270100259B3F /* CurrentStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStamp.swift; sourceTree = "<group>"; };
 		464117E02BFB270100259B3F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		464117E12BFB270100259B3F /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		B93C32982BFB34A1007699BB /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */,
+				B93C32982BFB34A1007699BB /* Title.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			files = (
 				2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */,
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
+				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
