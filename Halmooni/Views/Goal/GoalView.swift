@@ -13,7 +13,8 @@ struct GoalView: View {
     
     var body: some View {
         ZStack {
-            Color("BgColor").edgesIgnoringSafeArea(.all)
+            Color(.bg)
+                .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading, spacing: 16) {
                 Text("목표 관리")
@@ -22,7 +23,8 @@ struct GoalView: View {
                     .fontWeight(.bold)
                 HStack {
                     CurrentStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
-                    Spacer()
+                        .padding(.trailing, 25)
+                    
                     AddStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
                 }
                 GaugeBar()

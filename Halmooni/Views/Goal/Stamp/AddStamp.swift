@@ -13,24 +13,22 @@ struct AddStamp: View {
     var tokenUsed: Int
     
     var body: some View {
-        HStack {
-            VStack {
-                Text("우표 추가하기")
-                Button(action: {
-                    showModal = true
-                }, label: {
-                    Image(systemName: "plus.app")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(Color("PrimColor"))
-                })
-            }
-            .padding(16)
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .sheet(isPresented: $showModal) {
-                AddStampDetail(tokenSum: tokenSum, tokenUsed: tokenUsed)
-            }
+        VStack {
+            Text("우표 추가하기")
+            Button(action: {
+                showModal = true
+            }, label: {
+                Image(systemName: "plus.app")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(Color(.prim))
+            })
+        }
+        .padding(16)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .sheet(isPresented: $showModal) {
+            AddStampDetail(tokenSum: tokenSum, tokenUsed: tokenUsed)
         }
     }
 }
