@@ -29,6 +29,7 @@ struct MainTabView: View {
                     Image(systemName: "square.grid.2x2")
                     Text("모아 보기")
                 }
+            
         }
         .tint(Color("PrimColor"))
     }
