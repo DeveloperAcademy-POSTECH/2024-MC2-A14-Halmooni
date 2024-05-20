@@ -55,14 +55,13 @@ struct GrandMotherMainView: View {
                                 .font(.largeTitle)
                         }
                     }
-
                     
                     
                     Button {
-                            let telephone = "tel://"
-                            let formattedString = telephone + numberString
-                            guard let url = URL(string: formattedString) else { return }
-                            UIApplication.shared.open(url)
+                        let telephone = "tel://"
+                        let formattedString = telephone + numberString
+                        guard let url = URL(string: formattedString) else { return }
+                        UIApplication.shared.open(url)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
@@ -75,7 +74,7 @@ struct GrandMotherMainView: View {
                                 Text("인범이에게 전화하기")
                                     .dynamicTypeSize(.xxxLarge)
                                     .font(.largeTitle)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.text)
                                     .bold()
                                     .padding(.leading, 46)
                                 
@@ -89,10 +88,10 @@ struct GrandMotherMainView: View {
                             }
                             .padding()
                         }
-                        .padding(.trailing, 60)
-                        .padding(.leading, 370)
                     }
                     .padding(.top, 65)
+                    .padding(.trailing, 60)
+                    .padding(.leading, 370)
                 }
                 Spacer()
                     .frame(height: 65)
@@ -101,22 +100,28 @@ struct GrandMotherMainView: View {
                     LazyVGrid(columns: columns, alignment: .leading, spacing: 20) {
                         ForEach(0..<2) { i in
                             ZStack {
-                                if !showDetailView {
-                                    VStack {
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .fill(Color.blue) // 색상 추가 (선택 사항)
-                                            .frame(width: 592, height: 692)
-                                            .matchedGeometryEffect(id: "photo\(i)", in: animationNameSpace)
-                                            .onTapGesture {
-                                                withAnimation(.spring()) {
-                                                    showDetailView.toggle()
-                                                }
-                                            }
+                                //                                if !showDetailView {
+                                VStack {
+                                    if i % 2 == 0 {
+                                        // 짝수번 (왼쪽)
                                     }
+                                    else {
+                                        // 홀수번 (오른쪽)
+                                    }
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color.blue) // 색상 추가 (선택 사항)
+                                        .frame(width: 592, height: 692)
+                                        .matchedGeometryEffect(id: "photo\(i)", in: animationNameSpace)
+                                    //                                            .onTapGesture {
+                                    //                                                withAnimation(.spring()) {
+                                    //                                                    showDetailView.toggle()
+                                    //                                                }
+                                    //                                            }
                                 }
+                                //                                }
                                 
                                 
-
+                                
                                 
                                 if !self.select {
                                     RoundedRectangle(cornerRadius: 20)
@@ -141,12 +146,11 @@ struct GrandMotherMainView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace)
-                    .transition(.opacity)
+//                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
+                    //.transition(.opacity)
                 //detailview 임의 설정
                     .frame(width:1026, height: 904)
-                    .background(Color.white)
                     .cornerRadius(20)
-                    
             }
         }
     }

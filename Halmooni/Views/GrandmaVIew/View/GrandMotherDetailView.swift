@@ -35,9 +35,10 @@ struct GrandMotherDetailView: View {
                             .padding(.trailing, 50)
                     })
                 }// 날짜 버튼
-    //            Spacer()
+//                Spacer()
                 HStack {
                     RoundedRectangle(cornerRadius: 20)
+                        
                         .padding(.leading, 50)
                         .aspectRatio(3/4, contentMode: .fit)
                         .matchedGeometryEffect(id: "photo0", in: animationNamespace)
