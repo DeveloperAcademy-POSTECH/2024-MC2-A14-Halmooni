@@ -12,17 +12,9 @@
 		2C639AE12BF9C8D000420610 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AE02BF9C8D000420610 /* Assets.xcassets */; };
 		2C639AE42BF9C8D000420610 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AE32BF9C8D000420610 /* Preview Assets.xcassets */; };
 		2C639AEB2BF9C90F00420610 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AEA2BF9C90F00420610 /* .gitignore */; };
-		2C639AF22BF9CC3000420610 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C639AF02BF9CC3000420610 /* Model.xcdatamodeld */; };
-		46C1179C2BF9E99B00DFB0C9 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C1179B2BF9E99B00DFB0C9 /* GoalView.swift */; };
-		46C117A82BF9EA6100DFB0C9 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117A72BF9EA6100DFB0C9 /* CalendarView.swift */; };
-		46C117AC2BFB1B6F00DFB0C9 /* GuageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117AB2BFB1B6F00DFB0C9 /* GuageBar.swift */; };
-		46C117AE2BFB1B8D00DFB0C9 /* AddStampDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117AD2BFB1B8D00DFB0C9 /* AddStampDetail.swift */; };
-		46C117B02BFB1BAB00DFB0C9 /* AddStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117AF2BFB1BAB00DFB0C9 /* AddStamp.swift */; };
-		46C117B22BFB1BC700DFB0C9 /* CurrentStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117B12BFB1BC700DFB0C9 /* CurrentStamp.swift */; };
 		2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */; };
 		2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */; };
 		2CF2DBE42BFA337A008D2B4E /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE32BFA337A008D2B4E /* .gitattributes */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,12 +27,6 @@
 		2C639AED2BF9CB7900420610 /* Halmooni.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Halmooni.entitlements; sourceTree = "<group>"; };
 		2C639AEE2BF9CB9600420610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2C639AF12BF9CC3000420610 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		46C1179B2BF9E99B00DFB0C9 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
-		46C117A72BF9EA6100DFB0C9 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		46C117AB2BFB1B6F00DFB0C9 /* GuageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuageBar.swift; sourceTree = "<group>"; };
-		46C117AD2BFB1B8D00DFB0C9 /* AddStampDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStampDetail.swift; sourceTree = "<group>"; };
-		46C117AF2BFB1BAB00DFB0C9 /* AddStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStamp.swift; sourceTree = "<group>"; };
-		46C117B12BFB1BC700DFB0C9 /* CurrentStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStamp.swift; sourceTree = "<group>"; };
 		2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
 		2CF2DBE32BFA337A008D2B4E /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,7 +86,6 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				46C117B32BFB1BD400DFB0C9 /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
 			);
 			path = Views;
@@ -114,34 +99,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		46C1179D2BF9E9E600DFB0C9 /* Guage */ = {
-			isa = PBXGroup;
-			children = (
-				46C117AB2BFB1B6F00DFB0C9 /* GuageBar.swift */,
-			);
-			path = Guage;
-			sourceTree = "<group>";
-		};
-		46C117A02BF9EA0900DFB0C9 /* Stamp */ = {
-			isa = PBXGroup;
-			children = (
-				46C117AD2BFB1B8D00DFB0C9 /* AddStampDetail.swift */,
-				46C117AF2BFB1BAB00DFB0C9 /* AddStamp.swift */,
-				46C117B12BFB1BC700DFB0C9 /* CurrentStamp.swift */,
-			);
-			path = Stamp;
-			sourceTree = "<group>";
-		};
-		46C117B32BFB1BD400DFB0C9 /* Goal */ = {
-			isa = PBXGroup;
-			children = (
-				46C1179B2BF9E99B00DFB0C9 /* GoalView.swift */,
-				46C117A72BF9EA6100DFB0C9 /* CalendarView.swift */,
-				46C1179D2BF9E9E600DFB0C9 /* Guage */,
-				46C117A02BF9EA0900DFB0C9 /* Stamp */,
-			);
-			path = Goal;
-
 		2CF2DBE02BFA2238008D2B4E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,15 +179,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46C117AC2BFB1B6F00DFB0C9 /* GuageBar.swift in Sources */,
-				46C117B02BFB1BAB00DFB0C9 /* AddStamp.swift in Sources */,
-				46C117B22BFB1BC700DFB0C9 /* CurrentStamp.swift in Sources */,
 				2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */,
-				46C117AE2BFB1B8D00DFB0C9 /* AddStampDetail.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
-				46C117A82BF9EA6100DFB0C9 /* CalendarView.swift in Sources */,
-				2C639AF22BF9CC3000420610 /* Model.xcdatamodeld in Sources */,
-				46C1179C2BF9E99B00DFB0C9 /* GoalView.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
 			);
