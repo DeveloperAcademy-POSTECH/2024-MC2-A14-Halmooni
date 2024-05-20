@@ -19,6 +19,10 @@
 		46C117AE2BFB1B8D00DFB0C9 /* AddStampDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117AD2BFB1B8D00DFB0C9 /* AddStampDetail.swift */; };
 		46C117B02BFB1BAB00DFB0C9 /* AddStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117AF2BFB1BAB00DFB0C9 /* AddStamp.swift */; };
 		46C117B22BFB1BC700DFB0C9 /* CurrentStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C117B12BFB1BC700DFB0C9 /* CurrentStamp.swift */; };
+		2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */; };
+		2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */; };
+		2CF2DBE42BFA337A008D2B4E /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE32BFA337A008D2B4E /* .gitattributes */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,8 @@
 		46C117AD2BFB1B8D00DFB0C9 /* AddStampDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStampDetail.swift; sourceTree = "<group>"; };
 		46C117AF2BFB1BAB00DFB0C9 /* AddStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStamp.swift; sourceTree = "<group>"; };
 		46C117B12BFB1BC700DFB0C9 /* CurrentStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStamp.swift; sourceTree = "<group>"; };
+		2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
+		2CF2DBE32BFA337A008D2B4E /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,7 @@
 		2C639AD02BF9C8CF00420610 = {
 			isa = PBXGroup;
 			children = (
+				2CF2DBE32BFA337A008D2B4E /* .gitattributes */,
 				2C639AEA2BF9C90F00420610 /* .gitignore */,
 				2C639ADB2BF9C8CF00420610 /* Halmooni */,
 				2C639ADA2BF9C8CF00420610 /* Products */,
@@ -70,6 +77,7 @@
 		2C639ADB2BF9C8CF00420610 /* Halmooni */ = {
 			isa = PBXGroup;
 			children = (
+				2CF2DBE02BFA2238008D2B4E /* Helpers */,
 				2C639AEF2BF9CC2200420610 /* Model */,
 				2C639AEE2BF9CB9600420610 /* Info.plist */,
 				2C639AED2BF9CB7900420610 /* Halmooni.entitlements */,
@@ -101,7 +109,7 @@
 		2C639AEF2BF9CC2200420610 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2C639AF02BF9CC3000420610 /* Model.xcdatamodeld */,
+				2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -133,6 +141,13 @@
 				46C117A02BF9EA0900DFB0C9 /* Stamp */,
 			);
 			path = Goal;
+
+		2CF2DBE02BFA2238008D2B4E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +211,7 @@
 				2C639AE42BF9C8D000420610 /* Preview Assets.xcassets in Resources */,
 				2C639AEB2BF9C90F00420610 /* .gitignore in Resources */,
 				2C639AE12BF9C8D000420610 /* Assets.xcassets in Resources */,
+				2CF2DBE42BFA337A008D2B4E /* .gitattributes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +231,8 @@
 				46C117A82BF9EA6100DFB0C9 /* CalendarView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* Model.xcdatamodeld in Sources */,
 				46C1179C2BF9E99B00DFB0C9 /* GoalView.swift in Sources */,
+				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
+				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,13 +444,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2C639AF02BF9CC3000420610 /* Model.xcdatamodeld */ = {
+		2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				2C639AF12BF9CC3000420610 /* Model.xcdatamodel */,
 			);
 			currentVersion = 2C639AF12BF9CC3000420610 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			path = DiaryModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

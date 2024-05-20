@@ -19,13 +19,14 @@ struct MainTabView: View {
                     Image(systemName: "scope")
                     Text("목표 관리")
                 }.tag(0)
-                            
+
             // TODO: - 모아보기 View 넣어주세요
             Text("모아보기뷰")
                 .tabItem {
-                    Image(systemName: "square.grid.2x2.fill")
+                    Image(systemName: "square.grid.2x2")
                     Text("모아 보기")
                 }
+            
         }
         .tint(Color("PrimColor"))
     }
