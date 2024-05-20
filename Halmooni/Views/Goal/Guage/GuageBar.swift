@@ -8,29 +8,30 @@
 import SwiftUI
 
 struct GaugeBar: View {
+    var tokenSum: Int
+    var tokenUsed: Int
     
-    @State private var progress = 0.6
+    private var progress: Double {
+            return Double(tokenUsed) / Double(tokenSum)}
     
     var body: some View {
-        VStack {
-            Text("할머니께 편지를 전달하러 가는 중이에요")
+        VStack(alignment:.leading) {
+            Text("할머니께 달려가는 길")
             
             Gauge(value: progress) {
                 HStack{
                     Image(systemName: "figure.run")
                         .resizable()
-                        .frame(width: 20, height: 20)
-                        .offset(x: CGFloat(progress) * 300 - 150 , y: 0)
+                        .frame(width: 21, height: 28)
+                        .offset(x: CGFloat(progress) * 360 - 180 , y: 0)
                     Image(systemName: "house.and.flag.fill")
                         .resizable()
-                        .frame(width: 20, height: 20)
-                        .offset(x: 150 , y: 0)
+                        .frame(width: 28, height: 20)
+                        .offset(x: 130 , y: 0)
                 }
                 
             }
             .tint(Color("PrimColor"))
-            .frame(width: 300, height: 20)
-            .padding(16)
             
         }
         .padding(16)
@@ -40,5 +41,5 @@ struct GaugeBar: View {
 }
 
 #Preview {
-    GaugeBar()
+    GaugeBar(tokenSum: 15, tokenUsed: 8)
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarView: View {
     @State var month: Date
     @State var offset: CGSize = CGSize()
-    @State var uploadDate: Set<Date> = [Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 2))!,Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 11))!]
+    @State var uploadDate: Set<Date> = [Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 2))!, Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 11))!]
     
     var body: some View {
         VStack {
@@ -33,13 +33,35 @@ struct CalendarView: View {
     // MARK: - 헤더 뷰
     private var headerView: some View {
         VStack {
-            Text(month, formatter: Self.dateFormatter)
-                .font(.title)
-                .padding(.bottom)
+            HStack {
+                Image(systemName: "chevron.backward")
+                    .onTapGesture {
+                        changeMonth(by: -1)
+                    }
+                Spacer()
+                Text(month, formatter: Self.dateFormatter)
+                    .font(.headline)
+                    .foregroundColor(Color("TextColor"))
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .onTapGesture {
+                        changeMonth(by: 1)
+                    }
+            }
+            .padding(.bottom)
+            
+            Divider()
+                .overlay(Color("SecColor"))
+                .frame(minHeight: 1)
+                .background(Color("SecColor"))
+                .padding(.bottom, 16)
+            
             HStack {
                 ForEach(Self.weekdaySymbols, id: \.self) { symbol in
                     Text(symbol)
+                        .font(.subheadline)
                         .frame(maxWidth: .infinity)
+                        .foregroundColor(Color("GryColor"))
                 }
             }
             .padding(.bottom, 5)
@@ -61,19 +83,15 @@ struct CalendarView: View {
                         let date = getDate(for: index - firstWeekday)
                         let day = index - firstWeekday + 1
                         let selected = uploadDate.contains(date)
+                        let isToday = Calendar.current.isDateInToday(date)
                         
-                        CellView(day: day, selected: selected)
-                            .onTapGesture {
-                                if selected {
-                                    uploadDate.remove(date)
-                                } else {
-                                    uploadDate.insert(date)
-                                }
-                            }
+                        CellView(day: day, selected: selected, isToday: isToday)
+                            
                     }
-                }
+                }.padding(.vertical,5)
             }
-        }
+        }.foregroundColor(Color("TextColor"))
+        
     }
 }
 
@@ -81,10 +99,12 @@ struct CalendarView: View {
 private struct CellView: View {
     var day: Int
     var selected: Bool = false
+    var isToday: Bool = false
     
-    init(day: Int, selected: Bool) {
+    init(day: Int, selected: Bool, isToday: Bool) {
         self.day = day
         self.selected = selected
+        self.isToday = isToday
     }
     
     var body: some View {
@@ -92,15 +112,24 @@ private struct CellView: View {
             RoundedRectangle(cornerRadius: 5)
                 .opacity(0)
                 .foregroundColor(.gray)
+                .overlay(Text(String(day)))
+                .frame(width: 33, height: 33)
+                .background(isToday ? Color("SecColor") : Color.clear)
                 .overlay(
                     Group {
                         if selected {
-                            Image(systemName: "heart.fill")
+                            Image(systemName: "circle.fill")
+                                .resizable()
+                                .frame(width: 23, height: 23)
+                                .foregroundColor(Color.white)
+                            Image(systemName: "star.circle.fill")
+                                .resizable()
+                                .frame(width: 23, height: 23)
+                                .rotationEffect(.degrees(30))
                                 .foregroundColor(Color("PrimColor"))
                         }
                     }
                 )
-                .overlay(Text(String(day)))
         }
     }
 }
@@ -144,13 +173,13 @@ private extension CalendarView {
 extension CalendarView {
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM yyyy"
+        formatter.dateFormat = "yyyy년 M월"
+        formatter.locale = Locale(identifier: "ko_KR")
         return formatter
     }()
     
-    static let weekdaySymbols = Calendar.current.veryShortWeekdaySymbols
+    static let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
 }
-
 
 #Preview {
     CalendarView(month: Date())

@@ -25,7 +25,7 @@ struct GoalView: View {
                     Spacer()
                     AddStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
                 }
-                GaugeBar()
+                GaugeBar(tokenSum: tokenSum, tokenUsed: tokenUsed)
                 CalendarView(month: Date())
             }
             .padding(16)

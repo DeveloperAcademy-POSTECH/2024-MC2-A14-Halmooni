@@ -16,61 +16,88 @@ struct AddStampDetail: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Image(systemName: "star.square.on.square")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(Color("PrimColor"))
-                    .padding(16)
+            ZStack{
+                Color("BgColor").edgesIgnoringSafeArea(.all)
                 
-                Text("남은 우표 수: \(tokenSum - tokenUsed + 1)")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
-                TextField("Enter Quantity", value: $quantity, formatter: NumberFormatter())
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                HStack {
-                    Button(action : {
-                        quantity += 5
-                    })  {
-                        Text("+5")
+                VStack {
+                    VStack{
+                        Image(systemName: "star.square.on.square")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color("PrimColor"))
                             .padding(16)
-                            .background(Color("SecColor"))
-                            .foregroundColor(Color("TextColor"))
-                            .cornerRadius(20)
+                        
+                        Text("남은 우표 수: \(tokenSum - tokenUsed + 1)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                        
+                        Spacer()
+                        
+                        HStack{
+                            Text("추가할 우표 수")
+                            
+                            TextField("Enter Quantity", value: $quantity, formatter: NumberFormatter())
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                        .padding(16)
+                        .background(Color.white)
+                        .cornerRadius(20)
                     }
-                    Button(action: {
-                        quantity += 10
-                    }) {
-                        Text("+10")
-                            .padding()
-                            .background(Color("SecColor"))
-                            .foregroundColor(Color("TextColor"))
-                            .cornerRadius(20)
+                    .padding(16)
+                    .frame(height: 200)
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Button(action : {
+                            quantity += 5
+                        })  {
+                            Text("+5")
+                                .frame(width: 90, height: 30)
+                                .background(Color("SecColor"))
+                                .foregroundColor(Color("TextColor"))
+                                .cornerRadius(90)
+                        }
+                        Button(action: {
+                            quantity += 10
+                        }) {
+                            Text("+10")
+                                .frame(width: 90, height: 30)
+                                .background(Color("SecColor"))
+                                .foregroundColor(Color("TextColor"))
+                                .cornerRadius(90)
+                        }
+                        Button(action: {
+                            quantity += 15
+                        }) {
+                            Text("+15")
+                                .frame(width: 90, height: 30)
+                                .background(Color("SecColor"))
+                                .foregroundColor(Color("TextColor"))
+                                .cornerRadius(90)
+                        }
                     }
                 }
-            }
-            .padding(16)
-            .background(Color.white)
-            .navigationBarTitle("우표 추가", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("취소")
-                            .foregroundColor(Color("PrimColor"))
+                
+                .padding(16)
+                .navigationBarTitle("우표 추가", displayMode: .inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("취소")
+                                .foregroundColor(Color("PrimColor"))
+                        }
                     }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        // Add action for done button here
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("완료")
-                            .foregroundColor(Color("PrimColor"))
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            // Add action for done button here
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("완료")
+                                .foregroundColor(Color("PrimColor"))
+                        }
                     }
                 }
             }

@@ -25,7 +25,7 @@ struct AddStamp: View {
                         .foregroundColor(Color("PrimColor"))
                 })
             }
-            .padding(16)
+            .frame(width: 127, height: 131)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .sheet(isPresented: $showModal) {

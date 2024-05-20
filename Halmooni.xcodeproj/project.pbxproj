@@ -98,6 +98,7 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				464117E92BFB2CBC00259B3F /* Mode */,
 				464117E22BFB270100259B3F /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
 			);
@@ -147,6 +148,13 @@
 				464117E12BFB270100259B3F /* GoalView.swift */,
 			);
 			path = Goal;
+			sourceTree = "<group>";
+		};
+		464117E92BFB2CBC00259B3F /* Mode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
