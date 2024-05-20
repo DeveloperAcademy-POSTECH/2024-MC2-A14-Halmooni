@@ -15,6 +15,8 @@
 		2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */; };
 		2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */; };
 		2CF2DBE42BFA337A008D2B4E /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE32BFA337A008D2B4E /* .gitattributes */; };
+		43AF83352BFB63ED00C01C8E /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AF83342BFB63ED00C01C8E /* DiaryCollectionView.swift */; };
+		43AF83372BFB64CE00C01C8E /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AF83362BFB64CE00C01C8E /* DiaryDetailView.swift */; };
 		464117E32BFB270100259B3F /* GuageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DA2BFB270100259B3F /* GuageBar.swift */; };
 		464117E42BFB270100259B3F /* AddStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DC2BFB270100259B3F /* AddStamp.swift */; };
 		464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DD2BFB270100259B3F /* AddStampDetail.swift */; };
@@ -36,6 +38,8 @@
 		2C639AF12BF9CC3000420610 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
 		2CF2DBE32BFA337A008D2B4E /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		43AF83342BFB63ED00C01C8E /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
+		43AF83362BFB64CE00C01C8E /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		464117DA2BFB270100259B3F /* GuageBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuageBar.swift; sourceTree = "<group>"; };
 		464117DC2BFB270100259B3F /* AddStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStamp.swift; sourceTree = "<group>"; };
 		464117DD2BFB270100259B3F /* AddStampDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStampDetail.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43AF83332BFB63D900C01C8E /* DiaryCollection */,
 				464117E22BFB270100259B3F /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
 			);
@@ -121,6 +126,15 @@
 				2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		43AF83332BFB63D900C01C8E /* DiaryCollection */ = {
+			isa = PBXGroup;
+			children = (
+				43AF83342BFB63ED00C01C8E /* DiaryCollectionView.swift */,
+				43AF83362BFB64CE00C01C8E /* DiaryDetailView.swift */,
+			);
+			path = DiaryCollection;
 			sourceTree = "<group>";
 		};
 		464117DB2BFB270100259B3F /* Guage */ = {
@@ -228,9 +242,11 @@
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
+				43AF83352BFB63ED00C01C8E /* DiaryCollectionView.swift in Sources */,
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
+				43AF83372BFB64CE00C01C8E /* DiaryDetailView.swift in Sources */,
 				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
 				464117E82BFB270100259B3F /* GoalView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
