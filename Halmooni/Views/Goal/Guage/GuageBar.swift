@@ -26,15 +26,13 @@ struct GaugeBar: View {
                         .frame(width: 20, height: 20)
                         .offset(x: 150 , y: 0)
                 }
-                
             }
-            .tint(Color("PrimColor"))
+            .tint(Color(.prim))
             .frame(width: 300, height: 20)
             .padding(16)
-            
         }
         .padding(16)
-        .background(Color.white)
+        .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }

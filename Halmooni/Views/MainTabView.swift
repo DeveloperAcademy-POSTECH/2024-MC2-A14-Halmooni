@@ -9,27 +9,28 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedTab: Int = 0
-    
+
     var body: some View {
-        TabView(selection: $selectedTab) {
-            // TODO: - 목표관리 View 넣어주세요
-            GoalView()
-                .tabItem {
-                    // 수정 예정
-                    Image(systemName: "scope")
-                    Text("목표 관리")
-                }
-            
-            
-            // TODO: - 모아보기 View 넣어주세요
-            Text("모아보기뷰")
-                .tabItem {
-                    Image(systemName: "square.grid.2x2")
-                    Text("모아 보기")
-                }
-            
+        NavigationStack {
+            TabView(selection: $selectedTab) {
+                GoalView()
+                    .tabItem {
+                        // 수정 예정
+                        Image(systemName: "scope")
+                        Text(Title.goal.name)
+                    }
+                    .tag(0)
+                // TODO: - 모아보기 View 넣어주세요
+                Text("모아보기뷰")
+                    .tabItem {
+                        Image(systemName: "square.grid.2x2.fill")
+                        Text(Title.list.name)
+                    }
+                    .tag(1)
+            }
+            .tint(Color(.prim))
+            .navigationTitle(selectedTab == 0 ? Title.goal.name : Title.list.name)
         }
-        .tint(Color("PrimColor"))
     }
 }
 
