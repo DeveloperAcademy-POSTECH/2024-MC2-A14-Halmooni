@@ -17,7 +17,7 @@ struct AddDiaryTemplateView: View {
             RoundedRectangle(cornerRadius: 20)
                 .aspectRatio(3/5, contentMode: .fit)
                 .foregroundStyle(.white)
-                .shadow(radius: 5)
+                .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2)
                 .overlay {
                     Image(systemName: "photo")
                         .resizable()

@@ -10,6 +10,8 @@ import SwiftUI
 
 // TODO: - 녹음 기능 구현
 struct AddDiaryRecordView: View {
+    @State private var isRecordStart: Bool = false
+    
     var body: some View {
         VStack {
             Spacer()
@@ -25,51 +27,64 @@ struct AddDiaryRecordView: View {
                 .padding(.bottom, 40)
             
             HStack {
-                Button {
+                if self.isRecordStart {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "gobackward.15")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 30, height: 30)
+                    }
                     
-                } label: {
-                    Image(systemName: "gobackward.15")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 30, height: 30)
-                }
-                
-                Button {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "play.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 45, height: 45)
+                    }
+                    .padding(.leading, 40)
+                    .padding(.trailing, 30)
                     
-                } label: {
-                    Image(systemName: "play.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 45, height: 45)
-                }
-                .padding(.leading, 40)
-                .padding(.trailing, 30)
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "goforward.15")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 30, height: 30)
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "goforward.15")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 30, height: 30)
+                    }
+                } else {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "record.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 45)
+                    }
                 }
             }
             .padding(.bottom, 80)
             
-            Button {
-                
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(lineWidth: 4)
-                        .foregroundStyle(.prim)
-                        .frame(width: 108, height: 50)
+            if isRecordStart {
+                Button {
                     
-                    RoundedRectangle(cornerRadius: 12)
-                        .foregroundStyle(.sec)
-                        .frame(width: 108, height: 50)
-                    
-                    Text("재개")
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(lineWidth: 4)
+                            .foregroundStyle(.prim)
+                            .frame(width: 108, height: 50)
+                        
+                        RoundedRectangle(cornerRadius: 12)
+                            .foregroundStyle(.sec)
+                            .frame(width: 108, height: 50)
+                        
+                        Text("재개")
+                    }
                 }
             }
             
