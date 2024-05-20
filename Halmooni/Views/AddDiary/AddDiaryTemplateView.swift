@@ -28,7 +28,6 @@ struct AddDiaryTemplateView: View {
                 .padding(.top, 31)
                 .padding(.bottom, 34)
             
-            
             HStack {
                 Text("템플릿 선택")
                     .font(.subheadline)
@@ -37,7 +36,6 @@ struct AddDiaryTemplateView: View {
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 16)
-            
             
             ScrollView(.horizontal) {
                 // TODO: - 나중에 ForEach로 수정, 선택 기능 구현
@@ -80,15 +78,13 @@ struct AddDiaryTemplateView: View {
                         Text("무니무니")
                             .font(.footnote)
                     }
-                    
-
                 }
-                .padding(.leading, 16)
+                .padding(.horizontal, 16)
             }
             .frame(height: 230)
+            .scrollIndicators(.hidden)
         }
         .navigationTitle("카드 선택")
-        
     }
 }
 
