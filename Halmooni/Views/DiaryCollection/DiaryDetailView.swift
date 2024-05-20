@@ -52,6 +52,7 @@ struct DiaryDetailView: View {
            }
     }
 
+// MARK: 상세보기뷰 - 우표템플릿
 struct ImageCard: View {
     @ObservedObject var presenter: FlipCardPresenter
     @State private var isAnimating: Bool = false
@@ -61,7 +62,7 @@ struct ImageCard: View {
         VStack {
             Spacer()
             ZStack{
-                Image("fullpost")
+                Image(.fullpost)
                     .resizable()
                     .frame(width: 361, height: 571)
                 //날짜, 음성재생 버튼
@@ -107,7 +108,7 @@ struct ImageCard: View {
     }
 }
 
-//음성재생버튼
+// MARK: 음성재생버튼
 struct PlayButton: View {
     var body: some View {
         ZStack{
@@ -124,7 +125,7 @@ struct PlayButton: View {
     }
 }
 
-//이미지카드, 사용한 토큰 합체
+// MARK: 이미지카드 + 사용한 토큰
 struct FlipCard: View {
     @ObservedObject var presenter: FlipCardPresenter
     @Binding var isAnimating: Bool
@@ -134,7 +135,7 @@ struct FlipCard: View {
             //이미지카드
             VStack{
                 Spacer()
-                Image(presenter.isFlipped ? "examplecard" : "exampleimg")
+                Image(presenter.isFlipped ? .examplecard : .exampleimg)
                     .resizable()
                     .frame(width: 297, height: 457)
                     .scaleEffect(x: presenter.isFlipped ? -1 : 1, y: 1)
@@ -164,7 +165,7 @@ struct FlipCard: View {
     }
 }
 
-//카드플립을 위한 protocol, class
+// MARK: 카드플립을 위한 protocol, class
 protocol FlipCardPresenterProtocol: ObservableObject {
     var isFlipped: Bool { get }
     func flipButtonTapped()
@@ -178,11 +179,11 @@ class FlipCardPresenter: FlipCardPresenterProtocol {
     }
 }
 
-//사용한 토큰 갯수 구조체
+// MARK: 사용한 토큰 갯수
 struct UsedToken: View {
     var body: some View {
         ZStack{
-            Image("tokenpost")
+            Image(.tokenpost)
                 .resizable()
                 .frame(width: 78, height: 52)
             HStack(spacing: 0){

@@ -15,11 +15,12 @@ struct DiaryCollectionView: View {
         NavigationStack{
             ZStack{
                 Color.bg
+                    .ignoresSafeArea(.all)
                 ScrollView{
                     VStack(spacing: -1){
                         //우표템플릿 상단+날짜(월)
                         ZStack{
-                            Image("post")
+                            Image(.post)
                                 .resizable()
                                 .frame(width: 361)
                                 .padding(.top, 32)
@@ -37,10 +38,10 @@ struct DiaryCollectionView: View {
                             LazyVGrid(columns: columns, spacing: 16, content: {
                                 ForEach(gridNums, id: \.self) { num in
                                     ZStack{
-                                        Image("exampleimg")
+                                        Image(.exampleimg)
                                             .resizable()
                                             .frame(width: 161, height: 215)
-                                            .foregroundStyle(.sec)
+                                            
                                         //날짜, 전송예약
                                         VStack{
                                             Spacer()
@@ -51,7 +52,7 @@ struct DiaryCollectionView: View {
                                                     .opacity(0.5)
                                                 HStack(spacing: 0){
                                                     Spacer()
-                                                    WillSendIndicator()
+                                                    WillSendIndicatior()
                                                         .padding(.trailing, 16)
                                                     Text("7일")
                                                         .font(.headline)
@@ -76,7 +77,6 @@ struct DiaryCollectionView: View {
                     }
                 }
             }
-            .navigationTitle("모아보기")
             .toolbarBackground(.bg, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .accentColor(.accentColor)
@@ -91,32 +91,31 @@ struct DiaryCollectionView: View {
                     })
                 }
             }
-            .ignoresSafeArea(edges: .bottom)
         }
     }
 }
 
-//전송예약 아이콘
-struct WillSendIndicator: View {
-    var body: some View {
-         ZStack{
-             ZStack{
-                 RoundedRectangle(cornerRadius: 90)
-                     .foregroundStyle(.white)
-                     .frame(width: 90, height: 20)
-                 HStack(spacing: 0){
-                     Text("전송 예정 ")
-                         .font(.system(size: 12))
-                         .foregroundStyle(.prim)
-                     Image(systemName: "paperplane.fill")
-                                     .font(.system(size: 12))
-                                     .foregroundStyle(Color.prim)
+// MARK: 전송예약 아이콘
+@ViewBuilder
+func WillSendIndicatior() -> some View {
+    ZStack{
+        ZStack{
+            RoundedRectangle(cornerRadius: 90)
+                .foregroundStyle(.white)
+                .frame(width: 90, height: 20)
+            HStack(spacing: 0){
+                Text("전송 예정 ")
+                    .font(.caption2)
+                    .foregroundStyle(.prim)
+                Image(systemName: "paperplane.fill")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color.prim)
+                
+            }
+        }
+    }
+}
 
-                             }
-                         }
-                     }
-                 }
-             }
 
 #Preview {
     DiaryCollectionView()

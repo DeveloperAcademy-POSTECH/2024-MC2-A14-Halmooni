@@ -20,8 +20,8 @@ struct MainTabView: View {
                         Text(Title.goal.name)
                     }
                     .tag(0)
-                // TODO: - 모아보기 View 넣어주세요
-                Text("모아보기뷰")
+                
+                DiaryCollectionView()
                     .tabItem {
                         Image(systemName: "square.grid.2x2.fill")
                         Text(Title.list.name)
