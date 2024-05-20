@@ -49,10 +49,12 @@ struct GrandMotherMainView: View {
                                 .bold()
                                 .padding(.leading, 50)
                                 .padding(.trailing, 10)
+                                .foregroundColor(.text)
                             Text("5月")
                                 .bold()
                                 .dynamicTypeSize(.accessibility4)
                                 .font(.largeTitle)
+                                .foregroundColor(.text)
                         }
                     }
                     
@@ -66,7 +68,7 @@ struct GrandMotherMainView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
                                 .fill(.white)
-                                .shadow(radius: 5)
+                                .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
                                 .frame(width: 592, height: 100)
                             
                             HStack {
@@ -109,9 +111,10 @@ struct GrandMotherMainView: View {
                                         // 홀수번 (오른쪽)
                                     }
                                     RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.blue) // 색상 추가 (선택 사항)
+                                        .fill(Color.sec) // 색상 추가 (선택 사항)
                                         .frame(width: 592, height: 692)
                                         .matchedGeometryEffect(id: "photo\(i)", in: animationNameSpace)
+                                        .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
                                     //                                            .onTapGesture {
                                     //                                                withAnimation(.spring()) {
                                     //                                                    showDetailView.toggle()

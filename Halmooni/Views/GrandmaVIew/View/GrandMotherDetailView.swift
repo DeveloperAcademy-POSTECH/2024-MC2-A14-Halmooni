@@ -17,6 +17,7 @@ struct GrandMotherDetailView: View {
         ZStack {
             Color.white
             VStack {
+                Spacer()
                 HStack {
                     Text("2024년 5월 18일")
                         .dynamicTypeSize(.xxxLarge)
@@ -31,7 +32,7 @@ struct GrandMotherDetailView: View {
                         Image(systemName: "xmark.circle.fill")
                             .dynamicTypeSize(.xxxLarge)
                             .font(.title)
-                            .foregroundColor(.red)
+                            .foregroundColor(.prim)
                             .padding(.trailing, 50)
                     })
                 }// 날짜 버튼
@@ -53,16 +54,9 @@ struct GrandMotherDetailView: View {
 
                 } // 사진과 카드
     //            .padding(.top, 26)
-                VStack {
-                      Button(action: {
-                        audioPlayerViewModel.playOrPause()
-                      }) {
-                        Image(systemName: audioPlayerViewModel.isPlaying ? "pause.fill" : "play.fill")
-                              .dynamicTypeSize(.accessibility5)
-                              .font(.largeTitle)
-                              .foregroundStyle(.red)
-                      }
-                    }
+                    AudioPlayerView()
+
+                    
             }//VStack
         }
         
