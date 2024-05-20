@@ -18,6 +18,12 @@
 		2CF2DBE72BFA3590008D2B4E /* MainAddDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE62BFA3590008D2B4E /* MainAddDiaryView.swift */; };
 		2CF2DBE92BFA4F95008D2B4E /* AddDiaryRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE82BFA4F95008D2B4E /* AddDiaryRecordView.swift */; };
 		2CF2DBEB2BFA530A008D2B4E /* AddDiaryTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBEA2BFA530A008D2B4E /* AddDiaryTemplateView.swift */; };
+		464117E32BFB270100259B3F /* GuageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DA2BFB270100259B3F /* GuageBar.swift */; };
+		464117E42BFB270100259B3F /* AddStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DC2BFB270100259B3F /* AddStamp.swift */; };
+		464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DD2BFB270100259B3F /* AddStampDetail.swift */; };
+		464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DE2BFB270100259B3F /* CurrentStamp.swift */; };
+		464117E72BFB270100259B3F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E02BFB270100259B3F /* CalendarView.swift */; };
+		464117E82BFB270100259B3F /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E12BFB270100259B3F /* GoalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +41,12 @@
 		2CF2DBE62BFA3590008D2B4E /* MainAddDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddDiaryView.swift; sourceTree = "<group>"; };
 		2CF2DBE82BFA4F95008D2B4E /* AddDiaryRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryRecordView.swift; sourceTree = "<group>"; };
 		2CF2DBEA2BFA530A008D2B4E /* AddDiaryTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryTemplateView.swift; sourceTree = "<group>"; };
+		464117DA2BFB270100259B3F /* GuageBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuageBar.swift; sourceTree = "<group>"; };
+		464117DC2BFB270100259B3F /* AddStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStamp.swift; sourceTree = "<group>"; };
+		464117DD2BFB270100259B3F /* AddStampDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStampDetail.swift; sourceTree = "<group>"; };
+		464117DE2BFB270100259B3F /* CurrentStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStamp.swift; sourceTree = "<group>"; };
+		464117E02BFB270100259B3F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		464117E12BFB270100259B3F /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF2DBE52BFA3563008D2B4E /* AddDiary */,
+				464117E22BFB270100259B3F /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
 			);
 			path = Views;
@@ -122,6 +135,33 @@
 				2CF2DBEA2BFA530A008D2B4E /* AddDiaryTemplateView.swift */,
 			);
 			path = AddDiary;
+		464117DB2BFB270100259B3F /* Guage */ = {
+			isa = PBXGroup;
+			children = (
+				464117DA2BFB270100259B3F /* GuageBar.swift */,
+			);
+			path = Guage;
+			sourceTree = "<group>";
+		};
+		464117DF2BFB270100259B3F /* Stamp */ = {
+			isa = PBXGroup;
+			children = (
+				464117DC2BFB270100259B3F /* AddStamp.swift */,
+				464117DD2BFB270100259B3F /* AddStampDetail.swift */,
+				464117DE2BFB270100259B3F /* CurrentStamp.swift */,
+			);
+			path = Stamp;
+			sourceTree = "<group>";
+		};
+		464117E22BFB270100259B3F /* Goal */ = {
+			isa = PBXGroup;
+			children = (
+				464117DB2BFB270100259B3F /* Guage */,
+				464117DF2BFB270100259B3F /* Stamp */,
+				464117E02BFB270100259B3F /* CalendarView.swift */,
+				464117E12BFB270100259B3F /* GoalView.swift */,
+			);
+			path = Goal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,12 +237,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */,
+				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
+				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				2CF2DBEB2BFA530A008D2B4E /* AddDiaryTemplateView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
 				2CF2DBE72BFA3590008D2B4E /* MainAddDiaryView.swift in Sources */,
 				2CF2DBE92BFA4F95008D2B4E /* AddDiaryRecordView.swift in Sources */,
+				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
+				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
+				464117E82BFB270100259B3F /* GoalView.swift in Sources */,
+				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
+				464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
