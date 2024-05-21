@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "로고 라이트.png",
+      "filename" : "LogoLight.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "LogoLight@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "LogoLight@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
