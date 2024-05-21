@@ -24,6 +24,13 @@
 		464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DE2BFB270100259B3F /* CurrentStamp.swift */; };
 		464117E72BFB270100259B3F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E02BFB270100259B3F /* CalendarView.swift */; };
 		464117E82BFB270100259B3F /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E12BFB270100259B3F /* GoalView.swift */; };
+		9D2A77022BFCBFE10006794B /* GrandMotherPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */; };
+		9D2A77042BFCC0BA0006794B /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77032BFCC0BA0006794B /* ProgressBar.swift */; };
+		9D2A77072BFCC1140006794B /* GrandMotherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */; };
+		9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */; };
+		9D2A770B2BFCC16B0006794B /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */; };
+		9D2A770D2BFCC1890006794B /* AVFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A770C2BFCC1890006794B /* AVFoundation.swift */; };
+		A9D48AEA2BFB91E400F250FF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D48AE92BFB91E400F250FF /* SplashView.swift */; };
 		B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */; };
 		B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */; };
 		B93C32992BFB34A1007699BB /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C32982BFB34A1007699BB /* Title.swift */; };
@@ -50,6 +57,13 @@
 		464117DE2BFB270100259B3F /* CurrentStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStamp.swift; sourceTree = "<group>"; };
 		464117E02BFB270100259B3F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		464117E12BFB270100259B3F /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherPhoto.swift; sourceTree = "<group>"; };
+		9D2A77032BFCC0BA0006794B /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherMainView.swift; sourceTree = "<group>"; };
+		9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherDetailView.swift; sourceTree = "<group>"; };
+		9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
+		9D2A770C2BFCC1890006794B /* AVFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundation.swift; sourceTree = "<group>"; };
+		A9D48AE92BFB91E400F250FF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B93C32982BFB34A1007699BB /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
@@ -110,10 +124,12 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9D2A76FF2BFCBFAA0006794B /* GrandMa */,
 				B91FEB382BFC872A00C78843 /* DiaryCollection */,
 				2CF2DBEC2BFB3B6A008D2B4E /* AddDiary */,
 				464117E22BFB270100259B3F /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
+				A9D48AE92BFB91E400F250FF /* SplashView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,6 +188,35 @@
 				464117E12BFB270100259B3F /* GoalView.swift */,
 			);
 			path = Goal;
+			sourceTree = "<group>";
+		};
+		9D2A76FF2BFCBFAA0006794B /* GrandMa */ = {
+			isa = PBXGroup;
+			children = (
+				9D2A77052BFCC0F60006794B /* View */,
+				9D2A77002BFCBFC40006794B /* Component */,
+				9D2A770C2BFCC1890006794B /* AVFoundation.swift */,
+			);
+			path = GrandMa;
+			sourceTree = "<group>";
+		};
+		9D2A77002BFCBFC40006794B /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */,
+				9D2A77032BFCC0BA0006794B /* ProgressBar.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		9D2A77052BFCC0F60006794B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */,
+				9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */,
+				9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B91FEB382BFC872A00C78843 /* DiaryCollection */ = {
@@ -259,12 +304,19 @@
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
+				9D2A77042BFCC0BA0006794B /* ProgressBar.swift in Sources */,
+				9D2A770D2BFCC1890006794B /* AVFoundation.swift in Sources */,
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
+				A9D48AEA2BFB91E400F250FF /* SplashView.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
+				9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
 				B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */,
 				2CF2DBF22BFB3BC6008D2B4E /* AddDiaryTemplateView.swift in Sources */,
+				9D2A77022BFCBFE10006794B /* GrandMotherPhoto.swift in Sources */,
 				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
+				9D2A77072BFCC1140006794B /* GrandMotherMainView.swift in Sources */,
+				9D2A770B2BFCC16B0006794B /* AudioPlayerView.swift in Sources */,
 				464117E82BFB270100259B3F /* GoalView.swift in Sources */,
 				2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
