@@ -183,7 +183,7 @@ class FlipCardPresenter: FlipCardPresenterProtocol {
 struct UsedToken: View {
     var body: some View {
         ZStack{
-            Image(.tokenpost)
+            Image(.tokenPost)
                 .resizable()
                 .frame(width: 78, height: 52)
             HStack(spacing: 0){

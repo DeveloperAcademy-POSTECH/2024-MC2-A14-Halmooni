@@ -26,16 +26,18 @@ struct DiaryCollectionView: View {
                     ForEach(Array(postdate.keys), id: \.self) { key in
                         VStack(spacing: 0){
                             ZStack{
-                                Image(.postTheme)
+                                Image(.post)
                                     .resizable()
                                     .frame(width: 361)
                                     .padding(.top, 32)
+                                
                                 HStack{
                                     Text("\(key)月")
                                         .font(.title2)
                                         .bold()
                                         .padding(.leading, 32)
                                         .padding(.top, 48)
+                                    
                                     Spacer()
                                 }
                             }
