@@ -92,7 +92,7 @@ struct DiaryCollectionView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .accentColor(.accentColor)
             .toolbar{
-                ToolbarItem{
+                ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
                         // MARK: 글쓰기 뷰 삽입 필요
                         print("+")
@@ -102,6 +102,7 @@ struct DiaryCollectionView: View {
                     })
                 }
             }
+            .navigationTitle(Title.list.name)
         }
     }
  
