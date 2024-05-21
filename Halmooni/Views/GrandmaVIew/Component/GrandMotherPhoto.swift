@@ -7,34 +7,36 @@
 
 import SwiftUI
 
+
 struct GrandMotherPhoto: View {
     var body: some View {
-            ZStack {
-                // 뒤에 있는 roundedRectangle
-                RoundedRectangle(cornerRadius: 20.0)
-                    .foregroundColor(.green)
-                    .aspectRatio(3/4, contentMode: .fit)
-                
-                // 앞에 있는 roundedRectangle
-                RoundedRectangle(cornerRadius: 20.0)
-                    .foregroundColor(Color.black.opacity(0.5))
-//                    .clipShape(OverlayShape())
-                    .scaleEffect(x: 1, y: 1/6) // 가로 방향은 유지, 세로 방향은 1/6 축소
-                    .offset(y: 410) // 앞에 있는 사각형을 뒤에 있는 사각형의 아래에 위치시키기 위한 오프셋
-                    .aspectRatio(3/4, contentMode: .fit)
-                HStack {
-                    Text("15")
-                        .offset(x: 270,y:410)
-                        .dynamicTypeSize(.accessibility5)
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.white)
-                    Text("일")
-                        .offset(x:272, y:412)
-                        .dynamicTypeSize(.accessibility1)
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.white)
+       
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(Color.green)
+                .aspectRatio(3/4, contentMode: .fit)
+                .overlay {
+                    ZStack {
+                        VStack {
+                            Spacer()
+                            
+                            RoundedRectangle(cornerRadius: 20)
+                                .aspectRatio(15/3, contentMode: .fit)
+                                .foregroundColor(Color.black.opacity(0.5))
+                                .overlay {
+                                    HStack{
+                                        Spacer()
+                                        Text("YYYY년 MM월 DD일")
+                                            .font(.largeTitle.bold())
+                                            .dynamicTypeSize(.accessibility3)
+                                            .foregroundStyle(Color.white)
+                                            .padding(40)
+                                    }
+                                }
                         }
-            }
+                    }
+                }
+        }
                 
             
         

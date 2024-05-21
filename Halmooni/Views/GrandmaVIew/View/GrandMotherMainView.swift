@@ -24,8 +24,8 @@ struct GrandMotherMainView: View {
     let numberString = "111-222-3333"
     
     let columns: [GridItem] = [
-        GridItem(.fixed(592), spacing: 62),
-        GridItem(.fixed(592), spacing: 62)
+        GridItem(.flexible(), spacing: 90),
+        GridItem(.flexible(), spacing: 90)
     ]
     
     
@@ -36,29 +36,18 @@ struct GrandMotherMainView: View {
             
             VStack {
                 HStack {
+                    Text("To. 할무니")
+                        .font(.largeTitle.bold())
+                        .dynamicTypeSize(.xxxLarge)
+                        .padding(.leading, 60)
                     ZStack {
-                        Image("GrandmaDate")
-                            .resizable()
-                            .padding(.leading, 60)
-                            .padding(.top, 11)
-                            .frame(width: 297, height: 145)
                         HStack(alignment: .top) {
-                            Text("2024")
-                                .dynamicTypeSize(.accessibility1)
-                                .font(.title)
-                                .bold()
-                                .padding(.leading, 50)
-                                .padding(.trailing, 10)
-                                .foregroundColor(.text)
-                            Text("5月")
-                                .bold()
-                                .dynamicTypeSize(.accessibility4)
-                                .font(.largeTitle)
-                                .foregroundColor(.text)
+                            //TODO: - 날짜 변경 세팅하기
+
                         }
                     }
                     
-                    
+                    // TODO: 전화 연결 클라우드 사용 방안으로 변경
                     Button {
                         let telephone = "tel://"
                         let formattedString = telephone + numberString
@@ -68,11 +57,7 @@ struct GrandMotherMainView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
                                 .fill(.white)
-                                .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
-                                .frame(width: 592, height: 100)
-                            
                             HStack {
-                                
                                 Text("인범이에게 전화하기")
                                     .dynamicTypeSize(.xxxLarge)
                                     .font(.largeTitle)
@@ -88,8 +73,10 @@ struct GrandMotherMainView: View {
                                     .font(.largeTitle)
                                     .padding(.trailing, 33)
                             }
-                            .padding()
+                            
                         }
+                        .frame(width: 592, height: 100)
+                        
                     }
                     .padding(.top, 65)
                     .padding(.trailing, 60)
@@ -102,6 +89,7 @@ struct GrandMotherMainView: View {
                     LazyVGrid(columns: columns, alignment: .leading, spacing: 20) {
                         ForEach(0..<2) { i in
                             ZStack {
+                              //TODO: - 사진위치에 따른 애니메이션 변경 기능 추가
                                 //                                if !showDetailView {
                                 VStack {
                                     if i % 2 == 0 {
@@ -112,7 +100,9 @@ struct GrandMotherMainView: View {
                                     }
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(Color.sec) // 색상 추가 (선택 사항)
-                                        .frame(width: 592, height: 692)
+                                        .padding(i % 2 == 0 ? .leading: .trailing, 90)
+//                                        .padding(.leading, 50)
+                                        .aspectRatio(3/4, contentMode: .fit)
                                         .matchedGeometryEffect(id: "photo\(i)", in: animationNameSpace)
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
                                     //                                            .onTapGesture {
@@ -141,7 +131,7 @@ struct GrandMotherMainView: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 60)
+                    .padding(.horizontal, 90)
                 }
             }
             if showDetailView {

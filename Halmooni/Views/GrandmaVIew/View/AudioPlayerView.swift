@@ -6,13 +6,16 @@ struct AudioPlayerView: View {
     var body: some View {
         VStack {
             ProgressView(value: audioPlayerViewModel.currentTime, total: audioPlayerViewModel.duration)
-                .progressViewStyle(LinearProgressViewStyle(tint: .blue))
-                .padding()
+                .progressViewStyle(LinearProgressViewStyle(tint: .prim))
+                .padding(.horizontal, 233)
+            
             
             HStack {
                 Text(formatTime(audioPlayerViewModel.currentTime))
+                    .padding(.leading, 220)
                 Spacer()
                 Text(formatTime(audioPlayerViewModel.duration))
+                    .padding(.trailing, 220)
             }
             .padding(.horizontal)
             
@@ -23,8 +26,9 @@ struct AudioPlayerView: View {
                     .font(.largeTitle)
                     .foregroundColor(.prim)
             }
-            .padding()
+//            .padding()
         }
+        .padding(40)
     }
     
     private func formatTime(_ time: Double) -> String {

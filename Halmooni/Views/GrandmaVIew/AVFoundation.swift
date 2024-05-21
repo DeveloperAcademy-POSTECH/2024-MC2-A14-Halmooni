@@ -48,7 +48,7 @@ class AudioPlayerViewModel: ObservableObject {
     @Published var duration: Double = 0.0
     
     init() {
-        if let url = Bundle.main.url(forResource: "audiofile", withExtension: "mp3") {
+        if let url = Bundle.main.url(forResource: "audiofile", withExtension: "m4a") {
             player = AVPlayer(url: url)
             duration = player?.currentItem?.asset.duration.seconds ?? 0
             addPeriodicTimeObserver()
