@@ -16,6 +16,7 @@ struct PostDate: Identifiable {
 
 struct DiaryCollectionView: View {
     @State private var postdate: [String: [PostDate]] = [:] // 빈 배열로 초기화
+    @State private var isPresented: Bool = false
 
     var body: some View {
         NavigationStack{
@@ -97,8 +98,8 @@ struct DiaryCollectionView: View {
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                        // MARK: 글쓰기 뷰 삽입 필요
-                        print("+")
+                        
+                        isPresented.toggle()
                     }, label: {
                         Image(systemName: "plus")
                             .foregroundStyle(.prim)
@@ -106,6 +107,9 @@ struct DiaryCollectionView: View {
                 }
             }
             .navigationTitle(Title.list.name)
+            .sheet(isPresented: $isPresented) {
+                MainAddDiaryView(isPresented: $isPresented)
+            }
         }
     }
 
