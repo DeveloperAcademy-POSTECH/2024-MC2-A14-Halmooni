@@ -17,7 +17,10 @@ struct GrandMotherDetailView: View {
         ZStack {
             Color.white
             VStack {
+                Spacer()
+                    
                 HStack {
+                    
                     Text("2024년 5월 18일")
                         .dynamicTypeSize(.xxxLarge)
                         .font(.largeTitle.bold())
@@ -37,18 +40,21 @@ struct GrandMotherDetailView: View {
                 }// 날짜 버튼
                 HStack {
                     RoundedRectangle(cornerRadius: 20)
-                        .padding(.leading, 50)
-                        .aspectRatio(3/4, contentMode: .fit)
+                        //.padding(.leading, 50)
+//                        .aspectRatio(3/4, contentMode: .fit)
+                        .frame(width:450, height: 600)
                         .matchedGeometryEffect(id: "photo0", in: animationNamespace)
                     
                     Spacer()
                     
                     RoundedRectangle(cornerRadius: 20)
-                        .padding(.trailing, 50)
-                        .aspectRatio(3/4, contentMode: .fit)
+                        //.padding(.trailing, 50)
+//                        .aspectRatio(3/4, contentMode: .fit)
+                        .frame(width:450, height: 600)
 //                        .matchedGeometryEffect(id: "card", in: animationNamespace)
                 } // 사진과 카드
-                Spacer()
+                .padding(.horizontal, 50)
+//                Spacer()
                 AudioPlayerView()
 
                     

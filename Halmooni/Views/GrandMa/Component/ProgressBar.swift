@@ -15,11 +15,11 @@ struct ProgressBar: View {
                 ZStack(alignment: .leading) {
                     Rectangle()
                         .frame(width: geometry.size.width, height: 4) // ProgressBar의 기본 배경
-                        .foregroundColor(.gry) // 기본 배경의 색상
+                        .foregroundColor(.gry2) // 기본 배경의 색상
 
                     Rectangle()
                         .frame(width: min(max(0, geometry.size.width * progress), geometry.size.width), height: 4) // 진행률에 따라 너비를 조절하는 프로그레스 바
-                        .foregroundColor(.gray) // 프로그레스 바의 색상
+                        .foregroundColor(.gry) // 프로그레스 바의 색상
                 }
             }
         }

@@ -21,7 +21,7 @@ struct GrandMotherMainView: View {
     @Namespace private var animationNameSpace
     
     
-    let numberString = "111-222-3333"
+    let phoneNumber = "010-2557-0122"
     
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 90),
@@ -40,20 +40,16 @@ struct GrandMotherMainView: View {
                         .font(.largeTitle.bold())
                         .dynamicTypeSize(.xxxLarge)
                         .padding(.leading, 60)
-                    ZStack {
-                        HStack(alignment: .top) {
-                            //TODO: - 날짜 변경 세팅하기
 
-                        }
-                    }
                     
                     // TODO: 전화 연결 클라우드 사용 방안으로 변경
-                    Button {
-                        let telephone = "tel://"
-                        let formattedString = telephone + numberString
-                        guard let url = URL(string: formattedString) else { return }
-                        UIApplication.shared.open(url)
-                    } label: {
+                    Button(action: {
+                        makeFaceTimeCall(phoneNumber: phoneNumber)
+                    }) {
+//                        let telephone = "tel://"
+//                        let formattedString = telephone + numberString
+//                        guard let url = URL(string: formattedString) else { return }
+//                        UIApplication.shared.open(url)
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
                                 .fill(.white)
@@ -107,16 +103,13 @@ struct GrandMotherMainView: View {
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
 
                                 }
-               
-                                
-                                
-                                
                                 
                                 if !self.select {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(Color.white)
-                                    Image(systemName: "photo.artframe")
-                                        .font(.largeTitle)
+                                    GifView(gifName: "NewMessage")
+//                                    Image(systemName: "photo.artframe")
+//                                        .font(.largeTitle)
                                 }
                                 
                             }
@@ -138,8 +131,20 @@ struct GrandMotherMainView: View {
 //                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
                     //.transition(.opacity)
                 //detailview 임의 설정
-                    .frame(width:1026, height: 904)
+                    .frame(width:1026, height: 912)
                     .cornerRadius(20)
+            }
+        }
+        
+        
+    }
+    func makeFaceTimeCall(phoneNumber: String) {
+        let faceTimeURLString = "facetime://\(phoneNumber)"
+        if let faceTimeURL = URL(string: faceTimeURLString) {
+            if UIApplication.shared.canOpenURL(faceTimeURL) {
+                UIApplication.shared.open(faceTimeURL, options: [:], completionHandler: nil)
+            } else {
+                print("FaceTime을 열 수 없습니다.")
             }
         }
     }
