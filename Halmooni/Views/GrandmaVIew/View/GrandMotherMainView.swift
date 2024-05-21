@@ -90,7 +90,7 @@ struct GrandMotherMainView: View {
                         ForEach(0..<2) { i in
                             ZStack {
                               //TODO: - 사진위치에 따른 애니메이션 변경 기능 추가
-                                //                                if !showDetailView {
+
                                 VStack {
                                     if i % 2 == 0 {
                                         // 짝수번 (왼쪽)
@@ -105,13 +105,9 @@ struct GrandMotherMainView: View {
                                         .aspectRatio(3/4, contentMode: .fit)
                                         .matchedGeometryEffect(id: "photo\(i)", in: animationNameSpace)
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
-                                    //                                            .onTapGesture {
-                                    //                                                withAnimation(.spring()) {
-                                    //                                                    showDetailView.toggle()
-                                    //                                                }
-                                    //                                            }
+
                                 }
-                                //                                }
+               
                                 
                                 
                                 
