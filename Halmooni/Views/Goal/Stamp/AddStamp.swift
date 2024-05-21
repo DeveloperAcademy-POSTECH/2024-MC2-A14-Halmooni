@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddStamp: View {
     @State private var showModal = false
-    var tokenSum: Int
+    @Binding var tokenSum: Int
     var tokenUsed: Int
     
     var body: some View {
@@ -22,19 +22,19 @@ struct AddStamp: View {
                     Image(systemName: "plus.app")
                         .resizable()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(Color("PrimColor"))
+                        .foregroundColor(Color.prim)
                 })
             }
             .frame(width: 127, height: 131)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .sheet(isPresented: $showModal) {
-                AddStampDetail(tokenSum: tokenSum, tokenUsed: tokenUsed)
+                AddStampDetail(tokenSum: $tokenSum, tokenUsed: tokenUsed)
             }
         }
     }
 }
 
 #Preview {
-    AddStamp(tokenSum: 15, tokenUsed: 8)
+    AddStamp(tokenSum: .constant(15), tokenUsed: 8)
 }

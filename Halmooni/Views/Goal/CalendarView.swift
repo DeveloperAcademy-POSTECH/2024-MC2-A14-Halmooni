@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarView: View {
     @State var month: Date
     @State var offset: CGSize = CGSize()
-    @State var uploadDate: Set<Date> = [Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 2))!, Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 11))!]
+    @State var uploadDate: Set<Date> = [Calendar.current.date(from: DateComponents(year: 2024, month: 4, day: 30))!,Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 2))!, Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 11))!]
     
     var body: some View {
         VStack {
@@ -41,7 +41,7 @@ struct CalendarView: View {
                 Spacer()
                 Text(month, formatter: Self.dateFormatter)
                     .font(.headline)
-                    .foregroundColor(Color("TextColor"))
+                    .foregroundColor(Color.text)
                 Spacer()
                 Image(systemName: "chevron.right")
                     .onTapGesture {
@@ -51,9 +51,9 @@ struct CalendarView: View {
             .padding(.bottom)
             
             Divider()
-                .overlay(Color("SecColor"))
+                .overlay(Color.sec)
                 .frame(minHeight: 1)
-                .background(Color("SecColor"))
+                .background(Color.sec)
                 .padding(.bottom, 16)
             
             HStack {
@@ -61,7 +61,7 @@ struct CalendarView: View {
                     Text(symbol)
                         .font(.subheadline)
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(Color("GryColor"))
+                        .foregroundColor(Color.gry)
                 }
             }
             .padding(.bottom, 5)
@@ -72,13 +72,38 @@ struct CalendarView: View {
     private var calendarGridView: some View {
         let daysInMonth: Int = numberOfDays(in: month)
         let firstWeekday: Int = firstWeekdayOfMonth(in: month) - 1
+        let lastWeekday: Int = lastWeekdayOfMonth(in: month) - 2 + numberOfDays(in: month)
+        
+        let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: month)!
+        let trailingDays: Int = trailingDaysCount(after: lastWeekdayOfMonth(in: nextMonth)) + 1
+
+
+        let prevMonth = Calendar.current.date(byAdding: .month, value: -1, to: month)!
+        let daysInPrevMonth: Int = numberOfDays(in: prevMonth)
         
         return VStack {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
-                ForEach(0 ..< daysInMonth + firstWeekday, id: \.self) { index in
+                ForEach(0 ..< daysInMonth + firstWeekday + trailingDays, id: \.self) { index in
                     if index < firstWeekday {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(Color.clear)
+                        let date = getDate(for: index - firstWeekday)
+                        let day = daysInPrevMonth + index - firstWeekday + 1
+                        let selected = uploadDate.contains(date)
+                        let isToday = Calendar.current.isDateInToday(date)
+                        
+                        CellView(day: day, selected: selected, isToday: isToday)
+                            .foregroundColor(Color.gry)
+                        
+                    } else if index > lastWeekday {
+                        
+                        let date = getDate(for: index - firstWeekday)
+                        let day =  index - daysInMonth - firstWeekday + 1
+                        let selected = uploadDate.contains(date)
+                        let isToday = Calendar.current.isDateInToday(date)
+                        
+                        CellView(day: day, selected: selected, isToday: isToday)
+                            .foregroundColor(Color.gry)
+                        
+                        
                     } else {
                         let date = getDate(for: index - firstWeekday)
                         let day = index - firstWeekday + 1
@@ -86,11 +111,12 @@ struct CalendarView: View {
                         let isToday = Calendar.current.isDateInToday(date)
                         
                         CellView(day: day, selected: selected, isToday: isToday)
+                            .foregroundColor(Color.text)
                             
                     }
                 }.padding(.vertical,5)
             }
-        }.foregroundColor(Color("TextColor"))
+        }
         
     }
 }
@@ -111,10 +137,10 @@ private struct CellView: View {
         VStack {
             RoundedRectangle(cornerRadius: 5)
                 .opacity(0)
-                .foregroundColor(.gray)
+                .foregroundColor(Color.gry)
                 .overlay(Text(String(day)))
                 .frame(width: 33, height: 33)
-                .background(isToday ? Color("SecColor") : Color.clear)
+                .background(isToday ? Color.sec : Color.clear)
                 .overlay(
                     Group {
                         if selected {
@@ -126,7 +152,7 @@ private struct CellView: View {
                                 .resizable()
                                 .frame(width: 23, height: 23)
                                 .rotationEffect(.degrees(30))
-                                .foregroundColor(Color("PrimColor"))
+                                .foregroundColor(Color.prim)
                         }
                     }
                 )
@@ -160,12 +186,25 @@ private extension CalendarView {
         return Calendar.current.component(.weekday, from: firstDayOfMonth)
     }
     
+    /// 해당 월의 마지막 날짜가 갖는 해당 주의 몇번째 요일
+    func lastWeekdayOfMonth(in date: Date) -> Int {
+        let components = Calendar.current.dateComponents([.year, .month], from: date)
+        let lastDayOfMonth = Calendar.current.date(from: components)!
+        
+        return Calendar.current.component(.weekday, from: lastDayOfMonth)
+    }
+    
     /// 월 변경
     func changeMonth(by value: Int) {
         let calendar = Calendar.current
         if let newMonth = calendar.date(byAdding: .month, value: value, to: month) {
             self.month = newMonth
         }
+    }
+    
+    //마지막 요일에 따라 추가해야 하는 일자 수를 반환하는 함수
+    func trailingDaysCount(after lastWeekday: Int) -> Int {
+        return (7 - lastWeekday) % 7
     }
 }
 

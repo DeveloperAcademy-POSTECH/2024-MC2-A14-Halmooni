@@ -10,34 +10,34 @@ import SwiftUI
 struct AddStampDetail: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var quantity = 0
-    
-    var tokenSum: Int
+    @Binding var tokenSum: Int
     var tokenUsed: Int
     
     var body: some View {
         NavigationView {
             ZStack{
-                Color("BgColor").edgesIgnoringSafeArea(.all)
+                Color.bg.edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     VStack{
                         Image(systemName: "star.square.on.square")
                             .resizable()
                             .frame(width: 40, height: 40)
-                            .foregroundColor(Color("PrimColor"))
+                            .foregroundColor(Color.prim)
                             .padding(16)
                         
                         Text("남은 우표 수: \(tokenSum - tokenUsed + 1)")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color.gry)
                         
                         Spacer()
                         
                         HStack{
                             Text("추가할 우표 수")
                             
-                            TextField("Enter Quantity", value: $quantity, formatter: NumberFormatter())
+                            TextField("갯수 입력", value: $quantity, formatter: positiveNumberFormatter)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
                         }
                         .padding(16)
                         .background(Color.white)
@@ -54,8 +54,8 @@ struct AddStampDetail: View {
                         })  {
                             Text("+5")
                                 .frame(width: 90, height: 30)
-                                .background(Color("SecColor"))
-                                .foregroundColor(Color("TextColor"))
+                                .background(Color.sec)
+                                .foregroundColor(Color.text)
                                 .cornerRadius(90)
                         }
                         Button(action: {
@@ -63,8 +63,8 @@ struct AddStampDetail: View {
                         }) {
                             Text("+10")
                                 .frame(width: 90, height: 30)
-                                .background(Color("SecColor"))
-                                .foregroundColor(Color("TextColor"))
+                                .background(Color.sec)
+                                .foregroundColor(Color.text)
                                 .cornerRadius(90)
                         }
                         Button(action: {
@@ -72,8 +72,8 @@ struct AddStampDetail: View {
                         }) {
                             Text("+15")
                                 .frame(width: 90, height: 30)
-                                .background(Color("SecColor"))
-                                .foregroundColor(Color("TextColor"))
+                                .background(Color.sec)
+                                .foregroundColor(Color.text)
                                 .cornerRadius(90)
                         }
                     }
@@ -87,24 +87,31 @@ struct AddStampDetail: View {
                             presentationMode.wrappedValue.dismiss()
                         }) {
                             Text("취소")
-                                .foregroundColor(Color("PrimColor"))
+                                .foregroundColor(Color.prim)
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            // Add action for done button here
+                            tokenSum += quantity
                             presentationMode.wrappedValue.dismiss()
                         }) {
                             Text("완료")
-                                .foregroundColor(Color("PrimColor"))
+                                .foregroundColor(Color.prim)
                         }
                     }
                 }
             }
         }
     }
+    private var positiveNumberFormatter: NumberFormatter {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.minimum = 0
+            formatter.maximumFractionDigits = 0
+            return formatter
+    }
 }
 
 #Preview {
-    AddStampDetail(tokenSum: 15, tokenUsed: 8)
+    AddStampDetail(tokenSum: .constant(15), tokenUsed: 8)
 }

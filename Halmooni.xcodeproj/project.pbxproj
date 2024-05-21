@@ -21,6 +21,14 @@
 		464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DE2BFB270100259B3F /* CurrentStamp.swift */; };
 		464117E72BFB270100259B3F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E02BFB270100259B3F /* CalendarView.swift */; };
 		464117E82BFB270100259B3F /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E12BFB270100259B3F /* GoalView.swift */; };
+		464117EE2BFBC46C00259B3F /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117ED2BFBC46C00259B3F /* AudioRecorder.swift */; };
+		464117F02BFBCCDA00259B3F /* RecordingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117EF2BFBCCDA00259B3F /* RecordingDataModel.swift */; };
+		464117F22BFBCD0700259B3F /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117F12BFBCD0700259B3F /* DateValue.swift */; };
+		464117F42BFBCD4600259B3F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117F32BFBCD4600259B3F /* Extensions.swift */; };
+		464117F62BFBCDC300259B3F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117F52BFBCDC300259B3F /* Helper.swift */; };
+		464117F82BFBD2AD00259B3F /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117F72BFBD2AD00259B3F /* AudioPlayer.swift */; };
+		464117FC2BFBDA9400259B3F /* AudioPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117FB2BFBDA9400259B3F /* AudioPlayView.swift */; };
+		464117FE2BFBDBCF00259B3F /* AudioRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117FD2BFBDBCF00259B3F /* AudioRecordButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +49,14 @@
 		464117DE2BFB270100259B3F /* CurrentStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStamp.swift; sourceTree = "<group>"; };
 		464117E02BFB270100259B3F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		464117E12BFB270100259B3F /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		464117ED2BFBC46C00259B3F /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		464117EF2BFBCCDA00259B3F /* RecordingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDataModel.swift; sourceTree = "<group>"; };
+		464117F12BFBCD0700259B3F /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		464117F32BFBCD4600259B3F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		464117F52BFBCDC300259B3F /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		464117F72BFBD2AD00259B3F /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		464117FB2BFBDA9400259B3F /* AudioPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayView.swift; sourceTree = "<group>"; };
+		464117FD2BFBDBCF00259B3F /* AudioRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +114,7 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				464117E92BFB2CBC00259B3F /* Mode */,
+				464117EA2BFBC0D000259B3F /* Audio */,
 				464117E22BFB270100259B3F /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
 			);
@@ -109,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */,
+				464117EF2BFBCCDA00259B3F /* RecordingDataModel.swift */,
+				464117F12BFBCD0700259B3F /* DateValue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,11 +168,17 @@
 			path = Goal;
 			sourceTree = "<group>";
 		};
-		464117E92BFB2CBC00259B3F /* Mode */ = {
+		464117EA2BFBC0D000259B3F /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				464117ED2BFBC46C00259B3F /* AudioRecorder.swift */,
+				464117F72BFBD2AD00259B3F /* AudioPlayer.swift */,
+				464117F32BFBCD4600259B3F /* Extensions.swift */,
+				464117F52BFBCDC300259B3F /* Helper.swift */,
+				464117FB2BFBDA9400259B3F /* AudioPlayView.swift */,
+				464117FD2BFBDBCF00259B3F /* AudioRecordButton.swift */,
 			);
-			path = Mode;
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,12 +253,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				464117F02BFBCCDA00259B3F /* RecordingDataModel.swift in Sources */,
 				2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */,
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
+				464117FC2BFBDA9400259B3F /* AudioPlayView.swift in Sources */,
+				464117F22BFBCD0700259B3F /* DateValue.swift in Sources */,
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
+				464117F62BFBCDC300259B3F /* Helper.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
+				464117EE2BFBC46C00259B3F /* AudioRecorder.swift in Sources */,
+				464117F82BFBD2AD00259B3F /* AudioPlayer.swift in Sources */,
+				464117FE2BFBDBCF00259B3F /* AudioRecordButton.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
+				464117F42BFBCD4600259B3F /* Extensions.swift in Sources */,
 				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
 				464117E82BFB270100259B3F /* GoalView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,

@@ -30,7 +30,7 @@ struct MainTabView: View {
                 }
             
         }
-        .tint(Color("PrimColor"))
+        .tint(Color.prim)
     }
 }
 

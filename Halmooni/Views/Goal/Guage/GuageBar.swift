@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GaugeBar: View {
-    var tokenSum: Int
+    @Binding var tokenSum: Int
     var tokenUsed: Int
     
     private var progress: Double {
@@ -41,5 +41,5 @@ struct GaugeBar: View {
 }
 
 #Preview {
-    GaugeBar(tokenSum: 15, tokenUsed: 8)
+    GaugeBar(tokenSum: .constant(15), tokenUsed: 8)
 }

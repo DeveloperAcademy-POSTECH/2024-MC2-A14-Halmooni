@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GoalView: View {
     @State private var tokenSum = 15
-    @State private var tokenUsed = 8
+    @State private var tokenUsed = 2
     
     var body: some View {
         ZStack {
@@ -21,11 +21,11 @@ struct GoalView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 HStack {
-                    CurrentStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
+                    CurrentStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
                     Spacer()
-                    AddStamp(tokenSum: tokenSum, tokenUsed: tokenUsed)
+                    AddStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
                 }
-                GaugeBar(tokenSum: tokenSum, tokenUsed: tokenUsed)
+                GaugeBar(tokenSum: $tokenSum, tokenUsed: tokenUsed)
                 CalendarView(month: Date())
             }
             .padding(16)
