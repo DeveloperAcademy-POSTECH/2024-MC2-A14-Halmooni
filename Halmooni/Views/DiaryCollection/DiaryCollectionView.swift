@@ -80,7 +80,7 @@ struct DiaryCollectionView: View {
                                 .padding(.bottom, 16)
                                 .background{
                                     Rectangle()
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(.section)
                                         .frame(width: 361)
                                 }
                             }

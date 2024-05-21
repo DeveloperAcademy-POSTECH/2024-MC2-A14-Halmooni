@@ -195,10 +195,12 @@ struct UsedToken: View {
             HStack(spacing: 0){
                 Image(systemName: "heart.fill")
                     .font(.system(size: 22))
+                    .foregroundStyle(.black)
                 Text(" 17")
                     .font(.title2)
                     .bold()
                     .font(.system(size: 22))
+                    .foregroundStyle(.black)
             }
         }
     }
