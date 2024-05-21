@@ -56,13 +56,14 @@ struct DiaryDetailView: View {
 struct ImageCard: View {
     @ObservedObject var presenter: FlipCardPresenter
     @State private var isAnimating: Bool = false
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var body: some View {
         //우표템플릿
         VStack {
             Spacer()
             ZStack{
-                Image(.fullPost)
+                fullPostColorSchemeImage
                     .resizable()
                     .frame(width: 361, height: 571)
                 //날짜, 음성재생 버튼
@@ -105,6 +106,11 @@ struct ImageCard: View {
             Spacer()
                 .frame(height: 112)
         }
+    }
+    
+    // MARK: fullPost 이미지 colorScheme 설정
+    private var fullPostColorSchemeImage: Image {
+        colorScheme == .dark ? Image("fullPost_dark") : Image("fullPost")
     }
 }
 
