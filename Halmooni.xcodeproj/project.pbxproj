@@ -24,6 +24,8 @@
 		464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DE2BFB270100259B3F /* CurrentStamp.swift */; };
 		464117E72BFB270100259B3F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E02BFB270100259B3F /* CalendarView.swift */; };
 		464117E82BFB270100259B3F /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117E12BFB270100259B3F /* GoalView.swift */; };
+		B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */; };
+		B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */; };
 		B93C32992BFB34A1007699BB /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C32982BFB34A1007699BB /* Title.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,8 @@
 		464117DE2BFB270100259B3F /* CurrentStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStamp.swift; sourceTree = "<group>"; };
 		464117E02BFB270100259B3F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		464117E12BFB270100259B3F /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
+		B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B93C32982BFB34A1007699BB /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +110,7 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B91FEB382BFC872A00C78843 /* DiaryCollection */,
 				2CF2DBEC2BFB3B6A008D2B4E /* AddDiary */,
 				464117E22BFB270100259B3F /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
@@ -167,6 +172,15 @@
 				464117E12BFB270100259B3F /* GoalView.swift */,
 			);
 			path = Goal;
+			sourceTree = "<group>";
+		};
+		B91FEB382BFC872A00C78843 /* DiaryCollection */ = {
+			isa = PBXGroup;
+			children = (
+				B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */,
+				B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */,
+			);
+			path = DiaryCollection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,12 +262,14 @@
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
+				B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */,
 				2CF2DBF22BFB3BC6008D2B4E /* AddDiaryTemplateView.swift in Sources */,
 				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
 				464117E82BFB270100259B3F /* GoalView.swift in Sources */,
 				2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
 				464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */,
+				B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */,
 				2CF2DBF02BFB3BB9008D2B4E /* AddDiaryRecordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
