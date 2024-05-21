@@ -30,6 +30,7 @@
 		9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */; };
 		9D2A770B2BFCC16B0006794B /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */; };
 		9D2A770D2BFCC1890006794B /* AVFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A770C2BFCC1890006794B /* AVFoundation.swift */; };
+		A9D48AEA2BFB91E400F250FF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D48AE92BFB91E400F250FF /* SplashView.swift */; };
 		B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */; };
 		B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */; };
 		B93C32992BFB34A1007699BB /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C32982BFB34A1007699BB /* Title.swift */; };
@@ -62,6 +63,7 @@
 		9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherDetailView.swift; sourceTree = "<group>"; };
 		9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		9D2A770C2BFCC1890006794B /* AVFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundation.swift; sourceTree = "<group>"; };
+		A9D48AE92BFB91E400F250FF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B93C32982BFB34A1007699BB /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				2CF2DBEC2BFB3B6A008D2B4E /* AddDiary */,
 				464117E22BFB270100259B3F /* Goal */,
 				2C639ADE2BF9C8CF00420610 /* MainTabView.swift */,
+				A9D48AE92BFB91E400F250FF /* SplashView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				9D2A77042BFCC0BA0006794B /* ProgressBar.swift in Sources */,
 				9D2A770D2BFCC1890006794B /* AVFoundation.swift in Sources */,
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
+				A9D48AEA2BFB91E400F250FF /* SplashView.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,

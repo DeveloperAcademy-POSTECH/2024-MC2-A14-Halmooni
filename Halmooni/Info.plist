@@ -6,17 +6,17 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-    <key>NSUbiquitousContainers</key>
-    <dict>
-        <key>iCloud.DeveloperAcademy.Halmooni</key>
-        <dict>
-            <key>NSUbiquitousContainerIsDocumentScopePublic</key>
-            <true/>
-            <key>NSUbiquitousContainerName</key>
-            <string>Halmooni</string>
-            <key>NSUbiquitousContainerSupportedFolderLevels</key>
-            <string>Any</string>
-        </dict>
-    </dict>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.DeveloperAcademy.Halmooni</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>Halmooni</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 </dict>
 </plist>
