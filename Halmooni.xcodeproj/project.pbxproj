@@ -14,6 +14,8 @@
 		2C639AEB2BF9C90F00420610 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AEA2BF9C90F00420610 /* .gitignore */; };
 		2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */; };
 		2CBBD54F2BFC90C1005A2367 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBD54E2BFC90C0005A2367 /* AudioController.swift */; };
+		2CBBD5512BFCB061005A2367 /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBD5502BFCB061005A2367 /* AudioVisualizerView.swift */; };
+		2CBBD5532BFCD43E005A2367 /* TimeInterval + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBD5522BFCD43E005A2367 /* TimeInterval + Extension.swift */; };
 		2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */; };
 		2CF2DBE42BFA337A008D2B4E /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CF2DBE32BFA337A008D2B4E /* .gitattributes */; };
 		2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBED2BFB3B7D008D2B4E /* MainAddDiaryView.swift */; };
@@ -41,6 +43,8 @@
 		2C639AEE2BF9CB9600420610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2C639AF12BF9CC3000420610 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2CBBD54E2BFC90C0005A2367 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
+		2CBBD5502BFCB061005A2367 /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
+		2CBBD5522BFCD43E005A2367 /* TimeInterval + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval + Extension.swift"; sourceTree = "<group>"; };
 		2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
 		2CF2DBE32BFA337A008D2B4E /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		2CF2DBED2BFB3B7D008D2B4E /* MainAddDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddDiaryView.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 			children = (
 				2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */,
 				2CBBD54E2BFC90C0005A2367 /* AudioController.swift */,
+				2CBBD5522BFCD43E005A2367 /* TimeInterval + Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				2CF2DBED2BFB3B7D008D2B4E /* MainAddDiaryView.swift */,
 				2CF2DBEF2BFB3BB9008D2B4E /* AddDiaryRecordView.swift */,
 				2CF2DBF12BFB3BC6008D2B4E /* AddDiaryTemplateView.swift */,
+				2CBBD5502BFCB061005A2367 /* AudioVisualizerView.swift */,
 			);
 			path = AddDiary;
 			sourceTree = "<group>";
@@ -261,12 +267,14 @@
 				2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */,
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
+				2CBBD5512BFCB061005A2367 /* AudioVisualizerView.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
 				B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */,
 				2CF2DBF22BFB3BC6008D2B4E /* AddDiaryTemplateView.swift in Sources */,
+				2CBBD5532BFCD43E005A2367 /* TimeInterval + Extension.swift in Sources */,
 				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
 				464117E82BFB270100259B3F /* GoalView.swift in Sources */,
 				2CBBD54F2BFC90C1005A2367 /* AudioController.swift in Sources */,
@@ -413,6 +421,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halmooni/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "할머니에게 음성을 보내기 위해 마이크 사용 권한이 필요합니다!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -444,6 +453,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halmooni/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "할머니에게 음성을 보내기 위해 마이크 사용 권한이 필요합니다!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

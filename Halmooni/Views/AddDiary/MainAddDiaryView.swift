@@ -9,14 +9,19 @@ import SwiftUI
 import PhotosUI
 
 struct MainAddDiaryView: View {
+    @State private var viewModel: AudioController = AudioController()
     @State private var isCancelBtnPressed: Bool = false
     @State private var stampCount: Int = 0
     @State private var uploadDate: Date = Date()
     @State private var pickedPhoto: PhotosPickerItem?
     @State private var pickedTemplate: Int?
     @State private var image: Image?
+    @State private var recordURL: URL?
+    @State private var recordTime: TimeInterval?
     
     @Binding var isPresented: Bool
+    
+    let uuid = UUID()
     
     var body: some View {
         NavigationStack {
@@ -60,16 +65,29 @@ struct MainAddDiaryView: View {
                 List {
                     Section {
                         NavigationLink {
-                            AddDiaryRecordView()
+                            AddDiaryRecordView(viewModel: $viewModel, recordURL: $recordURL, recordTime: $recordTime, uuid: uuid)
                         } label: {
-                            Text("메시지 녹음")
+                            HStack {
+                                Text("메시지 녹음")
+                                Spacer()
+                                if recordTime != nil {
+                                    Text(recordTime!.getTimeString())
+                                        .font(.system(size: 17))
+                                        .foregroundStyle(Color(red: 60/255, green: 60/255, blue: 67/255).opacity(0.6))
+                                }
+                            }
                         }
                         
                         NavigationLink {
                             AddDiaryTemplateView(pickedTemplate: $pickedTemplate)
                                 .background(.bg)
                         } label: {
-                            Text("카드 선택")
+                            HStack {
+                                Text("카드 선택")
+                                Spacer()
+                                
+                                // TODO: - 이미지 선택 라벨 텍스트 추가
+                            }
                         }
                         
                         NavigationLink {
@@ -100,12 +118,13 @@ struct MainAddDiaryView: View {
                                     .font(.system(size: 17))
                                 Text("현재 개수 123개")
                                     .font(.system(size: 13))
-                                    .foregroundStyle(.gry)
+                                    .foregroundStyle(Color(red: 60/255, green: 60/255, blue: 67/255).opacity(0.3))
                             }
                             
                             Spacer()
                             
                             Text("\(stampCount)개")
+                                .foregroundStyle(Color(red: 60/255, green: 60/255, blue: 67/255).opacity(0.6))
                             
                             Stepper {
                                 

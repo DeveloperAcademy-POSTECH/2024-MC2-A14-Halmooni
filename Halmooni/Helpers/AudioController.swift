@@ -31,6 +31,9 @@ class AudioController: NSObject {
         AVNumberOfChannelsKey: 1,
         AVEncoderAudioQualityKey: AVAudioQuality.min.rawValue
     ]
+    
+    public var fileURL: URL?
+    public var audioLength: TimeInterval?
 }
 
 // MARK: - 녹음 권한 부여
@@ -46,26 +49,30 @@ extension AudioController {
 
 // MARK: - 재생 기능 메소드
 extension AudioController {
-    public func startAudio(recordURL: String) {
-        guard let fileURL = URL(string: recordURL) else {
-            return
-        }
-        
+    public func startAudio(filePath: URL?) {
         let session = AVAudioSession.sharedInstance()
         
         do {
-            try session.setCategory(.playback, mode: .default)
+            try session.setCategory(.playAndRecord, mode: .default)
             try session.overrideOutputAudioPort(.speaker)
             
-            self.audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            if filePath != nil {
+                self.audioPlayer = try AVAudioPlayer(contentsOf: filePath!)
+            } else {
+                self.audioPlayer = try AVAudioPlayer(contentsOf: self.fileURL!)
+            }
             audioPlayer?.delegate = self
+            
             audioPlayer?.play()
             
-            startMonitoring()
+            startMonitoring(isRecord: false)
             
             self.isPlaying = true
+            self.audioLength = self.audioPlayer?.duration
+            
         } catch {
             // TODO: - Error handling
+            print("failed to start audio, \(error.localizedDescription)")
         }
     }
     
@@ -85,6 +92,7 @@ extension AudioController {
         let audioSession = AVAudioSession.sharedInstance()
         
         guard let driveURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+            print("wrong drive url")
             return
         }
         let fileURL = driveURL.appending(path: "\(id.uuidString).m4a")
@@ -95,44 +103,64 @@ extension AudioController {
             try audioSession.setCategory(.record, mode: .default, options: [])
             
             self.audioRecorder?.record()
-            startMonitoring()
+            startMonitoring(isRecord: true)
 
             self.isRecorded = true
             self.isRecording = true
         } catch {
             // TODO: - Error handling
+            print("here is problem")
         }
     }
     
     public func stopRecording() {
         self.timer?.invalidate()
+        self.fileURL = self.audioRecorder?.url
+        self.audioLength = self.audioRecorder?.currentTime
         self.audioRecorder?.stop()
         
         stopMonitoring()
         
         self.isRecording = false
     }
+    
+    public func resetRecording() {
+        self.isRecorded = false
+        self.isRecording = false
+        self.isPlaying = false
+        self.timer = nil
+        self.time = nil
+        self.audioLength = nil
+        
+        do {
+            try FileManager.default.removeItem(at: self.fileURL!)
+        } catch {
+            print("Failed to remove item")
+        }
+        
+        self.fileURL = nil
+    }
 }
 
 
 // MARK: - Audio Visualization 메소드
 extension AudioController {
-    private func startMonitoring() {
-        if let audioRecorder = self.audioRecorder {
+    private func startMonitoring(isRecord: Bool) {
+        if isRecord {
+            audioRecorder?.isMeteringEnabled = true
             self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
-                audioRecorder.updateMeters()
+                audioRecorder?.updateMeters()
                 self.soundSamples[self.currentSample] = self.audioRecorder?.averagePower(forChannel: 0) ?? 10
                 self.currentSample = (self.currentSample + 1) % self.numberOfSamples
-                self.time = audioRecorder.currentTime
+                self.time = audioRecorder?.currentTime
             }
         } else {
-            if let audioPlayer = self.audioPlayer {
-                self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
-                    audioPlayer.updateMeters()
-                    self.soundSamples[self.currentSample] = self.audioPlayer?.averagePower(forChannel: 0) ?? 10
-                    self.currentSample = (self.currentSample + 1) % self.numberOfSamples
-                    self.time = audioPlayer.currentTime
-                }
+            audioPlayer?.isMeteringEnabled = true
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
+                audioPlayer?.updateMeters()
+                self.soundSamples[self.currentSample] = self.audioPlayer?.averagePower(forChannel: 0) ?? 10
+                self.currentSample = (self.currentSample + 1) % self.numberOfSamples
+                self.time = audioPlayer?.currentTime
             }
         }
     }
