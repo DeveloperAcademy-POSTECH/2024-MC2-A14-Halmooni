@@ -23,6 +23,12 @@ struct MainAddDiaryView: View {
     
     let uuid = UUID()
     
+    var possibleTokens: Int {
+        let tokenSum = UserDefaults.standard.tokenSum
+        let tokenUsed = UserDefaults.standard.tokenUsed
+        return tokenSum - tokenUsed
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -121,7 +127,7 @@ struct MainAddDiaryView: View {
                             VStack(alignment: .leading) {
                                 Text("스탬프 사용")
                                     .font(.system(size: 17))
-                                Text("현재 개수 123개")
+                                Text("현재 개수 \(possibleTokens)개")
                                     .font(.system(size: 13))
                                     .foregroundStyle(.gry)
                             }
@@ -131,17 +137,8 @@ struct MainAddDiaryView: View {
                             Text("\(stampCount)개")
                                 .foregroundStyle(.gry)
                             
-                            Stepper {
-                                
-                            } onIncrement: {
-                                stampCount += 1
-                            } onDecrement: {
-                                if stampCount == 0 {
-                                    return
-                                }
-                                stampCount -= 1
-                            }
-                            .labelsHidden()
+                            Stepper("", value: $stampCount, in: 0...possibleTokens)
+                                .labelsHidden()
                         }
                         
                     }
