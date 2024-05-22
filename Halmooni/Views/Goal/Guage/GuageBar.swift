@@ -23,7 +23,7 @@ struct GaugeBar: View {
                     Image(systemName: "figure.run")
                         .resizable()
                         .frame(width: 21, height: 28)
-                        .offset(x: CGFloat(progress) * 360 - 180 , y: 0)
+                        .offset(x: CGFloat(progress) * 360 - 150 , y: 0)
                     Image(systemName: "house.and.flag.fill")
                         .resizable()
                         .frame(width: 28, height: 28)
@@ -33,11 +33,11 @@ struct GaugeBar: View {
             .tint(Color.prim)
         }
         .padding(16)
-        .background(.white)
+        .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 
 #Preview {
-    GaugeBar(tokenSum: .constant(15), tokenUsed: 8)
+    GaugeBar(tokenSum: .constant(15), tokenUsed: 0)
 }

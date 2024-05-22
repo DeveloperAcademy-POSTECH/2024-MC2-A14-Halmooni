@@ -29,12 +29,15 @@ struct CurrentStamp: View {
             }
         }
         .padding(16)
-        .background(Color.white)
+        .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
+        .onChange(of: tokenSum, initial: true) { oldValue, newValue in
+                    UserDefaults.standard.tokenSum = newValue
+        }
     }
 }
 
 
 #Preview {
-    CurrentStamp(tokenSum: .constant(15), tokenUsed: 8)
+    CurrentStamp(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: UserDefaults.standard.tokenUsed)
 }
