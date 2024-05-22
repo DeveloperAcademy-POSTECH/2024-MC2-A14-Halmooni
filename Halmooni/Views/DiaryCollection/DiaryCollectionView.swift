@@ -17,6 +17,8 @@ struct PostDate: Identifiable {
 struct DiaryCollectionView: View {
     @State private var postdate: [String: [PostDate]] = [:] // 빈 배열로 초기화
     @State private var isPresented: Bool = false
+  
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     var body: some View {
         NavigationStack{
@@ -27,7 +29,7 @@ struct DiaryCollectionView: View {
                     ForEach(Array(postdate.keys), id: \.self) { key in
                         VStack(spacing: 0){
                             ZStack{
-                                Image(.post)
+                                postColorSchemeImage
                                     .resizable()
                                     .frame(width: 361)
                                     .padding(.top, 32)
@@ -42,7 +44,7 @@ struct DiaryCollectionView: View {
                                     Spacer()
                                 }
                             }
-
+                            
                             NavigationLink(destination: DiaryDetailView(presenter: FlipCardPresenter()).ignoresSafeArea()) {
                                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                                     if let postList = postdate[key] {
@@ -51,7 +53,17 @@ struct DiaryCollectionView: View {
                                                 Image(.exampleimg) // TODO: 추후 교체
                                                     .resizable()
                                                     .frame(width: 161, height: 215)
-
+                                                    .contextMenu {
+                                                        // 수정
+                                                        Button("수정", systemImage: "pencil") {
+                                                            // TODO: 수정 기능 삽입 필요
+                                                        }
+                                                        // 삭제
+                                                        Button("삭제", systemImage: "trash.fill", role: .destructive) {
+                                                            // TODO: 삭제 기능 삽입 필요
+                                                        }
+                                                    }
+                                                
                                                 //날짜, 전송예약
                                                 VStack{
                                                     Spacer()
@@ -80,7 +92,7 @@ struct DiaryCollectionView: View {
                                 .padding(.bottom, 16)
                                 .background{
                                     Rectangle()
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(.section)
                                         .frame(width: 361)
                                 }
                             }
@@ -112,14 +124,14 @@ struct DiaryCollectionView: View {
             }
         }
     }
-
+    
     // MARK: 날짜(월) - 숫자만 추출되도록
     private var monthNumberFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "M"
         return formatter
     }
-
+    
     // MARK: (임시) 배열 내 데이터 추가
     private func loadPosts() {
         // 예시 데이터 로드 (네트워크 요청이나 데이터베이스 조회 대신 사용)
@@ -136,6 +148,11 @@ struct DiaryCollectionView: View {
             ]
         ]
         postdate = examplePostList
+    }
+    
+    // MARK: post 이미지 colorScheme 설정
+    private var postColorSchemeImage: Image {
+        colorScheme == .dark ? Image("post_dark") : Image("post")
     }
 }
 
@@ -154,7 +171,7 @@ func WillSendIndicatior() -> some View {
                 Image(systemName: "paperplane.fill")
                     .font(.system(size: 12))
                     .foregroundStyle(Color.prim)
-
+                
             }
         }
     }

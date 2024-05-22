@@ -8,27 +8,24 @@
 import SwiftUI
 
 struct CurrentStamp: View {
-    var tokenSum: Int
+    @Binding var tokenSum: Int
     var tokenUsed: Int
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("올해 모은 우표의 개수")
-                .font(.body)
             Text("\(tokenSum)개")
-                .font(.body)
                 .fontWeight(.bold)
             
-            HStack(alignment: .bottom) {
+            HStack {
                 Image(systemName: "star.square.on.square")
                     .resizable()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(Color(.prim))
-                    .padding(.trailing, 16)
-                
-                Text("남은 우표: \(tokenSum - tokenUsed + 1)개")
+                    .foregroundColor(Color.prim)
+                Text("남은 우표: \(tokenSum - tokenUsed)개")
                     .font(.caption)
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color.gry)
+                    .padding(16)
             }
         }
         .padding(16)
@@ -39,5 +36,5 @@ struct CurrentStamp: View {
 
 
 #Preview {
-    CurrentStamp(tokenSum: 15, tokenUsed: 8)
+    CurrentStamp(tokenSum: .constant(15), tokenUsed: 8)
 }
