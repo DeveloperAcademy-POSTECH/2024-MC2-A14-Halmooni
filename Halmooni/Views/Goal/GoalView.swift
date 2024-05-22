@@ -30,14 +30,15 @@ struct GoalView: View {
                     }
                     .padding(16)
                 }
+                .scrollIndicators(.hidden)
             }
             .navigationTitle(Title.goal.name)
         }
-        .onChange(of: tokenSum) { newValue in
-            UserDefaults.standard.tokenSum = newValue
+        .onChange(of: tokenSum, initial: true) { oldValue, newValue in
+                    UserDefaults.standard.tokenSum = newValue
         }
-        .onChange(of: tokenUsed) { newValue in
-            UserDefaults.standard.tokenUsed = newValue
+        .onChange(of: tokenUsed, initial: true) { oldValue, newValue in
+                    UserDefaults.standard.tokenUsed = newValue
         }
     }
 }
