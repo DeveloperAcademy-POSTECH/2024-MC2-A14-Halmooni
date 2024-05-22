@@ -33,7 +33,7 @@ struct GaugeBar: View {
             .tint(Color.prim)
         }
         .padding(16)
-        .background(.white)
+        .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }

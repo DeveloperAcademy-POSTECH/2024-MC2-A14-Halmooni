@@ -40,7 +40,7 @@ struct AddStampDetail: View {
                                 .keyboardType(.numberPad)
                         }
                         .padding(16)
-                        .background(Color.white)
+                        .background(.section)
                         .cornerRadius(20)
                     }
                     .padding(16)

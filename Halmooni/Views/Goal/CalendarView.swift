@@ -18,7 +18,7 @@ struct CalendarView: View {
             calendarGridView
         }
         .padding(16)
-        .background(Color.white)
+        .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         
         .gesture(
