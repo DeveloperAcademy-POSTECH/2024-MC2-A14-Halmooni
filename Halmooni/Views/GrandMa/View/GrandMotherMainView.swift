@@ -20,8 +20,8 @@ struct GrandMotherMainView: View {
     @State private var showDetailView: Bool = false
     @Namespace private var animationNameSpace
     
-    
-    let phoneNumber = "010-2557-0122"
+    //TODO: 무니 번호로 수정하기
+    private let phoneNumber = "010-2557-0122"
     
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 90),
