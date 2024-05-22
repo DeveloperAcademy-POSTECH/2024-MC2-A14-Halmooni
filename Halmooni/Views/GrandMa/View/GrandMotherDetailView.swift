@@ -14,15 +14,19 @@ struct GrandMotherDetailView: View {
     @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             Color.white
             VStack {
+                //Spacer()
+                    
                 HStack {
                     Text("2024년 5월 18일")
                         .dynamicTypeSize(.xxxLarge)
                         .font(.largeTitle.bold())
                         .padding(.leading, 50)
+                    
                     Spacer()
+                    
                     Button(action: {
                         withAnimation(.spring()) {
                             showDetailView = false
@@ -34,21 +38,21 @@ struct GrandMotherDetailView: View {
                             .foregroundColor(.prim)
                             .padding(.trailing, 50)
                     })
-                }// 날짜 버튼
+                }
+                .padding(.top, 50)
                 HStack {
                     RoundedRectangle(cornerRadius: 20)
-                        .padding(.leading, 50)
-                        .aspectRatio(3/4, contentMode: .fit)
+                        .frame(width:450, height: 600)
                         .matchedGeometryEffect(id: "photo0", in: animationNamespace)
                     
                     Spacer()
                     
                     RoundedRectangle(cornerRadius: 20)
-                        .padding(.trailing, 50)
-                        .aspectRatio(3/4, contentMode: .fit)
+                        .frame(width:450, height: 600)
 //                        .matchedGeometryEffect(id: "card", in: animationNamespace)
                 } // 사진과 카드
-                Spacer()
+                .padding(.horizontal, 50)
+//                Spacer()
                 AudioPlayerView()
 
                     

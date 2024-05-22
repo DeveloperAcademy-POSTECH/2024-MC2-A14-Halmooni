@@ -37,7 +37,7 @@ struct RecordingRow: View {
                 if audioPlayer.isPlaying {
                                 HStack {
                                     Text("\(timeString(from: audioPlayer.currentTime))")
-                                        .foregroundColor(Color.gry)
+                                        .foregroundColor(Color.gry2)
                                     Spacer()
                                     Text("-\(timeString(from: audioPlayer.duration - audioPlayer.currentTime))")
                                         .foregroundColor(Color.gry)

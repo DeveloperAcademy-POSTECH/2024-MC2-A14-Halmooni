@@ -26,7 +26,6 @@ struct AudioPlayerView: View {
                     .font(.largeTitle)
                     .foregroundColor(.prim)
             }
-//            .padding()
         }
         .padding(40)
     }
