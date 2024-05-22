@@ -51,6 +51,16 @@ struct DiaryCollectionView: View {
                                                 Image(.exampleimg) // TODO: 추후 교체
                                                     .resizable()
                                                     .frame(width: 161, height: 215)
+                                                    .contextMenu {
+                                                        // 수정
+                                                        Button("수정", systemImage: "pencil") {
+                                                            // TODO: 수정 기능 삽입 필요
+                                                        }
+                                                        // 삭제
+                                                        Button("삭제", systemImage: "trash.fill", role: .destructive) {
+                                                            // TODO: 삭제 기능 삽입 필요
+                                                        }
+                                                    }
                                                 
                                                 //날짜, 전송예약
                                                 VStack{
