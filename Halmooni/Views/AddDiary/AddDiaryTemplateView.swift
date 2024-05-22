@@ -16,8 +16,6 @@ struct AddDiaryTemplateView: View {
     
     var body: some View {
         VStack {
-            // MARK: - 템플릿 선택한 것 보여주기
-            
             if selectedTemplate == nil {
                 RoundedRectangle(cornerRadius: 5)
                     .aspectRatio(3/4, contentMode: .fit)

@@ -20,14 +20,14 @@ struct MainAddDiaryView: View {
     @State private var image: Image?
     @State private var recordURL: URL?
     @State private var recordTime: TimeInterval?
-    @State var imageData: Data?
+    @State private var imageData: Data?
     
     @Binding var isPresented: Bool
     
-    let uuid = UUID()
-    let openedDate = Date()
+    private let uuid = UUID()
+    private let openedDate = Date()
     
-    var possibleTokens: Int {
+    private var possibleTokens: Int {
         let tokenSum = UserDefaults.standard.tokenSum
         let tokenUsed = UserDefaults.standard.tokenUsed
         return tokenSum - tokenUsed
@@ -42,6 +42,7 @@ struct MainAddDiaryView: View {
                             .frame(width: 150)
                             .foregroundStyle(.sec)
                             .overlay {
+                                // TODO: - 이미지 회전해서 보이는 것 수정 필요
                                 image?
                                     .resizable()
                                     .frame(width: 150, height: 150)
@@ -218,6 +219,7 @@ struct MainAddDiaryView: View {
         } catch {
             print("저장 실패~")
         }
+        UserDefaults.standard.tokenUsed += self.stampCount
         
         self.isPresented = false
     }
