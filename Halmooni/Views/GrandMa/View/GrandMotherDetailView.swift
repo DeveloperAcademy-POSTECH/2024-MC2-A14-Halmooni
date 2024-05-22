@@ -40,16 +40,14 @@ struct GrandMotherDetailView: View {
                 }// 날짜 버튼
                 HStack {
                     RoundedRectangle(cornerRadius: 20)
-                        //.padding(.leading, 50)
-//                        .aspectRatio(3/4, contentMode: .fit)
+                    
                         .frame(width:450, height: 600)
                         .matchedGeometryEffect(id: "photo0", in: animationNamespace)
                     
                     Spacer()
                     
                     RoundedRectangle(cornerRadius: 20)
-                        //.padding(.trailing, 50)
-//                        .aspectRatio(3/4, contentMode: .fit)
+   
                         .frame(width:450, height: 600)
 //                        .matchedGeometryEffect(id: "card", in: animationNamespace)
                 } // 사진과 카드

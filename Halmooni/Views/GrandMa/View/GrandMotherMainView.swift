@@ -108,8 +108,6 @@ struct GrandMotherMainView: View {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(Color.white)
                                     GifView(gifName: "NewMessage")
-//                                    Image(systemName: "photo.artframe")
-//                                        .font(.largeTitle)
                                 }
                                 
                             }
@@ -128,8 +126,7 @@ struct GrandMotherMainView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace)
-//                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
-                    //.transition(.opacity)
+
                 //detailview 임의 설정
                     .frame(width:1026, height: 912)
                     .cornerRadius(20)
