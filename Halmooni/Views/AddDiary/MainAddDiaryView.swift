@@ -9,14 +9,19 @@ import SwiftUI
 import PhotosUI
 
 struct MainAddDiaryView: View {
+    @State private var viewModel: AudioController = AudioController()
     @State private var isCancelBtnPressed: Bool = false
     @State private var stampCount: Int = 0
     @State private var uploadDate: Date = Date()
     @State private var pickedPhoto: PhotosPickerItem?
     @State private var pickedTemplate: Int?
     @State private var image: Image?
+    @State private var recordURL: URL?
+    @State private var recordTime: TimeInterval?
     
     @Binding var isPresented: Bool
+    
+    let uuid = UUID()
     
     var body: some View {
         NavigationStack {
@@ -60,16 +65,29 @@ struct MainAddDiaryView: View {
                 List {
                     Section {
                         NavigationLink {
-                            AddDiaryRecordView()
+                            AddDiaryRecordView(viewModel: $viewModel, recordURL: $recordURL, recordTime: $recordTime, uuid: uuid)
                         } label: {
-                            Text("메시지 녹음")
+                            HStack {
+                                Text("메시지 녹음")
+                                Spacer()
+                                if recordTime != nil {
+                                    Text(recordTime!.getTimeString())
+                                        .font(.system(size: 17))
+                                        .foregroundStyle(.gry)
+                                }
+                            }
                         }
                         
                         NavigationLink {
                             AddDiaryTemplateView(pickedTemplate: $pickedTemplate)
                                 .background(.bg)
                         } label: {
-                            Text("카드 선택")
+                            HStack {
+                                Text("카드 선택")
+                                Spacer()
+                                
+                                // TODO: - 이미지 선택 라벨 텍스트 추가
+                            }
                         }
                         
                         NavigationLink {
@@ -106,6 +124,7 @@ struct MainAddDiaryView: View {
                             Spacer()
                             
                             Text("\(stampCount)개")
+                                .foregroundStyle(.gry)
                             
                             Stepper {
                                 
@@ -145,6 +164,7 @@ struct MainAddDiaryView: View {
                         Text("완료")
                             .bold()
                     }
+                    .disabled(!(self.pickedPhoto != nil && self.recordURL != nil && self.pickedTemplate != nil))
                 }
             }
         }
@@ -153,6 +173,7 @@ struct MainAddDiaryView: View {
                 
             }
             Button("변경 사항 폐기", role: .destructive) {
+                viewModel.resetRecording()
                 self.isPresented.toggle()
             }
         } message: {
