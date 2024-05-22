@@ -25,7 +25,7 @@ struct AddStamp: View {
             })
         }
         .frame(width:127, height: 131)
-        .background(Color.white)
+        .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .sheet(isPresented: $showModal) {
             AddStampDetail(tokenSum: $tokenSum, tokenUsed: tokenUsed)
@@ -34,5 +34,5 @@ struct AddStamp: View {
 }
 
 #Preview {
-    AddStamp(tokenSum: .constant(15), tokenUsed: 8)
+    AddStamp(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: UserDefaults.standard.tokenUsed)
 }
