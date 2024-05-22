@@ -33,6 +33,11 @@ struct GrandMotherMainView: View {
         colorScheme == .dark ? Image(.halviewdark) : Image(.halviewlight)
     }
     
+    
+    @FetchRequest(entity: Diary.entity(), sortDescriptors: [.init(keyPath: \Diary.savedDate, ascending: true)])
+    var diaries:FetchedResults<Diary>
+    
+    
     var body: some View {
         
         ZStack {
@@ -52,7 +57,7 @@ struct GrandMotherMainView: View {
 //                        UIApplication.shared.open(url)
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
-                                .fill(.white)
+                                .fill(.section)
                                 .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 2)
                             
                             HStack {

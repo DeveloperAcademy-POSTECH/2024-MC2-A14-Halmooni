@@ -13,6 +13,8 @@ struct GrandMotherDetailView: View {
     var animationNamespace: Namespace.ID
     @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
     
+//    let diary: Diary
+    
     var body: some View {
         ZStack(alignment: .top) {
             Color.white
