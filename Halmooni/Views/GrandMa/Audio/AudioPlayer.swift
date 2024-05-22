@@ -15,13 +15,22 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     let objectWillChange = PassthroughSubject<AudioPlayer, Never>()
     
-    @Published var isPlaying = false
     @Published var duration: TimeInterval = 0.0
     @Published var isFinished = false {
         didSet {
             objectWillChange.send(self)
         }
     }
+    @Published var isPaused = false {
+               didSet {
+                   objectWillChange.send(self)
+               }
+           }
+       @Published var isPlaying = false {
+               didSet {
+                   objectWillChange.send(self)
+               }
+           }
     @Published var currentTime: TimeInterval = 0.0 {
         didSet {
             objectWillChange.send(self)
@@ -47,6 +56,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             audioPlayer.delegate = self
             audioPlayer.play()
             isPlaying = true
+            isPaused = false
             isFinished = false
             duration = audioPlayer.duration
             currentTime = 0.0
@@ -56,11 +66,25 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
     }
     
-    func stopPlayback() {
-        audioPlayer.stop()
-        isPlaying = false
-        stopTimer()
-    }
+    func pausePlayback() {
+            if audioPlayer.isPlaying {
+                audioPlayer.pause()
+                isPaused = true
+                isPlaying = false
+                stopTimer()
+                print("Paused playback")
+            }
+        }
+        
+        func resumePlayback() {
+            if isPaused {
+                audioPlayer.play()
+                isPaused = false
+                isPlaying = true
+                startTimer()
+                print("Resumed playback")
+            }
+        }
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
@@ -78,6 +102,17 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             currentTime = player.currentTime
         }
     }
+    
+    func updateCurrentTime(to time: TimeInterval) {
+            currentTime = time
+        }
+    
+    func seek(to time: TimeInterval) {
+            if let player = audioPlayer {
+                player.currentTime = time
+                currentTime = time
+            }
+        }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {
