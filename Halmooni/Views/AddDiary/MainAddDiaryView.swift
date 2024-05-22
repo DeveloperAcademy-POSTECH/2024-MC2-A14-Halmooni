@@ -27,28 +27,28 @@ struct MainAddDiaryView: View {
         NavigationStack {
             VStack {
                 ZStack {
-                    Circle()
-                        .frame(width: 150)
-                        .foregroundStyle(.sec)
-                        .overlay {
-                            image?
-                                .resizable()
-                                .frame(width: 150, height: 150)
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                        }
+                    PhotosPicker(selection: $pickedPhoto, matching: .images) {
+                        Circle()
+                            .frame(width: 150)
+                            .foregroundStyle(.sec)
+                            .overlay {
+                                image?
+                                    .resizable()
+                                    .frame(width: 150, height: 150)
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                            }
+                    }
                     if pickedPhoto == nil {
                         Image(systemName: "photo.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 50, height: 65)
                             .foregroundStyle(.bg)
-                        
                     }
                 }
                 .padding(.top, 47)
                 .padding(.bottom, 21)
-                    
                 
                 PhotosPicker(selection: $pickedPhoto, matching: .images) {
                     ZStack {
