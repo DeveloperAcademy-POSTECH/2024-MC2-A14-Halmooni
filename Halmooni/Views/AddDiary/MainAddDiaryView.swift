@@ -22,6 +22,7 @@ struct MainAddDiaryView: View {
     @Binding var isPresented: Bool
     
     let uuid = UUID()
+    let openedDate = Date()
     
     var possibleTokens: Int {
         let tokenSum = UserDefaults.standard.tokenSum
@@ -115,9 +116,7 @@ struct MainAddDiaryView: View {
                             
                             Spacer()
                             
-                            DatePicker(selection: $uploadDate) {
-                                
-                            }
+                            DatePicker(selection: $uploadDate, in: openedDate...) { }
                             .labelsHidden()
                             .frame(height: 30)
                             

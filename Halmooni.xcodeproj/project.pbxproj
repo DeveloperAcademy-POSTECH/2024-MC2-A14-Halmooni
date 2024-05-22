@@ -21,6 +21,7 @@
 		2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBED2BFB3B7D008D2B4E /* MainAddDiaryView.swift */; };
 		2CF2DBF02BFB3BB9008D2B4E /* AddDiaryRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBEF2BFB3BB9008D2B4E /* AddDiaryRecordView.swift */; };
 		2CF2DBF22BFB3BC6008D2B4E /* AddDiaryTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBF12BFB3BC6008D2B4E /* AddDiaryTemplateView.swift */; };
+		2CF752BA2BFDFAC50023BD2B /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF752B92BFDFAC50023BD2B /* Template.swift */; };
 		464117E32BFB270100259B3F /* GuageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DA2BFB270100259B3F /* GuageBar.swift */; };
 		464117E42BFB270100259B3F /* AddStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DC2BFB270100259B3F /* AddStamp.swift */; };
 		464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DD2BFB270100259B3F /* AddStampDetail.swift */; };
@@ -66,6 +67,7 @@
 		2CF2DBED2BFB3B7D008D2B4E /* MainAddDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddDiaryView.swift; sourceTree = "<group>"; };
 		2CF2DBEF2BFB3BB9008D2B4E /* AddDiaryRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryRecordView.swift; sourceTree = "<group>"; };
 		2CF2DBF12BFB3BC6008D2B4E /* AddDiaryTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryTemplateView.swift; sourceTree = "<group>"; };
+		2CF752B92BFDFAC50023BD2B /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		464117DA2BFB270100259B3F /* GuageBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuageBar.swift; sourceTree = "<group>"; };
 		464117DC2BFB270100259B3F /* AddStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStamp.swift; sourceTree = "<group>"; };
 		464117DD2BFB270100259B3F /* AddStampDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStampDetail.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				2CF2DBEF2BFB3BB9008D2B4E /* AddDiaryRecordView.swift */,
 				2CF2DBF12BFB3BC6008D2B4E /* AddDiaryTemplateView.swift */,
 				2CBBD5502BFCB061005A2367 /* AudioVisualizerView.swift */,
+				2CF752B92BFDFAC50023BD2B /* Template.swift */,
 			);
 			path = AddDiary;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				464118072BFCDC8F00259B3F /* AudioPlayer.swift in Sources */,
 				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
+				2CF752BA2BFDFAC50023BD2B /* Template.swift in Sources */,
 				2CBBD5512BFCB061005A2367 /* AudioVisualizerView.swift in Sources */,
 				464118012BFCDC5700259B3F /* RecordingDataModel.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
