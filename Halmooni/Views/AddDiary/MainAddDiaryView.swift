@@ -86,6 +86,11 @@ struct MainAddDiaryView: View {
                                 Text("카드 선택")
                                 Spacer()
                                 
+                                if pickedTemplate != nil {
+                                    Text(Template(rawValue: pickedTemplate!)!.getText)
+                                        .font(.system(size: 17))
+                                        .foregroundStyle(.gry)
+                                }
                                 // TODO: - 이미지 선택 라벨 텍스트 추가
                             }
                         }
