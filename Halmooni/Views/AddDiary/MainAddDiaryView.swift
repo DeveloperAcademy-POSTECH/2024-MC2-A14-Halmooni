@@ -73,7 +73,7 @@ struct MainAddDiaryView: View {
                                 if recordTime != nil {
                                     Text(recordTime!.getTimeString())
                                         .font(.system(size: 17))
-                                        .foregroundStyle(Color(red: 60/255, green: 60/255, blue: 67/255).opacity(0.6))
+                                        .foregroundStyle(.gry)
                                 }
                             }
                         }
@@ -118,13 +118,13 @@ struct MainAddDiaryView: View {
                                     .font(.system(size: 17))
                                 Text("현재 개수 123개")
                                     .font(.system(size: 13))
-                                    .foregroundStyle(Color(red: 60/255, green: 60/255, blue: 67/255).opacity(0.3))
+                                    .foregroundStyle(.gry)
                             }
                             
                             Spacer()
                             
                             Text("\(stampCount)개")
-                                .foregroundStyle(Color(red: 60/255, green: 60/255, blue: 67/255).opacity(0.6))
+                                .foregroundStyle(.gry)
                             
                             Stepper {
                                 
