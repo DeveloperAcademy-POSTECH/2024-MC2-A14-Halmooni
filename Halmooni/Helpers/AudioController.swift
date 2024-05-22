@@ -92,7 +92,6 @@ extension AudioController {
         let audioSession = AVAudioSession.sharedInstance()
         
         guard let driveURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
-            print("wrong drive url")
             return
         }
         let fileURL = driveURL.appending(path: "\(id.uuidString).m4a")
@@ -133,9 +132,13 @@ extension AudioController {
         self.audioLength = nil
         
         do {
-            try FileManager.default.removeItem(at: self.fileURL!)
+            guard let url = self.fileURL else {
+                return
+            }
+            
+            try FileManager.default.removeItem(at: url)
         } catch {
-            print("Failed to remove item")
+            // TODO: - 에러 처리
         }
         
         self.fileURL = nil
@@ -176,4 +179,11 @@ extension AudioController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         stopAudio()
     }
+}
+
+// MARK: - AudioController Error
+enum AudioControllerError: Error {
+    case startPlayingError
+    case startRecordingError
+    case resetRecordingError
 }

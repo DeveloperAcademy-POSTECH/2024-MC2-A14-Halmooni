@@ -164,6 +164,7 @@ struct MainAddDiaryView: View {
                         Text("완료")
                             .bold()
                     }
+                    .disabled(!(self.pickedPhoto != nil && self.recordURL != nil && self.pickedTemplate != nil))
                 }
             }
         }
@@ -172,6 +173,7 @@ struct MainAddDiaryView: View {
                 
             }
             Button("변경 사항 폐기", role: .destructive) {
+                viewModel.resetRecording()
                 self.isPresented.toggle()
             }
         } message: {

@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-// TODO: - 녹음 기능 구현
 struct AddDiaryRecordView: View {
     @Binding var viewModel: AudioController
     
@@ -130,7 +129,6 @@ extension AddDiaryRecordView {
                 
                 Button {
                     if !viewModel.isRecording {
-                        // 초기화
                         viewModel.resetRecording()
                     } else {
                         viewModel.stopRecording()
