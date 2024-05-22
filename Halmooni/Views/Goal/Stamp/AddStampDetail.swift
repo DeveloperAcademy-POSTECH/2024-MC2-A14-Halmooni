@@ -92,6 +92,7 @@ struct AddStampDetail: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             tokenSum += quantity
+                            UserDefaults.standard.tokenSum = tokenSum
                             presentationMode.wrappedValue.dismiss()
                         }) {
                             Text("완료")
@@ -112,5 +113,5 @@ struct AddStampDetail: View {
 }
 
 #Preview {
-    AddStampDetail(tokenSum: .constant(15), tokenUsed: 8)
+    AddStampDetail(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: UserDefaults.standard.tokenUsed)
 }

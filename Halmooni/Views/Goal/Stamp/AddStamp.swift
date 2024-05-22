@@ -34,5 +34,5 @@ struct AddStamp: View {
 }
 
 #Preview {
-    AddStamp(tokenSum: .constant(15), tokenUsed: 8)
+    AddStamp(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: UserDefaults.standard.tokenUsed)
 }

@@ -8,29 +8,54 @@
 import SwiftUI
 
 struct GoalView: View {
-    @State private var tokenSum = 15
-    @State private var tokenUsed = 8
+    @State private var tokenSum = UserDefaults.standard.tokenSum
+    @State private var tokenUsed = UserDefaults.standard.tokenUsed
+    
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Color(.bg)
                     .edgesIgnoringSafeArea(.all)
-                
-                VStack(alignment: .leading, spacing: 16) {
-                    HStack {
-                        CurrentStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
-                            .padding(.trailing, 25)
-                        Spacer()
-                        AddStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+                ScrollView{
+                    VStack(alignment: .leading, spacing: 16) {
+                        HStack {
+                            CurrentStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+                                .padding(.trailing, 25)
+                            Spacer()
+                            AddStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+                        }
+                        GaugeBar(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+                        CalendarView(month: Date())
                     }
-                    GaugeBar(tokenSum: $tokenSum, tokenUsed: tokenUsed)
-                    CalendarView(month: Date())
+                    .padding(16)
                 }
-                .padding(16)
             }
             .navigationTitle(Title.goal.name)
         }
+        .onChange(of: tokenSum) { newValue in
+            UserDefaults.standard.tokenSum = newValue
+        }
+        .onChange(of: tokenUsed) { newValue in
+            UserDefaults.standard.tokenUsed = newValue
+        }
+    }
+}
+
+extension UserDefaults {
+    private enum Keys {
+        static let tokenSum = "tokenSum"
+        static let tokenUsed = "tokenUsed"
+    }
+    
+    var tokenSum: Int {
+        get { integer(forKey: Keys.tokenSum) }
+        set { set(newValue, forKey: Keys.tokenSum) }
+    }
+    
+    var tokenUsed: Int {
+        get { integer(forKey: Keys.tokenUsed) }
+        set { set(newValue, forKey: Keys.tokenUsed) }
     }
 }
 
