@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrentStamp: View {
     @Binding var tokenSum: Int
-    var tokenUsed: Int
+    @Binding var tokenUsed: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -39,5 +39,5 @@ struct CurrentStamp: View {
 
 
 #Preview {
-    CurrentStamp(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: UserDefaults.standard.tokenUsed)
+    CurrentStamp(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: .constant(UserDefaults.standard.tokenUsed))
 }
