@@ -2,6 +2,18 @@ import SwiftUI
 import UIKit
 
 
+extension UserDefaults {
+    var gifClicked: Bool {
+        get {
+            return bool(forKey: "gifClicked")
+        }
+        set {
+            set(newValue, forKey: "gifClicked")
+        }
+    }
+}
+
+
 //detailView 호출시 블러 처리하는 것
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
@@ -18,14 +30,15 @@ struct VisualEffectView: UIViewRepresentable {
 struct GrandMotherMainView: View {
     @State private var select: Bool = false
     @State private var showDetailView: Bool = false
+    @State private var gifClicked = UserDefaults.standard.gifClicked
     @Namespace private var animationNameSpace
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     private let phoneNumber = "010-5594-7259"
     
     let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 122),
-        GridItem(.flexible(), spacing: 122)
+        GridItem(.flexible()),
+        GridItem(.flexible())
     ]
     
     private var imageColorScheme: Image {
@@ -41,6 +54,9 @@ struct GrandMotherMainView: View {
     var body: some View {
         
         ZStack {
+            
+
+            
             Color.bg.ignoresSafeArea()
             
             imageColorScheme
@@ -87,41 +103,43 @@ struct GrandMotherMainView: View {
                     .frame(height: 65)
                 
                 ScrollView {
-                    LazyVGrid(columns: columns, alignment: .leading, spacing: 44) {
-                        ForEach(diaries.indices, id: \.self) { index in
-                            ZStack {
-//                              //TODO: - 사진위치에 따른 애니메이션 변경 기능 추가
-                                    GrandMotherPhoto(
-                                        image: UIImage(data: diaries[index].image!),
-                                        date: diaries[index].savedDate
-                                    )
-//                                        .fill(Color.sec) // 색상 추가 (선택 사항)
-//                                        .padding(.leading, 50)
-                                //TODO: - 좌우 프레임 padding  조정하기
+                    LazyVGrid(columns: columns, spacing: 32) {
+                        
+                        ForEach(diaries){ diary in
+                            ZStack{
+                                if let data = diary.image {
+                                    GrandMotherPhotos(image: UIImage(data: data), date: diary.savedDate)
                                         .frame(width: 502, height: 670)
                                         .aspectRatio(3/4, contentMode: .fit)
-                                        .matchedGeometryEffect(id: "diary.id", in: animationNameSpace)
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
-                                        .padding(index % 2 == 0 ? .leading: .trailing, 120)
                                         .overlay {
-                                            if !self.select {
+                                            if !diary.isRead {
                                                 GifView(gifName: "NewMessage")
                                                     .frame(width: 502, height: 670)
                                                     .clipShape(RoundedRectangle(cornerRadius: 20))
-                                                    .padding(index % 2 == 0 ? .leading: .trailing, 120)
                                             }
                                         }
-                                
-                                
-//                                }
+                                    
+                                }
+
                             }
                             .onTapGesture {
-                                self.selectedDiary = diaries[index]
+                                self.selectedDiary = diary
                                 withAnimation{
                                     showDetailView.toggle()
                                 }
+                                
+                                diary.isRead = true
+                                do {
+                                    try PersistentController.shared.container.viewContext.save()
+                                } catch {
+                                    print("Failed")
+                                }
                             }
+                        
+        
                         }
+
                     }
 
                 } //ScrollView
@@ -132,8 +150,6 @@ struct GrandMotherMainView: View {
                 
                 
                 GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace, diary: self.selectedDiary!)
-
-                //detailview 임의 설정
                     .frame(width:1026, height: 912)
                     .cornerRadius(20)
             }

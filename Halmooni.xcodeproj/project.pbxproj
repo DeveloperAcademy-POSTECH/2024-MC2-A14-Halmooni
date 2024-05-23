@@ -36,7 +36,7 @@
 		4641180B2BFCDCB300259B3F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641180A2BFCDCB300259B3F /* Helper.swift */; };
 		4641180D2BFCDCC300259B3F /* AudioPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641180C2BFCDCC300259B3F /* AudioPlayView.swift */; };
 		4641180F2BFCDCE400259B3F /* AudioRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641180E2BFCDCE400259B3F /* AudioRecordButton.swift */; };
-		9D2A77022BFCBFE10006794B /* GrandMotherPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */; };
+		9D17C1CF2BFF690F005FEA11 /* GrandMotherPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D17C1CE2BFF690F005FEA11 /* GrandMotherPhotos.swift */; };
 		9D2A77072BFCC1140006794B /* GrandMotherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */; };
 		9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */; };
 		9D2A770B2BFCC16B0006794B /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */; };
@@ -85,7 +85,7 @@
 		4641180A2BFCDCB300259B3F /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		4641180C2BFCDCC300259B3F /* AudioPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayView.swift; sourceTree = "<group>"; };
 		4641180E2BFCDCE400259B3F /* AudioRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordButton.swift; sourceTree = "<group>"; };
-		9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherPhoto.swift; sourceTree = "<group>"; };
+		9D17C1CE2BFF690F005FEA11 /* GrandMotherPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherPhotos.swift; sourceTree = "<group>"; };
 		9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherMainView.swift; sourceTree = "<group>"; };
 		9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherDetailView.swift; sourceTree = "<group>"; };
 		9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 		9D2A77002BFCBFC40006794B /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */,
+				9D17C1CE2BFF690F005FEA11 /* GrandMotherPhotos.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -389,7 +389,6 @@
 				464118032BFCDC6800259B3F /* DataValue.swift in Sources */,
 				2CF2DBF22BFB3BC6008D2B4E /* AddDiaryTemplateView.swift in Sources */,
 				2CBBD5532BFCD43E005A2367 /* TimeInterval + Extension.swift in Sources */,
-				9D2A77022BFCBFE10006794B /* GrandMotherPhoto.swift in Sources */,
 				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
 				9D2A77072BFCC1140006794B /* GrandMotherMainView.swift in Sources */,
 				4641180F2BFCDCE400259B3F /* AudioRecordButton.swift in Sources */,
@@ -398,6 +397,7 @@
 				2CBBD54F2BFC90C1005A2367 /* AudioController.swift in Sources */,
 				2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
+				9D17C1CF2BFF690F005FEA11 /* GrandMotherPhotos.swift in Sources */,
 				464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */,
 				B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */,
 				2CF2DBF02BFB3BB9008D2B4E /* AddDiaryRecordView.swift in Sources */,
