@@ -9,6 +9,8 @@ import SwiftUI
 import AVKit
 
 struct GrandMotherDetailView: View {
+    
+    @StateObject private var audioRecorder = AudioRecorder()
     @Binding var showDetailView: Bool
     var animationNamespace: Namespace.ID
     @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
@@ -53,7 +55,7 @@ struct GrandMotherDetailView: View {
                 } // 사진과 카드
                 .padding(.horizontal, 50)
 //                Spacer()
-                AudioPlayerView()
+                AudioPlayView(audioRecorder: audioRecorder)
 
                     
             }//VStack

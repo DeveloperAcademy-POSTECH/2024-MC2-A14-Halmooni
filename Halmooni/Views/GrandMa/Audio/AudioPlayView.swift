@@ -12,10 +12,17 @@ struct AudioPlayView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     
     var body: some View {
-        List {
-            ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordingRow(audioURL: recording.fileURL)
-            }
+        ZStack{
+            Color.clear.ignoresSafeArea()
+            VStack{
+                List {
+                    ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
+                        RecordingRow(audioURL: recording.fileURL)
+                    }
+                }
+                .background(Color.clear)
+                .scrollContentBackground(.hidden)
+            }.ignoresSafeArea()
         }
     }
 }
@@ -28,54 +35,57 @@ struct RecordingRow: View {
     @State private var isDragging = false
     
     var body: some View {
-        VStack {
-            //녹음 제목
-            //Text("\(audioURL.lastPathComponent)")
-            
-            ProgressView(value: audioPlayer.currentTime, total: audioPlayer.duration)
-                .accentColor(Color.gry)
-                .progressViewStyle(LinearProgressViewStyle())
-            
-                .overlay(
-                    GeometryReader { geometry in
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(.gry)
-                            .offset(x: CGFloat(audioPlayer.currentTime / audioPlayer.duration) * geometry.size.width - 9, y: -3)
-                            .gesture(
-                                DragGesture()
-                                    .onChanged { value in
-                                        isDragging = true
-                                        dragOffset = min(max(0, value.location.x), geometry.size.width)
-                                        let newTime = TimeInterval(dragOffset / geometry.size.width) * audioPlayer.duration
-                                        audioPlayer.updateCurrentTime(to: newTime)
-                                    }
-                                    .onEnded { value in
-                                        isDragging = false
-                                        let newTime = TimeInterval(dragOffset / geometry.size.width) * audioPlayer.duration
-                                        audioPlayer.seek(to: newTime)
-                                    }
-                            )
-                        
+            VStack {
+                //녹음 제목
+                //Text("\(audioURL.lastPathComponent)")
+                
+                ProgressView(value: audioPlayer.currentTime, total: audioPlayer.duration)
+                    .accentColor(Color.gry)
+                    .progressViewStyle(LinearProgressViewStyle())
+                    .overlay(
+                        GeometryReader { geometry in
+                            Circle()
+                                .frame(width: 10, height: 10)
+                                .foregroundColor(.gry)
+                                .offset(x: CGFloat(audioPlayer.currentTime / audioPlayer.duration) * geometry.size.width - 9, y: -3)
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { value in
+                                            isDragging = true
+                                            dragOffset = min(max(0, value.location.x), geometry.size.width)
+                                            let newTime = TimeInterval(dragOffset / geometry.size.width) * audioPlayer.duration
+                                            audioPlayer.updateCurrentTime(to: newTime)
+                                        }
+                                        .onEnded { value in
+                                            isDragging = false
+                                            let newTime = TimeInterval(dragOffset / geometry.size.width) * audioPlayer.duration
+                                            audioPlayer.seek(to: newTime)
+                                        }
+                                )
+                            
+                        }
+                    )
+                    .padding(.horizontal, 233)
+                HStack{
+                    if audioPlayer.isPlaying || audioPlayer.isPaused {
+                        HStack {
+                            Text("\(timeString(from: audioPlayer.currentTime))")
+                                .foregroundColor(Color.gry2)
+                            Spacer()
+                            Text("-\(timeString(from: audioPlayer.duration - audioPlayer.currentTime))")
+                                .foregroundColor(Color.gry)
+                        }
+                        .padding(.top, 5)
                     }
-                )
-            HStack{
-                if audioPlayer.isPlaying || audioPlayer.isPaused {
-                    HStack {
-                        Text("\(timeString(from: audioPlayer.currentTime))")
-                            .foregroundColor(Color.gry2)
-                        Spacer()
-                        Text("-\(timeString(from: audioPlayer.duration - audioPlayer.currentTime))")
-                            .foregroundColor(Color.gry)
-                    }
-                    .padding(.top, 5)
-                }
-            }.frame(height: 10)
+                }.frame(height: 10)
+                    .padding(.horizontal, 220)
+                
+                controlButton()
+                
+            }
+            .padding()
             
-            controlButton()
-            
-        }
-        .padding()
+        
     }
     
     private func controlButton() -> some View {
