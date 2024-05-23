@@ -9,6 +9,8 @@ import SwiftUI
 import PhotosUI
 
 struct MainAddDiaryView: View {
+    @Environment(\.managedObjectContext) var context
+    
     @State private var viewModel: AudioController = AudioController()
     @State private var isCancelBtnPressed: Bool = false
     @State private var stampCount: Int = 0
@@ -18,10 +20,18 @@ struct MainAddDiaryView: View {
     @State private var image: Image?
     @State private var recordURL: URL?
     @State private var recordTime: TimeInterval?
+    @State private var imageData: Data?
     
     @Binding var isPresented: Bool
     
-    let uuid = UUID()
+    private let uuid = UUID()
+    private let openedDate = Date()
+    
+    private var possibleTokens: Int {
+        let tokenSum = UserDefaults.standard.tokenSum
+        let tokenUsed = UserDefaults.standard.tokenUsed
+        return tokenSum - tokenUsed
+    }
     
     var body: some View {
         NavigationStack {
@@ -32,6 +42,7 @@ struct MainAddDiaryView: View {
                             .frame(width: 150)
                             .foregroundStyle(.sec)
                             .overlay {
+                                // TODO: - 이미지 회전해서 보이는 것 수정 필요
                                 image?
                                     .resizable()
                                     .frame(width: 150, height: 150)
@@ -86,7 +97,12 @@ struct MainAddDiaryView: View {
                                 Text("카드 선택")
                                 Spacer()
                                 
-                                // TODO: - 이미지 선택 라벨 텍스트 추가
+                                if pickedTemplate != nil {
+                                    Text(Template(rawValue: pickedTemplate!)!.getText)
+                                        .font(.system(size: 17))
+                                        .foregroundStyle(.gry)
+                                }
+                                
                             }
                         }
                         
@@ -95,7 +111,6 @@ struct MainAddDiaryView: View {
                         } label: {
                             Text("미모티콘")
                         }
-                        
                     }
                     
                     Section {
@@ -104,9 +119,7 @@ struct MainAddDiaryView: View {
                             
                             Spacer()
                             
-                            DatePicker(selection: $uploadDate) {
-                                
-                            }
+                            DatePicker(selection: $uploadDate, in: openedDate...) { }
                             .labelsHidden()
                             .frame(height: 30)
                             
@@ -116,7 +129,7 @@ struct MainAddDiaryView: View {
                             VStack(alignment: .leading) {
                                 Text("스탬프 사용")
                                     .font(.system(size: 17))
-                                Text("현재 개수 123개")
+                                Text("현재 개수 \(possibleTokens)개")
                                     .font(.system(size: 13))
                                     .foregroundStyle(.gry)
                             }
@@ -126,17 +139,8 @@ struct MainAddDiaryView: View {
                             Text("\(stampCount)개")
                                 .foregroundStyle(.gry)
                             
-                            Stepper {
-                                
-                            } onIncrement: {
-                                stampCount += 1
-                            } onDecrement: {
-                                if stampCount == 0 {
-                                    return
-                                }
-                                stampCount -= 1
-                            }
-                            .labelsHidden()
+                            Stepper("", value: $stampCount, in: 0...possibleTokens)
+                                .labelsHidden()
                         }
                         
                     }
@@ -160,6 +164,7 @@ struct MainAddDiaryView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         // TODO: - diary 저장 구현
+                        AddDiary()
                     } label: {
                         Text("완료")
                             .bold()
@@ -182,14 +187,47 @@ struct MainAddDiaryView: View {
         .task(id: pickedPhoto) {
             do {
                 self.image = try await pickedPhoto?.loadTransferable(type: Image.self)
+                self.imageData = try await pickedPhoto?.loadTransferable(type: Data.self)
             } catch {
                 print("Can't load image!")
             }
         }
         .tint(.prim)
     }
+    
+    private func AddDiary() {
+        guard let image = self.imageData else {
+            return
+        }
+        // 토큰 추가 수정하기
+        let diary = Diary(context: self.context)
+        diary.id = self.uuid
+        diary.image = image
+        diary.pickedTemplate = Int16(self.pickedTemplate!)
+        diary.recordUrl = self.recordURL!.absoluteString
+        diary.savedDate = self.openedDate
+        diary.isRead = false
+        diary.tokenCount = Int16(stampCount)
+        if !(Date() > self.uploadDate) {
+            diary.uploadDate = self.uploadDate
+        } else {
+            diary.uploadDate = nil
+        }
+        
+        do {
+            try self.context.save()
+        } catch {
+            print("저장 실패~")
+        }
+        UserDefaults.standard.tokenUsed += self.stampCount
+        
+        self.isPresented = false
+    }
 }
 
 #Preview {
-    MainAddDiaryView(isPresented: .constant(true))
+    let context = PersistentController.shared.container.viewContext
+    
+    return MainAddDiaryView(isPresented: .constant(true))
+        .environment(\.managedObjectContext, context)
 }

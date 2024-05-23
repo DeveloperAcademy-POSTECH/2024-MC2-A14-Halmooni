@@ -26,7 +26,7 @@ struct AddDiaryRecordView: View {
                         AudioVisualizerView(value: 30)
                     } else {
                         AudioVisualizerView(value: nomalizeSoundLevel(level: level))
-                            .padding(.horizontal, 16)
+//                            .padding(.horizontal, 16)
                     }
                 }
             }
