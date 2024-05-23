@@ -52,9 +52,7 @@ struct DiaryCollectionView: View {
                                         
                                         
                                         
-                                        NavigationLink(destination: {
-                                            self.selectedDiary = post
-                                            return DiaryDetailView(presenter: FlipCardPresenter(), diary: post).ignoresSafeArea()}) {
+                                        NavigationLink(destination: DiaryDetailView(presenter: FlipCardPresenter(), diary: post).ignoresSafeArea()) {
                                             ZStack{
                                                 if let imgData = post.image, let uiImage = UIImage(data: imgData){
                                                     Image(uiImage: uiImage)
@@ -138,7 +136,7 @@ struct DiaryCollectionView: View {
             }
             .navigationTitle(Title.list.name)
             .sheet(isPresented: $isPresented) {
-                MainAddDiaryView(isPresented: $isPresented, diary: self.selectedDiary)
+                MainAddDiaryView(isPresented: $isPresented)
             }
         }
     }
