@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct SelectVieww: View {
+struct SelectView: View {
     @State var isPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
 
     var body: some View {
@@ -27,5 +27,5 @@ struct SelectVieww: View {
 
 
 #Preview {
-    SelectVieww()
+    SelectView()
 }
