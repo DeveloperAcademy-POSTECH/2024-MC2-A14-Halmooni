@@ -12,7 +12,7 @@ struct DiaryCollectionView: View {
     @State private var isPresented: Bool = false
     // 다크모드, 라이트모드 관리
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-
+    
     // 클라우드 데이터 받아오기
     @FetchRequest(entity: Diary.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Diary.uploadDate, ascending: true)])
     var diaries: FetchedResults<Diary>
@@ -89,7 +89,7 @@ struct DiaryCollectionView: View {
                                                                 WillSendIndicatior()
                                                                     .padding(.trailing, 16)
                                                             }
-
+                                                            
                                                             Text("\(dayString)일")
                                                                 .font(.headline)
                                                                 .foregroundStyle(Color.white)
@@ -140,7 +140,7 @@ struct DiaryCollectionView: View {
             }
         }
     }
-  
+    
     
     // MARK: - 현재 날짜와 비교하는 함수
     private func isFutureDate(date: Date) -> Bool {
@@ -168,14 +168,14 @@ struct DiaryCollectionView: View {
     func diaryPosts() -> [String: [Diary]] {
         var diaryDate = [String: [Diary]] ()
         
-//        for entry in self.diaries {
-//            let monthString = monthNumberFormatter.string(from: (entry.uploadDate ?? entry.savedDate)!)
-//            
-//            if diaryDate[monthString] == nil {
-//                diaryDate[monthString] = []
-//            }
-//            diaryDate[monthString]?.append(entry)
-//        }
+        //        for entry in self.diaries {
+        //            let monthString = monthNumberFormatter.string(from: (entry.uploadDate ?? entry.savedDate)!)
+        //
+        //            if diaryDate[monthString] == nil {
+        //                diaryDate[monthString] = []
+        //            }
+        //            diaryDate[monthString]?.append(entry)
+        //        }
         
         var monthFlag = "0"
         for diary in self.diaries {

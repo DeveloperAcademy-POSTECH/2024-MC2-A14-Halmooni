@@ -4,13 +4,27 @@
 //
 //  Created by 추서연 on 5/19/24.
 //
-
 import SwiftUI
+import CoreData
 
 struct CalendarView: View {
     @State var month: Date
     @State var offset: CGSize = CGSize()
-    @State var uploadDate: Set<Date> = [Calendar.current.date(from: DateComponents(year: 2024, month: 4, day: 30))!,Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 2))!, Calendar.current.date(from: DateComponents(year: 2024, month: 5, day: 11))!]
+    
+    @FetchRequest(entity: Diary.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Diary.uploadDate, ascending: true)])
+    var diaries: FetchedResults<Diary>
+    
+    var uploadDates: Set<Date> {
+        let dates = Set(diaries.compactMap { diary in
+            if let uploadDate = diary.uploadDate {
+                return Calendar.current.startOfDay(for: uploadDate)
+            } else {
+                return nil
+            }
+        })
+        print("Upload Dates: \(dates)")
+        return dates
+    }
     
     var body: some View {
         VStack {
@@ -18,16 +32,26 @@ struct CalendarView: View {
             calendarGridView
         }
         .padding(16)
-        .background(.section)
+        .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        
         .gesture(
             DragGesture()
                 .onChanged { gesture in self.offset = gesture.translation }
-                .onEnded { gesture in if gesture.translation.width < -100 { changeMonth(by: 1) }
-                    else if gesture.translation.width > 100 { changeMonth(by: -1) }
-                    self.offset = CGSize()}
+                .onEnded { gesture in
+                    if gesture.translation.width < -100 {
+                        changeMonth(by: 1)
+                    } else if gesture.translation.width > 100 {
+                        changeMonth(by: -1)
+                    }
+                    self.offset = CGSize()
+                }
         )
+        .onAppear {
+            print("Diaries: \(diaries.count)")
+            for diary in diaries {
+                print("Diary uploadDate: \(String(describing: diary.uploadDate))")
+            }
+        }
     }
     
     // MARK: - 헤더 뷰
@@ -81,37 +105,38 @@ struct CalendarView: View {
         return VStack {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
                 ForEach(0 ..< daysInMonth + firstWeekday + trailingDays, id: \.self) { index in
+                    
                     if index < firstWeekday {
                         let date = getDate(for: index - firstWeekday)
                         let day = daysInPrevMonth + index - firstWeekday + 1
-                        let selected = uploadDate.contains(date)
+                        let selected = uploadDates.contains(date)
                         let isToday = Calendar.current.isDateInToday(date)
                         
                         CellView(day: day, selected: selected, isToday: isToday)
-                            .foregroundColor(Color.gry)
+                            .foregroundColor(Color.gry2)
                         
                     } else if index > lastWeekday {
                         
                         let date = getDate(for: index - firstWeekday)
                         let day =  index - daysInMonth - firstWeekday + 1
-                        let selected = uploadDate.contains(date)
+                        let selected = uploadDates.contains(date)
                         let isToday = Calendar.current.isDateInToday(date)
                         
                         CellView(day: day, selected: selected, isToday: isToday)
-                            .foregroundColor(Color.gry)
+                            .foregroundColor(Color.gry2)
                         
                         
                     } else {
                         let date = getDate(for: index - firstWeekday)
                         let day = index - firstWeekday + 1
-                        let selected = uploadDate.contains(date)
+                        let selected = uploadDates.contains(date)
                         let isToday = Calendar.current.isDateInToday(date)
                         
                         CellView(day: day, selected: selected, isToday: isToday)
                             .foregroundColor(Color.text)
                             
                     }
-                }.padding(.vertical,5)
+                }.padding(.vertical, 5)
             }
         }
     }
@@ -133,10 +158,10 @@ private struct CellView: View {
         VStack {
             RoundedRectangle(cornerRadius: 5)
                 .opacity(0)
-                .foregroundColor(Color.gry)
+                .foregroundColor(Color.secondary)
                 .overlay(Text(String(day)))
                 .frame(width: 33, height: 33)
-                .background(isToday ? Color.sec : Color.clear)
+                .background(isToday ? Color.prim.opacity(0.2) : Color.clear)
                 .overlay(
                     Group {
                         if selected {
@@ -148,7 +173,7 @@ private struct CellView: View {
                                 .resizable()
                                 .frame(width: 23, height: 23)
                                 .rotationEffect(.degrees(30))
-                                .foregroundColor(Color.prim)
+                                .foregroundColor(Color.primary)
                         }
                     }
                 )
@@ -198,7 +223,7 @@ private extension CalendarView {
         }
     }
     
-    //마지막 요일에 따라 추가해야 하는 일자 수를 반환하는 함수
+    // 마지막 요일에 따라 추가해야 하는 일자 수를 반환하는 함수
     func trailingDaysCount(after lastWeekday: Int) -> Int {
         return (7 - lastWeekday) % 7
     }
@@ -215,7 +240,6 @@ extension CalendarView {
     
     static let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
 }
-
 
 #Preview {
     CalendarView(month: Date())
