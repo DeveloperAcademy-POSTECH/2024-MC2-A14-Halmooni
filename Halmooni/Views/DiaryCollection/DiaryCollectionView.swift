@@ -7,26 +7,25 @@
 
 import SwiftUI
 
-// MARK: (임시)PostDate Model
-struct PostDate: Identifiable {
-    let id = UUID()
-    var date: Date
-}
-
 
 struct DiaryCollectionView: View {
-    @State private var postdate: [String: [PostDate]] = [:] // 빈 배열로 초기화
     @State private var isPresented: Bool = false
-  
+    // 다크모드, 라이트모드 관리
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
+    // 클라우드 데이터 받아오기
+    @FetchRequest(entity: Diary.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Diary.uploadDate, ascending: true)])
+    var diaries: FetchedResults<Diary>
+    
+    @State var selectedDiary: Diary?
+    
     var body: some View {
         NavigationStack{
             ZStack{
                 Color.bg
                     .ignoresSafeArea(.all)
                 ScrollView {
-                    ForEach(Array(postdate.keys), id: \.self) { key in
+                    ForEach(Array(diaryPosts().keys).reversed(), id: \.self) { key in
                         VStack(spacing: 0){
                             ZStack{
                                 postColorSchemeImage
@@ -45,24 +44,37 @@ struct DiaryCollectionView: View {
                                 }
                             }
                             
-                            NavigationLink(destination: DiaryDetailView(presenter: FlipCardPresenter()).ignoresSafeArea()) {
-                                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                                    if let postList = postdate[key] {
-                                        ForEach(postList) { post in
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                                if let diaryList = diaryPosts()[key] {
+                                    ForEach(diaryList) { post in
+                                        // 게시물날짜 변환 상수
+                                        let dayString = dayNumberFormatter.string(from: post.uploadDate ?? post.savedDate!)
+                                        
+                                        
+                                        
+                                        NavigationLink(destination: {
+                                            self.selectedDiary = post
+                                            return DiaryDetailView(presenter: FlipCardPresenter(), diary: post).ignoresSafeArea()}) {
                                             ZStack{
-                                                Image(.exampleimg) // TODO: 추후 교체
-                                                    .resizable()
-                                                    .frame(width: 161, height: 215)
-                                                    .contextMenu {
-                                                        // 수정
-                                                        Button("수정", systemImage: "pencil") {
-                                                            // TODO: 수정 기능 삽입 필요
+                                                if let imgData = post.image, let uiImage = UIImage(data: imgData){
+                                                    Image(uiImage: uiImage)
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: 161, height: 215)
+                                                        .contextMenu {
+                                                            // 수정
+                                                            Button("수정", systemImage: "pencil") {
+                                                                // TODO: 수정 기능 삽입 필요
+                                                                self.selectedDiary = post
+                                                                self.isPresented.toggle()
+                                                            }
+                                                            // 삭제
+                                                            Button("삭제", systemImage: "trash.fill", role: .destructive) {
+                                                                // TODO: 삭제 기능 삽입 필요
+                                                                PersistentController.shared.deleteDiary(diary: post)
+                                                            }
                                                         }
-                                                        // 삭제
-                                                        Button("삭제", systemImage: "trash.fill", role: .destructive) {
-                                                            // TODO: 삭제 기능 삽입 필요
-                                                        }
-                                                    }
+                                                }
                                                 
                                                 //날짜, 전송예약
                                                 VStack{
@@ -74,11 +86,17 @@ struct DiaryCollectionView: View {
                                                             .opacity(0.5)
                                                         HStack(spacing: 0){
                                                             Spacer()
-                                                            WillSendIndicatior()
-                                                                .padding(.trailing, 16)
-                                                            Text("7일") // TODO: 추후 교체
+                                                            
+                                                            if isFutureDate(date: (post.uploadDate ?? post.savedDate)!) {
+                                                                WillSendIndicatior()
+                                                                    .padding(.trailing, 16)
+                                                            }
+
+                                                            Text("\(dayString)일")
                                                                 .font(.headline)
                                                                 .foregroundStyle(Color.white)
+                                                                .lineLimit(1)
+                                                                .minimumScaleFactor(0.5)
                                                                 .padding(.trailing, 13)
                                                         }
                                                     }
@@ -88,19 +106,20 @@ struct DiaryCollectionView: View {
                                         }
                                     }
                                 }
-                                .padding([.leading, .trailing], 32)
-                                .padding(.bottom, 16)
-                                .background{
-                                    Rectangle()
-                                        .foregroundStyle(.section)
-                                        .frame(width: 361)
-                                }
                             }
+                            .padding([.leading, .trailing], 32)
+                            .padding(.bottom, 16)
+                            .background{
+                                Rectangle()
+                                    .foregroundStyle(.section)
+                                    .frame(width: 361)
+                            }
+                            
                             Spacer()
                         }
                     }
                     .onAppear{
-                        loadPosts()
+                        //                        diaryPosts()
                     }
                 }
             }
@@ -110,7 +129,6 @@ struct DiaryCollectionView: View {
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                        
                         isPresented.toggle()
                     }, label: {
                         Image(systemName: "plus")
@@ -120,43 +138,68 @@ struct DiaryCollectionView: View {
             }
             .navigationTitle(Title.list.name)
             .sheet(isPresented: $isPresented) {
-                MainAddDiaryView(isPresented: $isPresented)
+                MainAddDiaryView(isPresented: $isPresented, diary: self.selectedDiary)
             }
         }
     }
+  
     
-    // MARK: 날짜(월) - 숫자만 추출되도록
-    private var monthNumberFormatter: DateFormatter {
+    // MARK: - 현재 날짜와 비교하는 함수
+    private func isFutureDate(date: Date) -> Bool {
+        let currentDate = Date()
+        return date > currentDate
+    }
+    
+    // MARK: - 날짜(월) 숫자만 추출되도록
+    var monthNumberFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "M"
         return formatter
     }
     
-    // MARK: (임시) 배열 내 데이터 추가
-    private func loadPosts() {
-        // 예시 데이터 로드 (네트워크 요청이나 데이터베이스 조회 대신 사용)
-        let examplePostList = [
-            monthNumberFormatter.string(from: Date()) : [
-                PostDate(date: Date())
-            ],
-            monthNumberFormatter.string(from: Calendar.current.date(byAdding: .month, value: -1, to: Date())!) : [
-                PostDate(date: Calendar.current.date(byAdding: .month, value: -1, to: Date())!), // 1개월 전
-                PostDate(date: Calendar.current.date(byAdding: .month, value: -1, to: Date())!), // 1개월 전
-            ],
-            monthNumberFormatter.string(from: Calendar.current.date(byAdding: .month, value: -2, to: Date())!) : [
-                PostDate(date: Calendar.current.date(byAdding: .month, value: -2, to: Date())!) // 2개월 전
-            ]
-        ]
-        postdate = examplePostList
+    // MARK: - 날짜(일) 숫자만 추출되도록
+    var dayNumberFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter
     }
     
-    // MARK: post 이미지 colorScheme 설정
+    
+    
+    // MARK: - 배열 내 데이터 추가
+    func diaryPosts() -> [String: [Diary]] {
+        var diaryDate = [String: [Diary]] ()
+        
+//        for entry in self.diaries {
+//            let monthString = monthNumberFormatter.string(from: (entry.uploadDate ?? entry.savedDate)!)
+//            
+//            if diaryDate[monthString] == nil {
+//                diaryDate[monthString] = []
+//            }
+//            diaryDate[monthString]?.append(entry)
+//        }
+        
+        var monthFlag = "0"
+        for diary in self.diaries {
+            let month = monthNumberFormatter.string(from: diary.uploadDate ?? diary.savedDate!)
+            if month != monthFlag {
+                monthFlag = month
+                diaryDate[month] = []
+                diaryDate[month]!.append(diary)
+                continue
+            }
+            diaryDate[month]!.append(diary)
+        }
+        return diaryDate
+    }
+    
+    // MARK: - post 이미지 colorScheme 설정
     private var postColorSchemeImage: Image {
         colorScheme == .dark ? Image("post_dark") : Image("post")
     }
 }
 
-// MARK: 전송예약 아이콘
+// MARK: - 전송예약 아이콘
 @ViewBuilder
 func WillSendIndicatior() -> some View {
     ZStack{

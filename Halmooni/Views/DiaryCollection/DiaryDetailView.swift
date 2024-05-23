@@ -9,18 +9,21 @@ import SwiftUI
 
 struct DiaryDetailView: View {
     @ObservedObject var presenter: FlipCardPresenter
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var diary: Diary
+    @State private var isPresented = false
     
     var body: some View {
         ZStack{
             Color.bg
             //기록카드 뷰
-            ImageCard(presenter: presenter)
+            ImageCard(presenter: presenter, diary: diary)
             //수정, 삭제하기 툴바
                 .toolbar{
                     ToolbarItem{
                         Menu(content: {
                             Button(action: {
-                                
+                                isPresented = true
                             }, label: {
                                 HStack{
                                     Text("수정하기")
@@ -31,6 +34,8 @@ struct DiaryDetailView: View {
                             })
                             
                             Button(role: .destructive, action: {
+                                PersistentController.shared.deleteDiary(diary: diary)
+                                self.presentationMode.wrappedValue.dismiss()
                                 
                             }, label: {
                                 HStack{
@@ -46,17 +51,22 @@ struct DiaryDetailView: View {
                         })
                     }
                 }
+//            if isPresented {
+//                MainAddDiaryView(isPresented: $isPresented)
+//            }
         }
         .toolbar(.hidden, for: .tabBar)
         .ignoresSafeArea()
     }
 }
 
-// MARK: 상세보기뷰 - 우표템플릿
+// MARK: - 상세보기뷰: 우표템플릿
 struct ImageCard: View {
     @ObservedObject var presenter: FlipCardPresenter
     @State private var isAnimating: Bool = false
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    let diary: Diary
+    
     
     var body: some View {
         //우표템플릿
@@ -69,13 +79,22 @@ struct ImageCard: View {
                 //날짜, 음성재생 버튼
                 VStack{
                     HStack{
-                        Text("5월 7일")
+                        let dateSting = dateNumberFormatter.string(from: (diary.uploadDate ?? diary.savedDate)!)
+                        Text("\(dateSting)")
                             .font(.title2)
                             .bold()
                             .padding(.leading, 32)
                         Spacer()
                         Button(action: {
                             //음성재생 기능 필요
+                            guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+                                return
+                            }
+//                            let str = diary.recordUrl!.split(separator: "/")
+//                            let url = path.appending(path: str.last!)
+                            let url = path.appending(path: "\(diary.id!.uuidString).m4a")
+                            
+                            AudioController().startAudio(filePath: url)
                         }, label: {
                             PlayButton()
                                 .foregroundStyle(.text)
@@ -86,7 +105,7 @@ struct ImageCard: View {
                     Spacer()
                 }
                 //카드 이미지
-                FlipCard(presenter: presenter, isAnimating: $isAnimating)
+                FlipCard(presenter: presenter, isAnimating: $isAnimating, diary: diary)
                     .rotation3DEffect(.degrees(isAnimating ? 5 : 0), axis: (x: 0, y: 1, z: 0))
                     .animation(
                         isAnimating ?
@@ -108,13 +127,20 @@ struct ImageCard: View {
         }
     }
     
-    // MARK: fullPost 이미지 colorScheme 설정
+    // MARK: - fullPost 이미지 colorScheme 설정
     private var fullPostColorSchemeImage: Image {
         colorScheme == .dark ? Image("fullPost_dark") : Image("fullPost")
     }
+    
+    // MARK: - 날짜(0월0일) 추출되도록
+    private var dateNumberFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M월 d일"
+        return formatter
+    }
 }
 
-// MARK: 음성재생버튼
+// MARK: - 음성재생버튼
 struct PlayButton: View {
     var body: some View {
         ZStack{
@@ -131,47 +157,67 @@ struct PlayButton: View {
     }
 }
 
-// MARK: 이미지카드 + 사용한 토큰
+// MARK: - 이미지카드 + 사용한 토큰
 struct FlipCard: View {
     @ObservedObject var presenter: FlipCardPresenter
     @Binding var isAnimating: Bool
+    let diary: Diary
     
     var body: some View {
         ZStack{
             //이미지카드
             VStack{
                 Spacer()
-                Image(presenter.isFlipped ? .examplecard : .exampleimg)
-                    .resizable()
-                    .frame(width: 297, height: 457)
-                    .scaleEffect(x: presenter.isFlipped ? -1 : 1, y: 1)
-                    .overlay{
-                        VStack {
-                            Spacer()
-                            HStack {
-                                Spacer()
-                                UsedToken()
-                                    .padding(20)
-                            }
-                        }
+                if let imgData = diary.image, let uiImage = UIImage(data: imgData){
+                    Image(uiImage: presenter.isFlipped ? UIImage(imageLiteralResourceName: "\(diary.pickedTemplate).png") : uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 294, height: 393)
+                        .clipped()
+                        .cornerRadius(15)
                         .scaleEffect(x: presenter.isFlipped ? -1 : 1, y: 1)
-                        .opacity(presenter.isFlipped ? 1 : 0)
-                    }
-                    .clipped()
-                    .cornerRadius(15)
-                    .scaledToFit()
-                    .shadow(color: .gry, radius: 4, y: 4)
-                    .padding(.bottom, 37)
-                    .onTapGesture {
-                        presenter.flipButtonTapped()
-                        isAnimating = false
-                    }
+                        .shadow(color: .gry, radius: 4, y: 4)
+                        .overlay{
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    // MARK: 사용한 토큰 우표
+                                    ZStack{
+                                        Image(.tokenPost)
+                                            .resizable()
+                                            .frame(width: 78, height: 52)
+                                        HStack(spacing: 0){
+                                            Image(systemName: "heart.fill")
+                                                .font(.system(size: 22))
+                                                .foregroundStyle(.black)
+                                            Text(" \(diary.tokenCount)")
+                                                .font(.title2)
+                                                .bold()
+                                                .font(.system(size: 22))
+                                                .foregroundStyle(.black)
+                                        }
+                                    }
+                                    .padding(.bottom, 20)
+                                    .padding(.trailing, 20)
+                                }
+                            }
+                            .scaleEffect(x: presenter.isFlipped ? -1 : 1, y: 1)
+                            .opacity(presenter.isFlipped ? 1 : 0)
+                        }
+                        .padding(.bottom, 57)
+                        .onTapGesture {
+                            presenter.flipButtonTapped()
+                            isAnimating = false
+                        }
+                }
+
             }
         }
     }
 }
 
-// MARK: 카드플립을 위한 protocol, class
+// MARK: - 카드플립을 위한 protocol, class
 protocol FlipCardPresenterProtocol: ObservableObject {
     var isFlipped: Bool { get }
     func flipButtonTapped()
@@ -185,23 +231,4 @@ class FlipCardPresenter: FlipCardPresenterProtocol {
     }
 }
 
-// MARK: 사용한 토큰 갯수
-struct UsedToken: View {
-    var body: some View {
-        ZStack{
-            Image(.tokenPost)
-                .resizable()
-                .frame(width: 78, height: 52)
-            HStack(spacing: 0){
-                Image(systemName: "heart.fill")
-                    .font(.system(size: 22))
-                    .foregroundStyle(.black)
-                Text(" 17")
-                    .font(.title2)
-                    .bold()
-                    .font(.system(size: 22))
-                    .foregroundStyle(.black)
-            }
-        }
-    }
-}
+
