@@ -47,8 +47,8 @@ struct IpadSelectView : View {
                     }
                     Spacer()
                     VStack(spacing: 0){
-                        IpadUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: "SlideArrowIpad",rectangleWidth: 390, isUnlocked: $isUnlocked)
-                        IpadUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: "SlideArrowIpad",rectangleWidth: 2000, isUnlocked: $isUnlocked)
+                        IpadUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton: .prim, colorUnderButton: .section, arrowImage: Image(.slideArrowIpad), rectangleWidth: 390, isUnlocked: $isUnlocked)
+                        IpadUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: Image(.slideArrowIpad), rectangleWidth: 2000, isUnlocked: $isUnlocked)
                     }
                     Spacer(minLength: 300)
                 }
@@ -62,7 +62,7 @@ struct IpadSelectView : View {
         let name: String
         let colorButton: Color
         let colorUnderButton: Color
-        let arrowImage: String
+        let arrowImage: Image
         let rectangleWidth: CGFloat
         
         @State private var offset: CGFloat = 0
@@ -79,20 +79,20 @@ struct IpadSelectView : View {
                         ZStack(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill((colorUnderButton))
-                                .frame(width: 500,height: 152)
+                                .frame(width: 500, height: 152)
                                 .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.15), radius: 15, y: 2)
+                            
                             HStack {
                                 Text(name)
                                     .font(.title)
                                     .bold()
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.text)
                                     .padding(.leading, 20)
                                     .frame(width: 110)
                                 
                                 if !isHide {
-                                    Image(arrowImage)
+                                    arrowImage
                                         .font(.title)
-                                        .padding(.horizontal, 50)
                                 }
                             }
                             RoundedRectangle(cornerRadius: 15)

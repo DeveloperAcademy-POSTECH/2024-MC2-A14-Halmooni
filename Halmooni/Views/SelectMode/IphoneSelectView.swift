@@ -33,8 +33,8 @@ struct IphoneSelectView : View {
                     }.padding(.horizontal, 16)
                     Spacer()
                     VStack(spacing: 0){
-                        IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: "SlideArrowIphone", rectangleWidth: 1000, isUnlocked: $isUnlocked )
-                        IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: "SlideArrowIphone", rectangleWidth: 240, isUnlocked: $isUnlocked)
+                        IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: Image(.slideArrowIphone), rectangleWidth: 1000, isUnlocked: $isUnlocked )
+                        IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: Image(.slideArrowIphone), rectangleWidth: 240, isUnlocked: $isUnlocked)
                     }
                     Spacer(minLength: 300)
                 }
@@ -48,7 +48,7 @@ struct IphoneUnlockSliderView: View {
     let name: String
     let colorButton: Color
     let colorUnderButton: Color
-    let arrowImage: String
+    let arrowImage: Image
     let rectangleWidth: CGFloat
     
     @State private var offset: CGFloat = 0
@@ -70,12 +70,12 @@ struct IphoneUnlockSliderView: View {
                             Text(name)
                                 .font(.title)
                                 .bold()
-                                .foregroundColor(.black)
+                                .foregroundColor(.text)
                                 .padding(.leading, 20)
                                 .frame(width: 110)
                             
                             if !isHide {
-                                Image(arrowImage)
+                                arrowImage
                                     .font(.title)
                             }
                         }
