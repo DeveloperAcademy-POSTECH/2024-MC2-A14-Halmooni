@@ -10,33 +10,38 @@ import SwiftUI
 
 struct IphoneSelectView : View {
     
+    @State private var isUnlocked: Bool = false
+    
     var body: some View {
         ZStack{
-            Color.bg
-                .ignoresSafeArea(.all)
-            VStack{
-                VStack(alignment: .leading){
-                    Text("앱을 시작하기에 앞서\n사용할 모드를 선택해 주세요!")
-                        .font(.title)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .padding(.vertical)
-                        .foregroundColor(.text)
-                    Text("한번 선택한 후에는 수정이 불가합니다.")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.text)
-                }.padding(.horizontal, 16)
-                Spacer()
-                VStack(spacing: 0){
-                    IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: "SlideArrowIphone", rectangleWidth: 240 )
-                    IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: "SlideArrowIphone", rectangleWidth: 240)
+            if isUnlocked{
+                MainTabView()
+            }else {
+                Color.bg
+                    .ignoresSafeArea(.all)
+                VStack{
+                    VStack(alignment: .leading){
+                        Text("앱을 시작하기에 앞서\n사용할 모드를 선택해 주세요!")
+                            .font(.title)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .padding(.vertical)
+                            .foregroundColor(.text)
+                        Text("한번 선택한 후에는 수정이 불가합니다.")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.text)
+                    }.padding(.horizontal, 16)
+                    Spacer()
+                    VStack(spacing: 0){
+                        IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: "SlideArrowIphone", rectangleWidth: 1000, isUnlocked: $isUnlocked )
+                        IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: "SlideArrowIphone", rectangleWidth: 240, isUnlocked: $isUnlocked)
+                    }
+                    Spacer(minLength: 300)
                 }
-                Spacer(minLength: 300)
             }
         }
     }
 }
-
 // MARK: - 슬라이딩 패드 구조체
 struct IphoneUnlockSliderView: View {
     let sliderImage: String
@@ -47,17 +52,13 @@ struct IphoneUnlockSliderView: View {
     let rectangleWidth: CGFloat
     
     @State private var offset: CGFloat = 0
-    @State private var isUnlocked: Bool = false
     @State private var isHide: Bool = false
+    @Binding  var isUnlocked: Bool
     
     var body: some View {
         ZStack {
-            if isUnlocked { // TODO: 추후 뷰 연결 필요
+            if isUnlocked {
                 
-                Text("아이폰이지롱")
-                    .font(.largeTitle)
-                    .foregroundColor(.red)
-                //예시
             } else {
                 HStack{
                     ZStack(alignment: .leading) {
@@ -103,6 +104,7 @@ struct IphoneUnlockSliderView: View {
                                             isUnlocked = true
                                         }
                                         withAnimation {
+                         
                                             offset = 0
                                         }
                                     }
