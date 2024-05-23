@@ -23,7 +23,7 @@ struct GoalView: View {
                             CurrentStamp(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
                             Spacer()
                                 .frame(width:16)
-                            AddStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+                            AddStamp(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
                         }
                         GaugeBar(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
                         CalendarView(month: Date())
