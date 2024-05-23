@@ -22,8 +22,8 @@ struct GoalView: View {
                         HStack {
                             CurrentStamp(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
                             Spacer()
-                                .frame(width:16)
                             AddStamp(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
+                                .padding(.trailing, 16)
                         }
                         GaugeBar(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
                         CalendarView(month: Date())
