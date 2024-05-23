@@ -285,9 +285,9 @@
 		EA50452E2BFF0D5600A16DD2 /* SelectMode */ = {
 			isa = PBXGroup;
 			children = (
+				EA5045382BFF162F00A16DD2 /* SelectVieww.swift */,
 				EA5045362BFF162F00A16DD2 /* IpadSelectView.swift */,
 				EA5045372BFF162F00A16DD2 /* IphoneSelectView.swift */,
-				EA5045382BFF162F00A16DD2 /* SelectVieww.swift */,
 			);
 			path = SelectMode;
 			sourceTree = "<group>";

@@ -22,6 +22,7 @@ struct IpadSelectView : View {
                             .font(.title2)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .padding(.vertical)
+                            .foregroundColor(.text)
                         Spacer()
                     }.padding(.vertical,36)
                         .padding(.bottom,-36)
@@ -31,6 +32,8 @@ struct IpadSelectView : View {
                             .dynamicTypeSize(.xxxLarge)
                             .font(.title3)
                             .fontWeight(.semibold)
+                            .foregroundColor(.text)
+
                         Spacer()
                     }
                     .padding(.horizontal,50)
@@ -39,7 +42,7 @@ struct IpadSelectView : View {
                 Spacer()
                 VStack(spacing: 0){
                     IpadUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: "SlideArrowIpad",rectangleWidth: 390)
-                    IpadUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .sec, colorUnderButton: .section, arrowImage: "SlideArrowIpad",rectangleWidth: 390)
+                    IpadUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: "SlideArrowIpad",rectangleWidth: 390)
                 }
                 Spacer(minLength: 300)
             }
@@ -54,10 +57,7 @@ struct IpadUnlockSliderView: View {
     let colorButton: Color
     let colorUnderButton: Color
     let arrowImage: String
-    
-    
     let rectangleWidth: CGFloat
-//    var isPad: Bool = false
     
     @State private var offset: CGFloat = 0
     @State private var isUnlocked: Bool = false
@@ -65,8 +65,6 @@ struct IpadUnlockSliderView: View {
     
     var body: some View {
         ZStack {
-//            let rectangleWidth: CGFloat = isPad ? 400 : 200
-            ////////
             if isUnlocked { // TODO: 추후 뷰 연결 필요
                 
                 Text("아이패드지롱")
@@ -88,7 +86,6 @@ struct IpadUnlockSliderView: View {
                                 .frame(width: 110)
                             
                             if !isHide {
-                                //반대일때 보여줘라
                                 Image(arrowImage)
                                     .font(.title)
                                     .padding(.horizontal, 50)
@@ -113,7 +110,7 @@ struct IpadUnlockSliderView: View {
                                     }
                                     .onEnded { gesture in
                                         isHide = false
-                                        if gesture.translation.width > /*UIScreen.main.bounds.width * 1/4*/
+                                        if gesture.translation.width > 
                                             rectangleWidth * 9/10
                                         {
                                             isUnlocked = true

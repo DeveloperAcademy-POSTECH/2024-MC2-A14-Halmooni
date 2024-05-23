@@ -20,14 +20,16 @@ struct IphoneSelectView : View {
                         .font(.title)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .padding(.vertical)
+                        .foregroundColor(.text)
                     Text("한번 선택한 후에는 수정이 불가합니다.")
                         .font(.subheadline)
                         .fontWeight(.semibold)
+                        .foregroundColor(.text)
                 }.padding(.horizontal, 16)
                 Spacer()
                 VStack(spacing: 0){
                     IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: "SlideArrowIphone", rectangleWidth: 240 )
-                    IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .sec, colorUnderButton: .section, arrowImage: "SlideArrowIphone", rectangleWidth: 240)
+                    IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: "SlideArrowIphone", rectangleWidth: 240)
                 }
                 Spacer(minLength: 300)
             }
@@ -42,10 +44,7 @@ struct IphoneUnlockSliderView: View {
     let colorButton: Color
     let colorUnderButton: Color
     let arrowImage: String
-    
-    
     let rectangleWidth: CGFloat
-    //    var isPad: Bool = false
     
     @State private var offset: CGFloat = 0
     @State private var isUnlocked: Bool = false
@@ -53,14 +52,12 @@ struct IphoneUnlockSliderView: View {
     
     var body: some View {
         ZStack {
-            //            let rectangleWidth: CGFloat = isPad ? 400 : 200
-            ////////
             if isUnlocked { // TODO: 추후 뷰 연결 필요
                 
                 Text("아이폰이지롱")
                     .font(.largeTitle)
                     .foregroundColor(.red)
-                //예시로 해놓음
+                //예시
             } else {
                 HStack{
                     ZStack(alignment: .leading) {
@@ -94,15 +91,13 @@ struct IphoneUnlockSliderView: View {
                                 DragGesture()
                                     .onChanged { gesture in
                                         isHide = true
-                                        //
                                         if gesture.translation.width > 0 {
                                             offset = min(gesture.translation.width, UIScreen.main.bounds.width - 174)
                                         }
                                     }
                                     .onEnded { gesture in
                                         isHide = false
-                                        //
-                                        if gesture.translation.width > /*UIScreen.main.bounds.width * 1/4*/
+                                        if gesture.translation.width >
                                             rectangleWidth * 9/10
                                         {
                                             isUnlocked = true
