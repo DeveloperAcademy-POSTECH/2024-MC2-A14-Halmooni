@@ -47,6 +47,9 @@
 		B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */; };
 		B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */; };
 		B93C32992BFB34A1007699BB /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C32982BFB34A1007699BB /* Title.swift */; };
+		EA5045302BFF0EC300A16DD2 /* SelectVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA50452F2BFF0EC300A16DD2 /* SelectVieww.swift */; };
+		EA5045322BFF0EDE00A16DD2 /* IphoneSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5045312BFF0EDE00A16DD2 /* IphoneSelectView.swift */; };
+		EA5045342BFF0EEA00A16DD2 /* IpadSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5045332BFF0EEA00A16DD2 /* IpadSelectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +96,9 @@
 		B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B93C32982BFB34A1007699BB /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		EA50452F2BFF0EC300A16DD2 /* SelectVieww.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectVieww.swift; path = ../../../../../Developer/ipadd/ipadd/SelectVieww.swift; sourceTree = "<group>"; };
+		EA5045312BFF0EDE00A16DD2 /* IphoneSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IphoneSelectView.swift; path = ../../../../../Developer/ipadd/ipadd/IphoneSelectView.swift; sourceTree = "<group>"; };
+		EA5045332BFF0EEA00A16DD2 /* IpadSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IpadSelectView.swift; path = ../../../../../Developer/ipadd/ipadd/IpadSelectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,7 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EA50452E2BFF0D5600A16DD2 /* SelectMode */,
 				9D2A76FF2BFCBFAA0006794B /* GrandMa */,
 				B91FEB382BFC872A00C78843 /* DiaryCollection */,
 				2CF2DBEC2BFB3B6A008D2B4E /* AddDiary */,
@@ -275,6 +282,16 @@
 			path = DiaryCollection;
 			sourceTree = "<group>";
 		};
+		EA50452E2BFF0D5600A16DD2 /* SelectMode */ = {
+			isa = PBXGroup;
+			children = (
+				EA50452F2BFF0EC300A16DD2 /* SelectVieww.swift */,
+				EA5045332BFF0EEA00A16DD2 /* IpadSelectView.swift */,
+				EA5045312BFF0EDE00A16DD2 /* IphoneSelectView.swift */,
+			);
+			path = SelectMode;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -350,6 +367,7 @@
 			files = (
 				2C639ADF2BF9C8CF00420610 /* MainTabView.swift in Sources */,
 				9D2A77152BFCDF690006794B /* GifView.swift in Sources */,
+				EA5045302BFF0EC300A16DD2 /* SelectVieww.swift in Sources */,
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				464118072BFCDC8F00259B3F /* AudioPlayer.swift in Sources */,
 				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
@@ -357,11 +375,13 @@
 				2CBBD5512BFCB061005A2367 /* AudioVisualizerView.swift in Sources */,
 				464118012BFCDC5700259B3F /* RecordingDataModel.swift in Sources */,
 				2C639ADD2BF9C8CF00420610 /* HalmooniApp.swift in Sources */,
+				EA5045322BFF0EDE00A16DD2 /* IphoneSelectView.swift in Sources */,
 				9D2A770D2BFCC1890006794B /* AVFoundation.swift in Sources */,
 				464117E42BFB270100259B3F /* AddStamp.swift in Sources */,
 				464118052BFCDC7B00259B3F /* AudioRecorder.swift in Sources */,
 				A9D48AEA2BFB91E400F250FF /* SplashView.swift in Sources */,
 				4641180D2BFCDCC300259B3F /* AudioPlayView.swift in Sources */,
+				EA5045342BFF0EEA00A16DD2 /* IpadSelectView.swift in Sources */,
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
