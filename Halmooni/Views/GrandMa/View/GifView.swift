@@ -47,6 +47,7 @@ extension UIImageView {
             for i in 0..<count {
                 if let cgImage = CGImageSourceCreateImageAtIndex(source, i, nil) {
                     images.append(UIImage(cgImage: cgImage))
+
                 }
             }
 

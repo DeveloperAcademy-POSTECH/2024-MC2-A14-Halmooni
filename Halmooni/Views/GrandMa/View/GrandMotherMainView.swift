@@ -19,14 +19,23 @@ struct GrandMotherMainView: View {
     @State private var select: Bool = false
     @State private var showDetailView: Bool = false
     @Namespace private var animationNameSpace
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     //TODO: 무니 번호로 수정하기
     private let phoneNumber = "010-2557-0122"
     
     let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 90),
-        GridItem(.flexible(), spacing: 90)
+        GridItem(.flexible(), spacing: 122),
+        GridItem(.flexible(), spacing: 122)
     ]
+    
+    private var imageColorScheme: Image {
+        colorScheme == .dark ? Image(.halviewdark) : Image(.halviewlight)
+    }
+    
+    
+    @FetchRequest(entity: Diary.entity(), sortDescriptors: [.init(keyPath: \Diary.savedDate, ascending: true)])
+    var diaries:FetchedResults<Diary>
     
     
     var body: some View {
@@ -34,13 +43,9 @@ struct GrandMotherMainView: View {
         ZStack {
             Color.bg.ignoresSafeArea()
             
-            VStack {
-                HStack {
-                    Text("To. 할무니")
-                        .font(.largeTitle.bold())
-                        .dynamicTypeSize(.xxxLarge)
-                        .padding(.leading, 60)
+            imageColorScheme
 
+            VStack {
                     
                     // TODO: 전화 연결 클라우드 사용 방안으로 변경
                     Button(action: {
@@ -52,37 +57,37 @@ struct GrandMotherMainView: View {
 //                        UIApplication.shared.open(url)
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
-                                .fill(.white)
+                                .fill(.section)
+                                .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 2)
+                            
                             HStack {
                                 Text("인범이에게 전화하기")
                                     .dynamicTypeSize(.xxxLarge)
-                                    .font(.largeTitle)
+                                    .font(.largeTitle.bold())
                                     .foregroundColor(.text)
-                                    .bold()
-                                    .padding(.leading, 46)
-                                
-                                Spacer()
+                                    .padding(.leading, 44)
+
                                 
                                 Image(systemName: "phone.circle.fill")
                                     .foregroundColor(.green)
                                     .dynamicTypeSize(.xxxLarge)
                                     .font(.largeTitle)
-                                    .padding(.trailing, 33)
+                                    .padding(.trailing, 44)
                             }
                             
                         }
-                        .frame(width: 592, height: 100)
+                        .frame(width: 502, height: 92)
                         
                     }
-                    .padding(.top, 65)
-                    .padding(.trailing, 60)
-                    .padding(.leading, 370)
-                }
+                    .padding(.top, 90)
+                    .padding(.trailing, 140)
+                    .padding(.leading, 750)
+                
                 Spacer()
                     .frame(height: 65)
                 
                 ScrollView {
-                    LazyVGrid(columns: columns, alignment: .leading, spacing: 20) {
+                    LazyVGrid(columns: columns, alignment: .leading, spacing: 44) {
                         ForEach(0..<2) { i in
                             ZStack {
                               //TODO: - 사진위치에 따른 애니메이션 변경 기능 추가
@@ -96,20 +101,27 @@ struct GrandMotherMainView: View {
                                     }
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(Color.sec) // 색상 추가 (선택 사항)
-                                        .padding(i % 2 == 0 ? .leading: .trailing, 90)
 //                                        .padding(.leading, 50)
+                                        .frame(width: 502, height: 670)
                                         .aspectRatio(3/4, contentMode: .fit)
                                         .matchedGeometryEffect(id: "photo\(i)", in: animationNameSpace)
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
+                                        .padding(i % 2 == 0 ? .leading: .trailing, 120)
+                                        .overlay {
+                                            if !self.select {
+                                                GifView(gifName: "NewMessage")
+                                                    .frame(width: 502, height: 670)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                                    .padding(i % 2 == 0 ? .leading: .trailing, 120)
+
+                                            }
+
+                                        }
+
 
                                 }
                                 
-                                if !self.select {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.white)
-                                    GifView(gifName: "NewMessage")
-                                }
-                                
+                                                                
                             }
                             .onTapGesture {
                                 withAnimation{
@@ -118,7 +130,7 @@ struct GrandMotherMainView: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 90)
+
                 }
             }
             if showDetailView {
