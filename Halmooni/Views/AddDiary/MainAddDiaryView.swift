@@ -27,6 +27,8 @@ struct MainAddDiaryView: View {
     private let uuid = UUID()
     private let openedDate = Date()
     
+    var diary: Diary?
+    
     private var possibleTokens: Int {
         let tokenSum = UserDefaults.standard.tokenSum
         let tokenUsed = UserDefaults.standard.tokenUsed
@@ -193,6 +195,14 @@ struct MainAddDiaryView: View {
             }
         }
         .tint(.prim)
+        .onAppear {
+            guard let diary = self.diary else {
+                print("1111")
+                return
+            }
+            self.stampCount = Int(diary.tokenCount)
+            self.image = Image(uiImage: UIImage(data:diary.image!)!)
+        }
     }
     
     private func AddDiary() {
