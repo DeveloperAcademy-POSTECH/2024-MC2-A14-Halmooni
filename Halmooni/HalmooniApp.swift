@@ -25,10 +25,11 @@ struct HalmooniApp: App {
                             }
                         }
                 } else {
-                    MainTabView()
-                        .environment(\.managedObjectContext, managedObject.container.viewContext)
+                    SelectVieww()
                 }
             }
+//            GrandMotherMainView()
+//                .environment(\.managedObjectContext, managedObject.container.viewContext)
         }
     }
 }

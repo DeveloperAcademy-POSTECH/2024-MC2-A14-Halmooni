@@ -20,12 +20,12 @@ struct GoalView: View {
                 ScrollView{
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
-                            CurrentStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
-                                .padding(.trailing, 25)
+                            CurrentStamp(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
                             Spacer()
-                            AddStamp(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+                            AddStamp(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
+                                .padding(.trailing, 16)
                         }
-                        GaugeBar(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+                        GaugeBar(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
                         CalendarView(month: Date())
                     }
                     .padding(16)
