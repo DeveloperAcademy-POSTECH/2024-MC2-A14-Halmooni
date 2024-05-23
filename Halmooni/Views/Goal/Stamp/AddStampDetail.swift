@@ -11,12 +11,12 @@ struct AddStampDetail: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var quantity = 0
     @Binding var tokenSum: Int
-    var tokenUsed: Int
+    @Binding var tokenUsed: Int
     
     var body: some View {
         NavigationView {
             ZStack{
-                Color.bg.edgesIgnoringSafeArea(.all)
+                Color.section.edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     VStack {
@@ -26,7 +26,7 @@ struct AddStampDetail: View {
                             .foregroundColor(Color.prim)
                             .padding(16)
                         
-                        Text("남은 우표 수: \(tokenSum - tokenUsed + 1)")
+                        Text("남은 우표 수: \(tokenSum - tokenUsed)")
                             .font(.caption)
                             .foregroundColor(Color.gry)
                         
@@ -38,9 +38,11 @@ struct AddStampDetail: View {
                             TextField("갯수 입력", value: $quantity, formatter: positiveNumberFormatter)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .keyboardType(.numberPad)
+                            Text("개")
+                                .foregroundColor(.gry)
                         }
                         .padding(16)
-                        .background(.section)
+                        .background(.bg)
                         .cornerRadius(20)
                     }
                     .padding(16)
@@ -113,5 +115,5 @@ struct AddStampDetail: View {
 }
 
 #Preview {
-    AddStampDetail(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: UserDefaults.standard.tokenUsed)
+    AddStampDetail(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: .constant(UserDefaults.standard.tokenUsed))
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct AddStamp: View {
     @State private var showModal = false
     @Binding var tokenSum: Int
-    var tokenUsed: Int
+    @Binding var tokenUsed: Int
     
     var body: some View {
         VStack {
@@ -24,15 +24,15 @@ struct AddStamp: View {
                     .foregroundColor(Color.prim)
             })
         }
-        .frame(width:127, height: 131)
+        .frame(width:131, height: 131)
         .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .sheet(isPresented: $showModal) {
-            AddStampDetail(tokenSum: $tokenSum, tokenUsed: tokenUsed)
+            AddStampDetail(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
         }
     }
 }
 
 #Preview {
-    AddStamp(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: UserDefaults.standard.tokenUsed)
+    AddStamp(tokenSum: .constant(UserDefaults.standard.tokenSum), tokenUsed: .constant(UserDefaults.standard.tokenUsed))
 }
