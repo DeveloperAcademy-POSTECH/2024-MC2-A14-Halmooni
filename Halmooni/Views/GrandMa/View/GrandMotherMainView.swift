@@ -21,8 +21,7 @@ struct GrandMotherMainView: View {
     @Namespace private var animationNameSpace
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
-    //TODO: 무니 번호로 수정하기
-    private let phoneNumber = "010-2557-0122"
+    private let phoneNumber = "010-5594-7259"
     
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 122),
@@ -37,6 +36,7 @@ struct GrandMotherMainView: View {
     @FetchRequest(entity: Diary.entity(), sortDescriptors: [.init(keyPath: \Diary.savedDate, ascending: true)])
     var diaries:FetchedResults<Diary>
     
+    @State var selectedDiary: Diary?
     
     var body: some View {
         
@@ -88,42 +88,35 @@ struct GrandMotherMainView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns, alignment: .leading, spacing: 44) {
-                        ForEach(0..<2) { i in
+                        ForEach(diaries.indices, id: \.self) { index in
                             ZStack {
-                              //TODO: - 사진위치에 따른 애니메이션 변경 기능 추가
-
-                                VStack {
-                                    if i % 2 == 0 {
-                                        // 짝수번 (왼쪽)
-                                    }
-                                    else {
-                                        // 홀수번 (오른쪽)
-                                    }
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.sec) // 색상 추가 (선택 사항)
+//                              //TODO: - 사진위치에 따른 애니메이션 변경 기능 추가
+                                    GrandMotherPhoto(
+                                        image: UIImage(data: diaries[index].image!),
+                                        date: diaries[index].savedDate
+                                    )
+//                                        .fill(Color.sec) // 색상 추가 (선택 사항)
 //                                        .padding(.leading, 50)
+                                //TODO: - 좌우 프레임 padding  조정하기
                                         .frame(width: 502, height: 670)
                                         .aspectRatio(3/4, contentMode: .fit)
-                                        .matchedGeometryEffect(id: "photo\(i)", in: animationNameSpace)
+                                        .matchedGeometryEffect(id: "diary.id", in: animationNameSpace)
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
-                                        .padding(i % 2 == 0 ? .leading: .trailing, 120)
+                                        .padding(index % 2 == 0 ? .leading: .trailing, 120)
                                         .overlay {
                                             if !self.select {
                                                 GifView(gifName: "NewMessage")
                                                     .frame(width: 502, height: 670)
                                                     .clipShape(RoundedRectangle(cornerRadius: 20))
-                                                    .padding(i % 2 == 0 ? .leading: .trailing, 120)
-
+                                                    .padding(index % 2 == 0 ? .leading: .trailing, 120)
                                             }
-
                                         }
-
-
-                                }
                                 
-                                                                
+                                
+//                                }
                             }
                             .onTapGesture {
+                                self.selectedDiary = diaries[index]
                                 withAnimation{
                                     showDetailView.toggle()
                                 }
@@ -131,13 +124,14 @@ struct GrandMotherMainView: View {
                         }
                     }
 
-                }
+                } //ScrollView
             }
             if showDetailView {
                 VisualEffectView(effect: UIBlurEffect(style: .light))
                     .edgesIgnoringSafeArea(.all)
                 
-                GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace)
+                
+                GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace, diary: self.selectedDiary!)
 
                 //detailview 임의 설정
                     .frame(width:1026, height: 912)

@@ -29,6 +29,8 @@ struct HalmooniApp: App {
                         .environment(\.managedObjectContext, managedObject.container.viewContext)
                 }
             }
+//            GrandMotherMainView()
+//                .environment(\.managedObjectContext, managedObject.container.viewContext)
         }
     }
 }
