@@ -24,7 +24,7 @@ struct GrandMotherDetailView: View {
                 //Spacer()
                     
                 HStack {
-                    Text(diary.savedDate!, style: .date)
+                    Text(diary.savedDate!.engToKor())
                         .dynamicTypeSize(.xxxLarge)
                         .font(.largeTitle.bold())
                         .padding(.leading, 50)

@@ -12,7 +12,6 @@ struct HalmooniApp: App {
     
     var body: some Scene {
         let managedObject = PersistentController.shared
-        
         WindowGroup {
             ZStack {
                 if showSplash {
