@@ -88,7 +88,7 @@ struct GrandMotherMainView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns, alignment: .leading, spacing: 44) {
-                        ForEach(diaries.indices) { index in
+                        ForEach(diaries.indices, id: \.self) { index in
                             ZStack {
 //                              //TODO: - 사진위치에 따른 애니메이션 변경 기능 추가
                                     GrandMotherPhoto(

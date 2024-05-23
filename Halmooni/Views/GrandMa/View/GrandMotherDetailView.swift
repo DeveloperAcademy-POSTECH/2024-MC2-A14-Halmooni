@@ -44,12 +44,12 @@ struct GrandMotherDetailView: View {
                 .padding(.top, 50)
                 
                 HStack {
-                    if let imageData = diary.image, let uiImage = UIImage(data: imageData) {
-                        Image(uiImage: uiImage)
+                    if let imageData = diary.image, let imageData = UIImage(data: imageData) {
+                        Image(uiImage: imageData)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 450, height: 600)
-                            .matchedGeometryEffect(id: "photo\(diary.id)", in: animationNamespace)
+                            .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
                     } else {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color.gray)
@@ -59,8 +59,8 @@ struct GrandMotherDetailView: View {
                                     .foregroundColor(.white)
                                     .bold()
                             }
-                            .matchedGeometryEffect(id: "photo\(diary.id)", in: animationNamespace)
-                    }                        
+                            .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
+                    }
                         Spacer()
                         
                     Image("\(diary.pickedTemplate)")

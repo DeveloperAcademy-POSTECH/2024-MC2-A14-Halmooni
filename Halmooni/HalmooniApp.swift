@@ -14,23 +14,23 @@ struct HalmooniApp: App {
         let managedObject = PersistentController.shared
         
         WindowGroup {
-//            ZStack {
-//                if showSplash {
-//                    SplashView()
-//                        .onAppear {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                                withAnimation {
-//                                    showSplash = false
-//                                }
-//                            }
-//                        }
-//                } else {
-//                    MainTabView()
-//                        .environment(\.managedObjectContext, managedObject.container.viewContext)
-//                }
-//            }
-            GrandMotherMainView()
-                .environment(\.managedObjectContext, managedObject.container.viewContext)
+            ZStack {
+                if showSplash {
+                    SplashView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                withAnimation {
+                                    showSplash = false
+                                }
+                            }
+                        }
+                } else {
+                    MainTabView()
+                        .environment(\.managedObjectContext, managedObject.container.viewContext)
+                }
+            }
+//            GrandMotherMainView()
+//                .environment(\.managedObjectContext, managedObject.container.viewContext)
         }
     }
 }
