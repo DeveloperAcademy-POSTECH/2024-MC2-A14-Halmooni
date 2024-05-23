@@ -47,6 +47,9 @@
 		B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */; };
 		B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */; };
 		B93C32992BFB34A1007699BB /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C32982BFB34A1007699BB /* Title.swift */; };
+		EA5045392BFF162F00A16DD2 /* IpadSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5045362BFF162F00A16DD2 /* IpadSelectView.swift */; };
+		EA50453A2BFF162F00A16DD2 /* IphoneSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5045372BFF162F00A16DD2 /* IphoneSelectView.swift */; };
+		EA50453B2BFF162F00A16DD2 /* SelectVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5045382BFF162F00A16DD2 /* SelectVieww.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +96,9 @@
 		B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B93C32982BFB34A1007699BB /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		EA5045362BFF162F00A16DD2 /* IpadSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpadSelectView.swift; sourceTree = "<group>"; };
+		EA5045372BFF162F00A16DD2 /* IphoneSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IphoneSelectView.swift; sourceTree = "<group>"; };
+		EA5045382BFF162F00A16DD2 /* SelectVieww.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVieww.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,7 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EA50452E2BFF0D5600A16DD2 /* SelectMode */,
 				9D2A76FF2BFCBFAA0006794B /* GrandMa */,
 				B91FEB382BFC872A00C78843 /* DiaryCollection */,
 				2CF2DBEC2BFB3B6A008D2B4E /* AddDiary */,
@@ -275,6 +282,16 @@
 			path = DiaryCollection;
 			sourceTree = "<group>";
 		};
+		EA50452E2BFF0D5600A16DD2 /* SelectMode */ = {
+			isa = PBXGroup;
+			children = (
+				EA5045382BFF162F00A16DD2 /* SelectVieww.swift */,
+				EA5045362BFF162F00A16DD2 /* IpadSelectView.swift */,
+				EA5045372BFF162F00A16DD2 /* IphoneSelectView.swift */,
+			);
+			path = SelectMode;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -352,6 +369,9 @@
 				9D2A77152BFCDF690006794B /* GifView.swift in Sources */,
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				464118072BFCDC8F00259B3F /* AudioPlayer.swift in Sources */,
+				EA50453B2BFF162F00A16DD2 /* SelectVieww.swift in Sources */,
+				EA50453A2BFF162F00A16DD2 /* IphoneSelectView.swift in Sources */,
+				EA5045392BFF162F00A16DD2 /* IpadSelectView.swift in Sources */,
 				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
 				2CF752BA2BFDFAC50023BD2B /* Template.swift in Sources */,
 				2CBBD5512BFCB061005A2367 /* AudioVisualizerView.swift in Sources */,
@@ -517,7 +537,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halmooni/Preview Content\"";
-				DEVELOPMENT_TEAM = VF8R3A969C;
+				DEVELOPMENT_TEAM = RQW4ABCWWT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halmooni/Info.plist;
@@ -549,7 +569,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halmooni/Preview Content\"";
-				DEVELOPMENT_TEAM = VF8R3A969C;
+				DEVELOPMENT_TEAM = RQW4ABCWWT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halmooni/Info.plist;
