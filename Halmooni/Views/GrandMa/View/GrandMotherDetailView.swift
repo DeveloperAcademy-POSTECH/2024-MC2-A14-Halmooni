@@ -15,14 +15,16 @@ struct GrandMotherDetailView: View {
     var animationNamespace: Namespace.ID
     @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
     
+    let diary: Diary
+    
     var body: some View {
         ZStack(alignment: .top) {
-            Color.white
+            Color.section
             VStack {
                 //Spacer()
                     
                 HStack {
-                    Text("2024년 5월 18일")
+                    Text(diary.savedDate!, style: .date)
                         .dynamicTypeSize(.xxxLarge)
                         .font(.largeTitle.bold())
                         .padding(.leading, 50)
@@ -42,17 +44,32 @@ struct GrandMotherDetailView: View {
                     })
                 }
                 .padding(.top, 50)
+                
                 HStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .frame(width:450, height: 600)
-                        .matchedGeometryEffect(id: "photo0", in: animationNamespace)
-                    
-                    Spacer()
-                    
-                    RoundedRectangle(cornerRadius: 20)
-                        .frame(width:450, height: 600)
-//                        .matchedGeometryEffect(id: "card", in: animationNamespace)
-                } // 사진과 카드
+                    if let imageData = diary.image, let imageData = UIImage(data: imageData) {
+                        Image(uiImage: imageData)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 450, height: 600)
+                            .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
+                    } else {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.gray)
+                            .frame(width: 450, height: 600)
+                            .overlay {
+                                Text("No Image")
+                                    .foregroundColor(.white)
+                                    .bold()
+                            }
+                            .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
+                    }
+                        Spacer()
+                        
+                    Image("\(diary.pickedTemplate)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 450, height: 600)
+                    } // 사진과 카드
                 .padding(.horizontal, 50)
 //                Spacer()
                 AudioPlayView(audioRecorder: audioRecorder)
@@ -64,14 +81,14 @@ struct GrandMotherDetailView: View {
     }
 }
 
-struct GrandMotherDetailView_Previews: PreviewProvider {
-    @State static var showDetailView = true
-    @Namespace static var animationNamespace
-    
-    static var previews: some View {
-        GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNamespace)
-    }
-}
+//struct GrandMotherDetailView_Previews: PreviewProvider {
+//    @State static var showDetailView = true
+//    @Namespace static var animationNamespace
+//    
+//    static var previews: some View {
+//        GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNamespace)
+//    }
+//}
 
 //#Preview {
 //    GrandMotherDetailView($showDetailView)
