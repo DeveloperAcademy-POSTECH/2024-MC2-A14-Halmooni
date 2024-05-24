@@ -36,7 +36,7 @@
 		4641180B2BFCDCB300259B3F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641180A2BFCDCB300259B3F /* Helper.swift */; };
 		4641180D2BFCDCC300259B3F /* AudioPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641180C2BFCDCC300259B3F /* AudioPlayView.swift */; };
 		4641180F2BFCDCE400259B3F /* AudioRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641180E2BFCDCE400259B3F /* AudioRecordButton.swift */; };
-		9D2A77022BFCBFE10006794B /* GrandMotherPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */; };
+		9D17C1CF2BFF690F005FEA11 /* GrandMotherPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D17C1CE2BFF690F005FEA11 /* GrandMotherPhotos.swift */; };
 		9D2A77072BFCC1140006794B /* GrandMotherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */; };
 		9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */; };
 		9D2A770B2BFCC16B0006794B /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */; };
@@ -47,7 +47,7 @@
 		B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */; };
 		B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */; };
 		B93C32992BFB34A1007699BB /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C32982BFB34A1007699BB /* Title.swift */; };
-		B9434F392BFF75BD00D598C6 /* SelectVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9434F382BFF75BD00D598C6 /* SelectVieww.swift */; };
+		B9434F392BFF75BD00D598C6 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9434F382BFF75BD00D598C6 /* SelectView.swift */; };
 		B9434F3C2BFF75C400D598C6 /* IphoneSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9434F3A2BFF75C400D598C6 /* IphoneSelectView.swift */; };
 		B9434F3D2BFF75C400D598C6 /* IpadSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9434F3B2BFF75C400D598C6 /* IpadSelectView.swift */; };
 /* End PBXBuildFile section */
@@ -85,7 +85,7 @@
 		4641180A2BFCDCB300259B3F /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		4641180C2BFCDCC300259B3F /* AudioPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayView.swift; sourceTree = "<group>"; };
 		4641180E2BFCDCE400259B3F /* AudioRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordButton.swift; sourceTree = "<group>"; };
-		9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherPhoto.swift; sourceTree = "<group>"; };
+		9D17C1CE2BFF690F005FEA11 /* GrandMotherPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherPhotos.swift; sourceTree = "<group>"; };
 		9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherMainView.swift; sourceTree = "<group>"; };
 		9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMotherDetailView.swift; sourceTree = "<group>"; };
 		9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B93C32982BFB34A1007699BB /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
-		B9434F382BFF75BD00D598C6 /* SelectVieww.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVieww.swift; sourceTree = "<group>"; };
+		B9434F382BFF75BD00D598C6 /* SelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		B9434F3A2BFF75C400D598C6 /* IphoneSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IphoneSelectView.swift; sourceTree = "<group>"; };
 		B9434F3B2BFF75C400D598C6 /* IpadSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpadSelectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -256,7 +256,7 @@
 		9D2A77002BFCBFC40006794B /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				9D2A77012BFCBFE10006794B /* GrandMotherPhoto.swift */,
+				9D17C1CE2BFF690F005FEA11 /* GrandMotherPhotos.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 			children = (
 				B9434F3B2BFF75C400D598C6 /* IpadSelectView.swift */,
 				B9434F3A2BFF75C400D598C6 /* IphoneSelectView.swift */,
-				B9434F382BFF75BD00D598C6 /* SelectVieww.swift */,
+				B9434F382BFF75BD00D598C6 /* SelectView.swift */,
 			);
 			path = SelectMode;
 			sourceTree = "<group>";
@@ -383,12 +383,11 @@
 				2CF2DBE22BFA2245008D2B4E /* PersistentController.swift in Sources */,
 				9D2A77092BFCC13A0006794B /* GrandMotherDetailView.swift in Sources */,
 				464117E72BFB270100259B3F /* CalendarView.swift in Sources */,
-				B9434F392BFF75BD00D598C6 /* SelectVieww.swift in Sources */,
+				B9434F392BFF75BD00D598C6 /* SelectView.swift in Sources */,
 				B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */,
 				464118032BFCDC6800259B3F /* DataValue.swift in Sources */,
 				2CF2DBF22BFB3BC6008D2B4E /* AddDiaryTemplateView.swift in Sources */,
 				2CBBD5532BFCD43E005A2367 /* TimeInterval + Extension.swift in Sources */,
-				9D2A77022BFCBFE10006794B /* GrandMotherPhoto.swift in Sources */,
 				464117E62BFB270100259B3F /* CurrentStamp.swift in Sources */,
 				9D2A77072BFCC1140006794B /* GrandMotherMainView.swift in Sources */,
 				4641180F2BFCDCE400259B3F /* AudioRecordButton.swift in Sources */,
@@ -398,6 +397,7 @@
 				2CBBD54F2BFC90C1005A2367 /* AudioController.swift in Sources */,
 				2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
+				9D17C1CF2BFF690F005FEA11 /* GrandMotherPhotos.swift in Sources */,
 				464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */,
 				B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */,
 				2CF2DBF02BFB3BB9008D2B4E /* AddDiaryRecordView.swift in Sources */,
@@ -538,7 +538,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halmooni/Preview Content\"";
-				DEVELOPMENT_TEAM = RQW4ABCWWT;
+				DEVELOPMENT_TEAM = VF8R3A969C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halmooni/Info.plist;
@@ -572,7 +572,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halmooni/Preview Content\"";
-				DEVELOPMENT_TEAM = RQW4ABCWWT;
+				DEVELOPMENT_TEAM = VF8R3A969C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halmooni/Info.plist;

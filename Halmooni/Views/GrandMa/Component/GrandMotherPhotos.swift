@@ -1,22 +1,28 @@
 //
-//  GrandMotherPhoto.swift
-//  grandmother
+//  GrandMotherPhotos.swift
+//  Halmooni
 //
-//  Created by Kyu Im on 5/18/24.
+//  Created by Kyu Im on 5/23/24.
 //
 
 import SwiftUI
-
-
-struct GrandMotherPhoto: View {
+extension Date {
+    func engToKor() -> String {
+        let myFormatter = DateFormatter()
+        myFormatter.dateFormat = "yyyy년 M월 d일"
+        let dateString = myFormatter.string(from: self)
+        
+        return dateString
+    }
+}
+struct GrandMotherPhotos: View {
     var image: UIImage?
     var date: Date?
-    
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(Color.green)
+                .foregroundColor(Color.clear)
                 .aspectRatio(3/4, contentMode: .fit)
                 .overlay {
                     ZStack {
@@ -37,9 +43,9 @@ struct GrandMotherPhoto: View {
                                     HStack{
                                         Spacer()
                                         if let date = date {
-                                            Text(date, style: .date)
+                                            Text(date.engToKor())
                                                 .font(.largeTitle.bold())
-                                                .dynamicTypeSize(.accessibility3)
+                                                .dynamicTypeSize(.accessibility1)
                                                 .foregroundStyle(Color.white)
                                                 .padding(40)
                                         }
@@ -53,5 +59,5 @@ struct GrandMotherPhoto: View {
 }
 
 #Preview {
-    GrandMotherPhoto()
+    GrandMotherPhotos()
 }
