@@ -9,14 +9,16 @@ import AVKit
 
 struct GrandMotherDetailView: View {
     
-    @StateObject private var audioRecorder = AudioRecorder()
+//    @StateObject private var audioRecorder = AudioRecorder()
     @Binding var showDetailView: Bool
     var animationNamespace: Namespace.ID
-    @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
+//    @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
     
     let diary: Diary
     @State private var isPlaying: Bool = false
     @State private var player: AVPlayer?
+    @State private var viewModel: TestModel = TestModel()
+    @State private var audioPlayerModel: AudioPlayer = AudioPlayer()
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -68,34 +70,70 @@ struct GrandMotherDetailView: View {
                 }
                 .padding(.horizontal, 50)
                 
-                Button(action: {
-                    if isPlaying {
-                        // Pause the audio
-                        player?.pause()
-                    } else {
-                        // Start playing the audio
+                switch self.viewModel.status {
+                case .loading:
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                case .success:
+                    Button("재생") {
                         guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
                             return
                         }
-                        let url = path.appending(path: "\(diary.id!.uuidString).m4a")
-                        player = AVPlayer(url: url)
+                        let fileName = diary.recordUrl!.split(separator: "/").last!
+                        let fileUrl = path.appending(path: fileName)
+                        
+                        player = AVPlayer(url: fileUrl)
                         player?.play()
                     }
-                    // Toggle the state
-                    isPlaying.toggle()
-                }, label: {
-                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                        .imageScale(.large)
-                        .foregroundColor(Color.prim)
-                })
+                case .failed:
+                    Text("저장 실패 ㅋ")
+                }
                 
-                AudioPlayView(audioRecorder: audioRecorder)
+//                Button(action: {
+//                    if isPlaying {
+//                        // Pause the audio
+//                        player?.pause()
+//                    } else {
+//                        isPlaying = false
+//                        // Start playing the audio
+//                        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+//                            return
+//                        }
+//                        let fileName = diary.recordUrl!.split(separator: "/").last!
+//                        let fileUrl = path.appending(path: fileName)
+//                        
+//                        if FileManager.default.fileExists(atPath: path.relativePath) {
+//                            print("444444444")
+//                        }
+//                        
+//                        try! FileManager.default.startDownloadingUbiquitousItem(at: fileUrl)
+//                        
+//                        player = AVPlayer(url: fileUrl)
+//                        player?.play()
+//                    }
+//                    // Toggle the state
+//                    isPlaying.toggle()
+//                }, label: {
+//                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+//                        .imageScale(.large)
+//                        .foregroundColor(Color.prim)
+//                })
+                
+//                AudioPlayView(audioRecorder: audioRecorder)
             }
+        }
+        .onAppear {
+            viewModel.downloadRecordFile(url: self.diary.recordUrl!)
         }
         .onDisappear {
             // Stop the audio when view disappears
             player?.pause()
         }
+    }
+    
+    @ViewBuilder
+    private func audioButtonView() -> some View {
+        
     }
 }
 
@@ -109,3 +147,33 @@ struct GrandMotherDetailView: View {
 //    }
 //}
 
+
+@Observable
+class TestModel {
+    public var status: ModelStatus = .loading
+    
+    public func downloadRecordFile(url: String) {
+        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+            print("failed to make url")
+            return
+        }
+        let fileName = url.split(separator: "/").last!
+        let fileUrl = path.appending(path: fileName)
+        
+        do {
+            try FileManager.default.startDownloadingUbiquitousItem(at: fileUrl)
+        } catch {
+            self.status = .failed
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.status = .success
+        }
+    }
+    
+    enum ModelStatus {
+        case loading
+        case success
+        case failed
+    }
+}
