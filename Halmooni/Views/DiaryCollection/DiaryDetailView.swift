@@ -11,7 +11,9 @@ struct DiaryDetailView: View {
     @ObservedObject var presenter: FlipCardPresenter
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var diary: Diary
+    
     @State private var isPresented = false
+    @State private var isDeleted: Bool = false
     
     var body: some View {
         ZStack{
@@ -23,6 +25,7 @@ struct DiaryDetailView: View {
                     ToolbarItem{
                         Menu(content: {
                             Button(action: {
+                                // TODO: 수정하기 기능 추가
                                 isPresented = true
                             }, label: {
                                 HStack{
@@ -34,9 +37,7 @@ struct DiaryDetailView: View {
                             })
                             
                             Button(role: .destructive, action: {
-                                PersistentController.shared.deleteDiary(diary: diary)
-                                self.presentationMode.wrappedValue.dismiss()
-                                
+                                isDeleted.toggle()
                             }, label: {
                                 HStack{
                                     Text("삭제하기")
@@ -49,11 +50,18 @@ struct DiaryDetailView: View {
                             Image(systemName: "ellipsis.circle")
                                 .foregroundStyle(.prim)
                         })
+                        .alert(isPresented: $isDeleted) {
+                            Alert(title: Text("삭제"), message: Text("이 기록을 삭제하시겠습니까?"), primaryButton: .cancel(Text("취소")), secondaryButton: .default(Text("확인"), action: {
+                                PersistentController.shared.deleteDiary(diary: diary)
+                                self.presentationMode.wrappedValue.dismiss()
+                            }))
+                        }
+                        
                     }
                 }
-//            if isPresented {
-//                MainAddDiaryView(isPresented: $isPresented)
-//            }
+            //            if isPresented {
+            //                MainAddDiaryView(isPresented: $isPresented)
+            //            }
         }
         .toolbar(.hidden, for: .tabBar)
         .ignoresSafeArea()
@@ -90,8 +98,6 @@ struct ImageCard: View {
                             guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
                                 return
                             }
-//                            let str = diary.recordUrl!.split(separator: "/")
-//                            let url = path.appending(path: str.last!)
                             let url = path.appending(path: "\(diary.id!.uuidString).m4a")
                             
                             AudioController().startAudio(filePath: url)
@@ -211,7 +217,7 @@ struct FlipCard: View {
                             isAnimating = false
                         }
                 }
-
+                
             }
         }
     }

@@ -10,13 +10,17 @@ import SwiftUI
 
 struct DiaryCollectionView: View {
     @State private var isPresented: Bool = false
+    // 삭제 알럿창 전용
+    @State private var isDeleted: Bool = false
+    @State private var selectedButton: String = " "
     // 다크모드, 라이트모드 관리
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-
+    
     // 클라우드 데이터 받아오기
     @FetchRequest(entity: Diary.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Diary.uploadDate, ascending: true)])
     var diaries: FetchedResults<Diary>
     
+    // 삭제 시 클릭한 데이터 받아오는 변수
     @State var selectedDiary: Diary?
     
     var body: some View {
@@ -25,7 +29,8 @@ struct DiaryCollectionView: View {
                 Color.bg
                     .ignoresSafeArea(.all)
                 ScrollView {
-                    ForEach(Array(diaryPosts().keys).reversed(), id: \.self) { key in
+                    ForEach(Array(diaryPosts().keys).sorted{
+                        Int($0)! > Int($1)! }, id: \.self) { key in
                         VStack(spacing: 0){
                             ZStack{
                                 postColorSchemeImage
@@ -47,60 +52,67 @@ struct DiaryCollectionView: View {
                             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                                 if let diaryList = diaryPosts()[key] {
                                     ForEach(diaryList) { post in
-                                        // 게시물날짜 변환 상수
-                                        let dayString = dayNumberFormatter.string(from: post.uploadDate ?? post.savedDate!)
-                                        
-                                        
-                                        
-                                        NavigationLink(destination: DiaryDetailView(presenter: FlipCardPresenter(), diary: post).ignoresSafeArea()) {
-                                            ZStack{
-                                                if let imgData = post.image, let uiImage = UIImage(data: imgData){
-                                                    Image(uiImage: uiImage)
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fill)
-                                                        .frame(width: 161, height: 215)
-                                                        .contextMenu {
-                                                            // 수정
-                                                            Button("수정", systemImage: "pencil") {
-                                                                // TODO: 수정 기능 삽입 필요
-                                                                self.selectedDiary = post
-                                                                self.isPresented.toggle()
-                                                            }
-                                                            // 삭제
-                                                            Button("삭제", systemImage: "trash.fill", role: .destructive) {
-                                                                // TODO: 삭제 기능 삽입 필요
-                                                                PersistentController.shared.deleteDiary(diary: post)
-                                                            }
-                                                        }
-                                                }
-                                                
-                                                //날짜, 전송예약
-                                                VStack{
-                                                    Spacer()
+                                        // 일 변환 상수
+                                        if let date = post.uploadDate {
+                                            let dayString = dayNumberFormatter.string(from: date)
+                                            
+                                            NavigationLink(destination: {
+                                                DiaryDetailView(presenter: FlipCardPresenter(), diary: post).ignoresSafeArea()}) {
                                                     ZStack{
-                                                        Rectangle()
-                                                            .frame(width: 161, height: 34)
-                                                            .foregroundStyle(Color.black)
-                                                            .opacity(0.5)
-                                                        HStack(spacing: 0){
+                                                        if let imgData = post.image, let uiImage = UIImage(data: imgData){
+                                                            Image(uiImage: uiImage)
+                                                                .resizable()
+                                                                .aspectRatio(contentMode: .fill)
+                                                                .frame(width: 161, height: 215)
+                                                                .contextMenu {
+                                                                    // 수정
+                                                                    Button("수정", systemImage: "pencil") {
+                                                                        // TODO: 수정 기능 삽입 필요
+                                                                        self.isPresented.toggle()
+                                                                    }
+                                                                    // 삭제
+                                                                    Button("삭제", systemImage: "trash.fill", role: .destructive) {
+                                                                        selectedDiary = post
+                                                                        isDeleted.toggle()
+                                                                    }
+                                                                }
+                                                                .alert(isPresented: $isDeleted) {
+                                                                    Alert(title: Text("삭제"), message: Text("이 기록을 삭제하시겠습니까?"), primaryButton: .cancel(Text("취소")), secondaryButton: .default(Text("확인"), action: {
+                                                                        if let selectedDiary = selectedDiary {
+                                                                                    PersistentController.shared.deleteDiary(diary: selectedDiary)
+                                                                                }
+                                                                    }))
+                                                                }
+                                                        }
+                                                        
+                                                        //날짜, 전송예약
+                                                        VStack{
                                                             Spacer()
-                                                            
-                                                            if isFutureDate(date: (post.uploadDate ?? post.savedDate)!) {
-                                                                WillSendIndicatior()
-                                                                    .padding(.trailing, 16)
+                                                            ZStack{
+                                                                Rectangle()
+                                                                    .frame(width: 161, height: 34)
+                                                                    .foregroundStyle(Color.black)
+                                                                    .opacity(0.5)
+                                                                HStack(spacing: 0){
+                                                                    Spacer()
+                                                                    
+                                                                    if isFutureDate(date: (post.uploadDate ?? post.savedDate)!) {
+                                                                        WillSendIndicatior()
+                                                                            .padding(.trailing, 16)
+                                                                    }
+                                                                    
+                                                                    Text("\(dayString)일")
+                                                                        .font(.headline)
+                                                                        .foregroundStyle(Color.white)
+                                                                        .lineLimit(1)
+                                                                        .minimumScaleFactor(0.5)
+                                                                        .padding(.trailing, 13)
+                                                                }
                                                             }
-
-                                                            Text("\(dayString)일")
-                                                                .font(.headline)
-                                                                .foregroundStyle(Color.white)
-                                                                .lineLimit(1)
-                                                                .minimumScaleFactor(0.5)
-                                                                .padding(.trailing, 13)
                                                         }
                                                     }
                                                 }
-                                            }
-                                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                                                .clipShape(RoundedRectangle(cornerRadius: 20))
                                         }
                                     }
                                 }
@@ -115,9 +127,6 @@ struct DiaryCollectionView: View {
                             
                             Spacer()
                         }
-                    }
-                    .onAppear{
-                        //                        diaryPosts()
                     }
                 }
             }
@@ -140,7 +149,7 @@ struct DiaryCollectionView: View {
             }
         }
     }
-  
+    
     
     // MARK: - 현재 날짜와 비교하는 함수
     private func isFutureDate(date: Date) -> Bool {
@@ -167,26 +176,21 @@ struct DiaryCollectionView: View {
     // MARK: - 배열 내 데이터 추가
     func diaryPosts() -> [String: [Diary]] {
         var diaryDate = [String: [Diary]] ()
-        
-//        for entry in self.diaries {
-//            let monthString = monthNumberFormatter.string(from: (entry.uploadDate ?? entry.savedDate)!)
-//            
-//            if diaryDate[monthString] == nil {
-//                diaryDate[monthString] = []
-//            }
-//            diaryDate[monthString]?.append(entry)
-//        }
-        
         var monthFlag = "0"
+        
         for diary in self.diaries {
-            let month = monthNumberFormatter.string(from: diary.uploadDate ?? diary.savedDate!)
-            if month != monthFlag {
-                monthFlag = month
-                diaryDate[month] = []
-                diaryDate[month]!.append(diary)
-                continue
+            if let month = diary.uploadDate {
+                let monthString = monthNumberFormatter.string(from: month)
+                
+                if monthString != monthFlag {
+                    monthFlag = monthString
+                    diaryDate[monthString] = []
+                    diaryDate[monthString]!.append(diary)
+                    continue
+                }
+                
+                diaryDate[monthString]!.append(diary)
             }
-            diaryDate[month]!.append(diary)
         }
         return diaryDate
     }

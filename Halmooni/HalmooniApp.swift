@@ -24,7 +24,7 @@ struct HalmooniApp: App {
                             }
                         }
                 } else {
-                    SelectView()
+                    SelectVieww()
                         .environment(\.managedObjectContext, managedObject.container.viewContext)
                 }
             }
