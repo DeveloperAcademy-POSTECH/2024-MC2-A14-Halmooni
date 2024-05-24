@@ -24,12 +24,12 @@ struct HalmooniApp: App {
                             }
                         }
                 } else {
-                    SelectVieww()
+                    SelectView()
                         .environment(\.managedObjectContext, managedObject.container.viewContext)
                 }
             }
-//            GrandMotherMainView()
-//                .environment(\.managedObjectContext, managedObject.container.viewContext)
+            //            GrandMotherMainView()
+            //                .environment(\.managedObjectContext, managedObject.container.viewContext)
         }
     }
 }
