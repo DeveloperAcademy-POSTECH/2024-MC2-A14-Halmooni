@@ -4,7 +4,6 @@
 //
 //  Created by Kyu Im on 5/17/24.
 //
-
 import SwiftUI
 import AVKit
 
@@ -16,21 +15,19 @@ struct GrandMotherDetailView: View {
     @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
     
     let diary: Diary
+    @State private var isPlaying: Bool = false
+    @State private var player: AVPlayer?
     
     var body: some View {
         ZStack(alignment: .top) {
             Color.section
             VStack {
-                //Spacer()
-                    
                 HStack {
                     Text(diary.savedDate!.engToKor())
                         .dynamicTypeSize(.xxxLarge)
                         .font(.largeTitle.bold())
                         .padding(.leading, 50)
-                    
                     Spacer()
-                    
                     Button(action: {
                         withAnimation(.spring()) {
                             showDetailView = false
@@ -63,33 +60,52 @@ struct GrandMotherDetailView: View {
                             }
                             .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
                     }
-                        Spacer()
-                        
+                    Spacer()
                     Image("\(diary.pickedTemplate)")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 450, height: 600)
-                    } // 사진과 카드
+                }
                 .padding(.horizontal, 50)
-//                Spacer()
+                
+                Button(action: {
+                    if isPlaying {
+                        // Pause the audio
+                        player?.pause()
+                    } else {
+                        // Start playing the audio
+                        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+                            return
+                        }
+                        let url = path.appending(path: "\(diary.id!.uuidString).m4a")
+                        player = AVPlayer(url: url)
+                        player?.play()
+                    }
+                    // Toggle the state
+                    isPlaying.toggle()
+                }, label: {
+                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                        .imageScale(.large)
+                        .foregroundColor(Color.prim)
+                })
+                
                 AudioPlayView(audioRecorder: audioRecorder)
-
-                    
-            }//VStack
+            }
         }
-        
+        .onDisappear {
+            // Stop the audio when view disappears
+            player?.pause()
+        }
     }
 }
+
 
 //struct GrandMotherDetailView_Previews: PreviewProvider {
 //    @State static var showDetailView = true
 //    @Namespace static var animationNamespace
-//    
+//
 //    static var previews: some View {
 //        GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNamespace)
 //    }
 //}
 
-//#Preview {
-//    GrandMotherDetailView($showDetailView)
-//}
