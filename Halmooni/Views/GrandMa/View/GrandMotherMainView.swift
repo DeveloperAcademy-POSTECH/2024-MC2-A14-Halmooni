@@ -50,6 +50,7 @@ struct GrandMotherMainView: View {
     var diaries:FetchedResults<Diary>
     
     @State var selectedDiary: Diary?
+    @State var selectedIndex: Int?
     
     var body: some View {
         
@@ -101,15 +102,16 @@ struct GrandMotherMainView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 32) {
                         
-                        ForEach(diaries){ diary in
+                        ForEach(0..<diaries.count, id: \.self) { index in
+                        //ForEach(diaries){ diary in
                             ZStack{
-                                if let data = diary.image {
-                                    GrandMotherPhotos(image: UIImage(data: data), date: diary.savedDate)
+                                if let data = diaries[index].image {
+                                    GrandMotherPhotos(image: UIImage(data: data), date: diaries[index].savedDate, namespace: animationNameSpace, index: index)
                                         .frame(width: 502, height: 670)
                                         .aspectRatio(3/4, contentMode: .fit)
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
                                         .overlay {
-                                            if !diary.isRead {
+                                            if !diaries[index].isRead {
                                                 GifView(gifName: "NewMessage")
                                                     .frame(width: 502, height: 670)
                                                     .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -120,12 +122,14 @@ struct GrandMotherMainView: View {
 
                             }
                             .onTapGesture {
-                                self.selectedDiary = diary
+                                self.selectedDiary = diaries[index]
+                                self.selectedIndex = index
                                 withAnimation{
                                     showDetailView.toggle()
                                 }
                                 
-                                diary.isRead = true
+                                diaries[index].isRead = true
+                                
                                 do {
                                     try PersistentController.shared.container.viewContext.save()
                                 } catch {
@@ -145,7 +149,7 @@ struct GrandMotherMainView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 
-                GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace, diary: self.selectedDiary!)
+                GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace, diary: self.selectedDiary!, index: self.selectedIndex!)
                     .frame(width:1026, height: 912)
                     .cornerRadius(20)
             }
