@@ -26,6 +26,7 @@ struct HalmooniApp: App {
                         }
                 } else {
                     SelectVieww()
+                        .environment(\.managedObjectContext, managedObject.container.viewContext)
                 }
             }
 //            GrandMotherMainView()
