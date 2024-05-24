@@ -98,8 +98,6 @@ struct ImageCard: View {
                             guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
                                 return
                             }
-                            //                            let str = diary.recordUrl!.split(separator: "/")
-                            //                            let url = path.appending(path: str.last!)
                             let url = path.appending(path: "\(diary.id!.uuidString).m4a")
                             
                             AudioController().startAudio(filePath: url)
