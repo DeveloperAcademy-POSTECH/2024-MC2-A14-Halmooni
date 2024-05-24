@@ -20,15 +20,16 @@ struct AddStampDetail: View {
                 
                 VStack {
                     VStack {
-                        Image(systemName: "star.square.on.square")
+                        Image(systemName: "heart.square")
                             .resizable()
                             .frame(width: 40, height: 40)
                             .foregroundColor(Color.prim)
                             .padding(16)
                         
-                        Text("남은 우표 수: \(tokenSum - tokenUsed)")
+                        Text("사용 가능 우표 수: \(tokenSum - tokenUsed)")
                             .font(.caption)
                             .foregroundColor(Color.gry)
+                            
                         
                         Spacer()
                         
@@ -44,6 +45,15 @@ struct AddStampDetail: View {
                         .padding(16)
                         .background(.bg)
                         .cornerRadius(20)
+                        
+                        
+                        HStack{
+                            Image(systemName:"questionmark.circle")
+                            Text("할머니께 받은 용돈을 우표로 입력해주세요")
+                        }
+                        .foregroundColor(.gry)
+                        .padding(16)
+                        .font(.caption)
                     }
                     .padding(16)
                     .frame(height: 200)

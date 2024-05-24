@@ -18,39 +18,40 @@ struct IpadSelectView : View {
                 GrandMotherMainView()
             } else {
                 
-                Color.bg
+                Color.section
                     .ignoresSafeArea(.all)
-                VStack{
-                    VStack{
-                        HStack{
-                            Text("앱을 시작하기에 앞서 사용할 모드를 선택해 주세요!")
-                                .dynamicTypeSize(.accessibility4)
-                                .font(.title2)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .padding(.vertical)
-                                .foregroundColor(.text)
-                            Spacer()
-                        }.padding(.vertical,36)
-                            .padding(.bottom,-36)
-                            .padding(.horizontal,50)
-                        HStack{
-                            Text("한번 선택한 후에는 수정이 불가합니다.")
-                                .dynamicTypeSize(.xxxLarge)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.text)
-                            
-                            Spacer()
-                        }
-                        .padding(.horizontal,50)
-                        
-                    }
-                    Spacer()
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.section, Color.sec.opacity(0.9)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea(.all)
+                VStack(alignment:.leading, spacing: 16){
+                    
+                    Image(.logoTitle)
+                        .padding(.horizontal, 30)
+                    VStack(alignment: .leading, spacing: 16){
+                        Text("손자와 할머니의 우편함")
+                            .font(.title2)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .padding(.vertical, 30)
+                            .foregroundColor(.text)
+                        Text("사용자 모드를 선택하고 시작해 주세요")
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                            .foregroundColor(.text)
+                        Text("한번 선택한 후에는 수정이 불가합니다")
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                            .foregroundColor(.text)
+                    }.padding(.all, 40)
+                    
+                    
                     VStack(spacing: 0){
-                        IpadUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton: .prim, colorUnderButton: .section, arrowImage: Image(.slideArrowIpad), rectangleWidth: 390, isUnlocked: $isUnlocked)
-                        IpadUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: Image(.slideArrowIpad), rectangleWidth: 2000, isUnlocked: $isUnlocked)
+                        IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .section, colorUnderButton:.section.opacity(0.5), arrowImage: Image(systemName :"arrow.right"), rectangleWidth: 1000, isUnlocked: $isUnlocked )
+                        IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .section, colorUnderButton: .section.opacity(0.5), arrowImage: Image(systemName: "arrow.right"), rectangleWidth: 240, isUnlocked: $isUnlocked)
                     }
-                    Spacer(minLength: 300)
                 }
             }
         }
