@@ -15,14 +15,10 @@ struct GifView: UIViewRepresentable {
         let imageView = UIImageView()
         
         guard let gifUrl = Bundle.main.url(forResource: gifName, withExtension: "GIF") else {
-//            fatalError("GIF 파일을 찾을 수 없습니다.")
-            print("울랄라")
             return UIImageView()
         }
 
         guard let gifData = try? Data(contentsOf: gifUrl) else {
-//            fatalError("GIF 파일을 로드할 수 없습니다.")
-            print("안됨!")
             return UIImageView()
         }
 

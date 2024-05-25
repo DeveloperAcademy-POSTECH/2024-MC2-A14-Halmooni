@@ -53,7 +53,7 @@ struct DiaryCollectionView: View {
                                 if let diaryList = diaryPosts()[key] {
                                     ForEach(diaryList) { post in
                                         // 일 변환 상수
-                                        if let date = post.uploadDate {
+                                        if let date = post.uploadDate ?? post.savedDate {
                                             let dayString = dayNumberFormatter.string(from: date)
                                             
                                             NavigationLink(destination: {
@@ -179,7 +179,10 @@ struct DiaryCollectionView: View {
         var monthFlag = "0"
         
         for diary in self.diaries {
-            if let month = diary.uploadDate {
+            let month = diary.uploadDate ?? diary.savedDate!
+            print(month)
+            
+//            if let month = diary.uploadDate ?? diary.savedDate {
                 let monthString = monthNumberFormatter.string(from: month)
                 
                 if monthString != monthFlag {
@@ -190,8 +193,9 @@ struct DiaryCollectionView: View {
                 }
                 
                 diaryDate[monthString]!.append(diary)
-            }
+//            }
         }
+        print(diaryDate.values)
         return diaryDate
     }
     
