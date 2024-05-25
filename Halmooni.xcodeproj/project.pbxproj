@@ -13,6 +13,7 @@
 		2C639AE42BF9C8D000420610 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AE32BF9C8D000420610 /* Preview Assets.xcassets */; };
 		2C639AEB2BF9C90F00420610 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2C639AEA2BF9C90F00420610 /* .gitignore */; };
 		2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */; };
+		2C8713E22C01B66C00264640 /* AudioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8713E12C01B66C00264640 /* AudioViewModel.swift */; };
 		2CBBD54F2BFC90C1005A2367 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBD54E2BFC90C0005A2367 /* AudioController.swift */; };
 		2CBBD5512BFCB061005A2367 /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBD5502BFCB061005A2367 /* AudioVisualizerView.swift */; };
 		2CBBD5532BFCD43E005A2367 /* TimeInterval + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBD5522BFCD43E005A2367 /* TimeInterval + Extension.swift */; };
@@ -62,6 +63,7 @@
 		2C639AED2BF9CB7900420610 /* Halmooni.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Halmooni.entitlements; sourceTree = "<group>"; };
 		2C639AEE2BF9CB9600420610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2C639AF12BF9CC3000420610 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		2C8713E12C01B66C00264640 /* AudioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewModel.swift; sourceTree = "<group>"; };
 		2CBBD54E2BFC90C0005A2367 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
 		2CBBD5502BFCB061005A2367 /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		2CBBD5522BFCD43E005A2367 /* TimeInterval + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval + Extension.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				2CF2DBE12BFA2245008D2B4E /* PersistentController.swift */,
 				2CBBD54E2BFC90C0005A2367 /* AudioController.swift */,
 				2CBBD5522BFCD43E005A2367 /* TimeInterval + Extension.swift */,
+				2C8713E12C01B66C00264640 /* AudioViewModel.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */,
 				2CF2DBF02BFB3BB9008D2B4E /* AddDiaryRecordView.swift in Sources */,
 				4641180B2BFCDCB300259B3F /* Helper.swift in Sources */,
+				2C8713E22C01B66C00264640 /* AudioViewModel.swift in Sources */,
 				464118092BFCDCA300259B3F /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

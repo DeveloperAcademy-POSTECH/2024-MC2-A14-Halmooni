@@ -72,6 +72,8 @@ struct DiaryDetailView: View {
 struct ImageCard: View {
     @ObservedObject var presenter: FlipCardPresenter
     @State private var isAnimating: Bool = false
+    @State private var viewModel: AudioViewModel = AudioViewModel()
+    @State private var audioController: AudioController = AudioController()
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     let diary: Diary
     
@@ -93,19 +95,30 @@ struct ImageCard: View {
                             .bold()
                             .padding(.leading, 32)
                         Spacer()
-                        Button(action: {
-                            //음성재생 기능 필요
-                            guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
-                                return
-                            }
-                            let url = path.appending(path: "\(diary.id!.uuidString).m4a")
-                            
-                            AudioController().startAudio(filePath: url)
-                        }, label: {
-                            PlayButton()
-                                .foregroundStyle(.text)
+                        
+                        switch viewModel.status {
+                        case .loading:
+                            ProgressView()
+                                .progressViewStyle(.circular)
                                 .padding(.trailing, 32)
-                        })
+                        case .success:
+                            Button(action: {
+                                guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+                                    return
+                                }
+                                let url = path.appending(path: "\(diary.id!.uuidString).m4a")
+                                
+                                AudioController().startAudio(filePath: url)
+                            }, label: {
+                                PlayButton()
+                                    .foregroundStyle(.text)
+                                    .padding(.trailing, 32)
+                            })
+                        case .failed:
+                            Text("로딩 실패")
+                        }
+                        
+                        
                     }
                     .padding(.top, 30)
                     Spacer()
@@ -128,6 +141,12 @@ struct ImageCard: View {
                     }
             }
             .frame(width: 361, height: 571)
+            .onAppear {
+                self.viewModel.downloadRecordFile(url: diary.recordUrl!)
+            }
+            .onDisappear {
+                self.audioController.stopAudio()
+            }
             Spacer()
                 .frame(height: 112)
         }

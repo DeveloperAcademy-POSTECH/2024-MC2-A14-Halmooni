@@ -8,11 +8,11 @@ import SwiftUI
 import AVKit
 
 struct GrandMotherDetailView: View {
-    
-//    @StateObject private var audioRecorder = AudioRecorder()
+    @State private var viewModel: AudioViewModel = AudioViewModel()
+    @State private var audioController: AudioController = AudioController()
     @Binding var showDetailView: Bool
+    
     var animationNamespace: Namespace.ID
-//    @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
     
     let diary: Diary
     let index: Int
@@ -48,7 +48,6 @@ struct GrandMotherDetailView: View {
                             .matchedGeometryEffect(id: "\(index)", in: animationNamespace)
                             .scaledToFit()
                             .frame(width: 450, height: 600)
-//                            .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
                     } else {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color.gray)
@@ -80,8 +79,7 @@ struct GrandMotherDetailView: View {
                         let fileName = diary.recordUrl!.split(separator: "/").last!
                         let fileUrl = path.appending(path: fileName)
                         
-                        player = AVPlayer(url: fileUrl)
-                        player?.play()
+                        audioController.startAudio(filePath: fileUrl)
                     }
                 case .failed:
                     Text("저장 실패 ㅋ")
@@ -125,7 +123,7 @@ struct GrandMotherDetailView: View {
         }
         .onDisappear {
             // Stop the audio when view disappears
-            player?.pause()
+            self.audioController.stopAudio()
         }
     }
     
@@ -135,42 +133,3 @@ struct GrandMotherDetailView: View {
     }
 }
 
-//struct GrandMotherDetailView_Previews: PreviewProvider {
-//    @State static var showDetailView = true
-//    @Namespace static var animationNamespace
-//
-//    static var previews: some View {
-//        GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNamespace)
-//    }
-//}
-
-
-@Observable
-class TestModel {
-    public var status: ModelStatus = .loading
-    
-    public func downloadRecordFile(url: String) {
-        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
-            print("failed to make url")
-            return
-        }
-        let fileName = url.split(separator: "/").last!
-        let fileUrl = path.appending(path: fileName)
-        
-        do {
-            try FileManager.default.startDownloadingUbiquitousItem(at: fileUrl)
-        } catch {
-            self.status = .failed
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.status = .success
-        }
-    }
-    
-    enum ModelStatus {
-        case loading
-        case success
-        case failed
-    }
-}
