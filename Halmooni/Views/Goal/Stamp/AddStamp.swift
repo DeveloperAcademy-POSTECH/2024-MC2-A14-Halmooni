@@ -15,6 +15,8 @@ struct AddStamp: View {
     var body: some View {
         VStack {
             Text("우표 추가하기")
+                .padding(16)
+            
             Button(action: {
                 showModal = true
             }, label: {
@@ -25,11 +27,13 @@ struct AddStamp: View {
             })
         }
         .frame(width:131, height: 131)
+        .padding(16)
         .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .sheet(isPresented: $showModal) {
             AddStampDetail(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
         }
+        .shadow(color: .gry2, radius: 10, x: 0, y: 5)
     }
 }
 

@@ -34,6 +34,7 @@ struct CalendarView: View {
         .padding(16)
         .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(color: .gry2, radius: 10, x: 0, y: 5)
         .gesture(
             DragGesture()
                 .onChanged { gesture in self.offset = gesture.translation }
@@ -162,6 +163,8 @@ private struct CellView: View {
                 .overlay(Text(String(day)))
                 .frame(width: 33, height: 33)
                 .background(isToday ? Color.prim.opacity(0.2) : Color.clear)
+                .font(isToday ? .title2 : .subheadline)
+                .cornerRadius(20)
                 .overlay(
                     Group {
                         if selected {
@@ -169,7 +172,7 @@ private struct CellView: View {
                                 .resizable()
                                 .frame(width: 23, height: 23)
                                 .foregroundColor(Color.white)
-                            Image(systemName: "star.circle.fill")
+                            Image(systemName: "heart.circle.fill")
                                 .resizable()
                                 .frame(width: 23, height: 23)
                                 .rotationEffect(.degrees(30))

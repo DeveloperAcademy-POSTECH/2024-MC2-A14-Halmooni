@@ -65,12 +65,8 @@ struct GrandMotherMainView: View {
                     
                     // TODO: 전화 연결 클라우드 사용 방안으로 변경
                     Button(action: {
-                        makeFaceTimeCall(phoneNumber: phoneNumber)
+                        makeFaceTimeAudioCall(phoneNumber: phoneNumber)
                     }) {
-//                        let telephone = "tel://"
-//                        let formattedString = telephone + numberString
-//                        guard let url = URL(string: formattedString) else { return }
-//                        UIApplication.shared.open(url)
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
                                 .fill(.section)
@@ -157,14 +153,13 @@ struct GrandMotherMainView: View {
         
         
     }
-    func makeFaceTimeCall(phoneNumber: String) {
-        let faceTimeURLString = "facetime://\(phoneNumber)"
-        if let faceTimeURL = URL(string: faceTimeURLString) {
-            if UIApplication.shared.canOpenURL(faceTimeURL) {
-                UIApplication.shared.open(faceTimeURL, options: [:], completionHandler: nil)
-            } else {
-                print("FaceTime을 열 수 없습니다.")
-            }
+    
+    func makeFaceTimeAudioCall(phoneNumber: String) {
+        if let url = URL(string: "facetime-audio://\(phoneNumber)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        else {
+            print("Cannot make FaceTime audio call")
         }
     }
 }

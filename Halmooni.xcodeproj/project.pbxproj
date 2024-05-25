@@ -201,6 +201,7 @@
 		464117DB2BFB270100259B3F /* Guage */ = {
 			isa = PBXGroup;
 			children = (
+				9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */,
 				464117DA2BFB270100259B3F /* GuageBar.swift */,
 			);
 			path = Guage;
@@ -266,7 +267,6 @@
 			children = (
 				9D2A77062BFCC1140006794B /* GrandMotherMainView.swift */,
 				9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */,
-				9D2A770A2BFCC16B0006794B /* AudioPlayerView.swift */,
 				9D2A77162BFCDFC10006794B /* NewMessage.GIF */,
 				9D2A77142BFCDF690006794B /* GifView.swift */,
 			);
