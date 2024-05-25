@@ -12,28 +12,33 @@ struct CurrentStamp: View {
     @Binding var tokenUsed: Int
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("올해 모은 우표의 개수")
-            Text("\(tokenSum)개")
-                .fontWeight(.bold)
-            
+        VStack(alignment: .center) {
+            Text("사용 가능 우표 수")
             HStack {
-                Image(systemName: "star.square.on.square")
+                Image(systemName: "heart.square")
                     .resizable()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(Color.prim)
-                Text("남은 우표: \(tokenSum - tokenUsed)개")
-                    .font(.caption)
                     .foregroundColor(Color.gry)
                     .padding(16)
+                
+                Text("\(tokenSum - tokenUsed)")
+                    .fontWeight(.bold)
+                    .font(.title)
+                    .foregroundColor(.prim)
+                Text("개")
             }
+            Text("올해 모은 우표 수: \(tokenSum)개")
+                .font(.caption)
+                .foregroundColor(Color.gry)
         }
+        .frame(height: 131)
         .padding(16)
         .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .onChange(of: tokenSum, initial: true) { oldValue, newValue in
                     UserDefaults.standard.tokenSum = newValue
         }
+        .shadow(color: .gry2, radius: 10, x: 0, y: 5)
     }
 }
 

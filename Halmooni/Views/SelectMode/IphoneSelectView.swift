@@ -17,26 +17,40 @@ struct IphoneSelectView : View {
             if isUnlocked{
                 MainTabView()
             }else {
-                Color.bg
+                Color.section
                     .ignoresSafeArea(.all)
-                VStack{
-                    VStack(alignment: .leading){
-                        Text("앱을 시작하기에 앞서\n사용할 모드를 선택해 주세요!")
-                            .font(.title)
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.section, Color.sec.opacity(0.9)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea(.all)
+                VStack(alignment:.leading, spacing: 16){
+                    
+                    Image(.logoTitle)
+                        .padding(.horizontal, 30)
+                    VStack(alignment: .leading, spacing: 16){
+                        Text("손자와 할머니의 우편함")
+                            .font(.title2)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .padding(.vertical)
+                            .padding(.vertical, 30)
                             .foregroundColor(.text)
-                        Text("한번 선택한 후에는 수정이 불가합니다.")
+                        Text("사용자 모드를 선택하고 시작해 주세요")
                             .font(.subheadline)
-                            .fontWeight(.semibold)
+                            .fontWeight(.light)
                             .foregroundColor(.text)
-                    }.padding(.horizontal, 16)
-                    Spacer()
+                        Text("한번 선택한 후에는 수정이 불가합니다")
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                            .foregroundColor(.text)
+                    }.padding(.all, 40)
+                    
+                    
                     VStack(spacing: 0){
-                        IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .prim, colorUnderButton:.section, arrowImage: Image(.slideArrowIphone), rectangleWidth: 1000, isUnlocked: $isUnlocked )
-                        IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .prim, colorUnderButton: .section, arrowImage: Image(.slideArrowIphone), rectangleWidth: 240, isUnlocked: $isUnlocked)
+                        IphoneUnlockSliderView(sliderImage: "👵🏻", name: "할머니", colorButton:  .section, colorUnderButton:.section.opacity(0.5), arrowImage: Image(systemName :"arrow.right"), rectangleWidth: 1000, isUnlocked: $isUnlocked )
+                        IphoneUnlockSliderView(sliderImage: "👦🏻", name: "무니",  colorButton: .section, colorUnderButton: .section.opacity(0.5), arrowImage: Image(systemName: "arrow.right"), rectangleWidth: 240, isUnlocked: $isUnlocked)
                     }
-                    Spacer(minLength: 300)
                 }
             }
         }
@@ -62,13 +76,13 @@ struct IphoneUnlockSliderView: View {
             } else {
                 HStack{
                     ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 90)
                             .fill((colorUnderButton))
-                            .frame(height: 110)
+                            .frame(height: 80)
                             .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.15), radius: 15, y: 2)
                         HStack {
                             Text(name)
-                                .font(.title)
+                                .font(.headline)
                                 .bold()
                                 .foregroundColor(.text)
                                 .padding(.leading, 20)
@@ -76,12 +90,15 @@ struct IphoneUnlockSliderView: View {
                             
                             if !isHide {
                                 arrowImage
-                                    .font(.title)
+                                    .foregroundColor(.gry)
+                                    .font(.headline)
+                                Text("slide to halmooni")
+                                    .foregroundColor(.gry)
                             }
                         }
-                        RoundedRectangle(cornerRadius: 15)
+                        RoundedRectangle(cornerRadius: 90)
                             .fill(colorButton)
-                            .frame(width: 100, height: 100)
+                            .frame(width: 90, height: 90)
                             .padding(.leading, 5)
                             .overlay(
                                 Text(sliderImage)
@@ -104,7 +121,7 @@ struct IphoneUnlockSliderView: View {
                                             isUnlocked = true
                                         }
                                         withAnimation {
-                         
+                                            
                                             offset = 0
                                         }
                                     }
