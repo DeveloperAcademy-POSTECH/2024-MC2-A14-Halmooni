@@ -46,7 +46,7 @@ struct GrandMotherMainView: View {
     }
     
     
-    @FetchRequest(entity: Diary.entity(), sortDescriptors: [.init(keyPath: \Diary.savedDate, ascending: true)])
+    @FetchRequest(entity: Diary.entity(), sortDescriptors: [.init(keyPath: \Diary.savedDate, ascending: false)])
     var diaries:FetchedResults<Diary>
     
     @State var selectedDiary: Diary?
@@ -101,7 +101,7 @@ struct GrandMotherMainView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 32) {
-                        
+                        // TODO: - 일정 순 제대로 나오지 않음
                         ForEach(0..<diaries.count, id: \.self) { index in
                         //ForEach(diaries){ diary in
                             ZStack{

@@ -30,8 +30,8 @@ struct MainAddDiaryView: View {
     var diary: Diary?
     
     private var possibleTokens: Int {
-        let tokenSum = UserDefaults.standard.tokenSum
-        let tokenUsed = UserDefaults.standard.tokenUsed
+        let tokenSum = UserDefaults.standard.integer(forKey: "tokenSum")
+        let tokenUsed = UserDefaults.standard.integer(forKey: "tokenUsed")
         return tokenSum - tokenUsed
     }
     
@@ -106,12 +106,6 @@ struct MainAddDiaryView: View {
                                 }
                                 
                             }
-                        }
-                        
-                        NavigationLink {
-                            
-                        } label: {
-                            Text("미모티콘")
                         }
                     }
                     
@@ -229,7 +223,9 @@ struct MainAddDiaryView: View {
         } catch {
             print("저장 실패~")
         }
-        UserDefaults.standard.tokenUsed += self.stampCount
+        let usedToken = UserDefaults.standard.integer(forKey: "tokenUsed")
+        
+        UserDefaults.standard.set(usedToken + self.stampCount, forKey: "tokenUsed")
         
         self.isPresented = false
     }

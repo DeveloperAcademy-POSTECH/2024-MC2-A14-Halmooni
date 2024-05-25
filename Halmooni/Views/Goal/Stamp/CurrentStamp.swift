@@ -35,9 +35,6 @@ struct CurrentStamp: View {
         .padding(16)
         .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .onChange(of: tokenSum, initial: true) { oldValue, newValue in
-                    UserDefaults.standard.tokenSum = newValue
-        }
     }
 }
 
