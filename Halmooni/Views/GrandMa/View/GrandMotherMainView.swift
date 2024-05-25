@@ -101,17 +101,23 @@ struct GrandMotherMainView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 32) {
-                        // TODO: - 일정 순 제대로 나오지 않음
-                        ForEach(0..<diaries.count, id: \.self) { index in
-                        //ForEach(diaries){ diary in
+                        // TODO: - 일정 순 제대로 나오지 않음 (수정 완료)
+                        let filteredDiaries = diaries.filter { diary in
+                            if diary.uploadDate != nil && Date() < diary.uploadDate! {
+                                return false
+                            }
+                            return true
+                        }
+                        
+                        ForEach(0..<filteredDiaries.count, id: \.self) { index in
                             ZStack{
-                                if let data = diaries[index].image {
-                                    GrandMotherPhotos(image: UIImage(data: data), date: diaries[index].savedDate, namespace: animationNameSpace, index: index)
+                                if let data = filteredDiaries[index].image {
+                                    GrandMotherPhotos(image: UIImage(data: data), date: filteredDiaries[index].savedDate, namespace: animationNameSpace, index: index)
                                         .frame(width: 502, height: 670)
                                         .aspectRatio(3/4, contentMode: .fit)
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
                                         .overlay {
-                                            if !diaries[index].isRead {
+                                            if !filteredDiaries[index].isRead {
                                                 GifView(gifName: "NewMessage")
                                                     .frame(width: 502, height: 670)
                                                     .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -122,13 +128,13 @@ struct GrandMotherMainView: View {
 
                             }
                             .onTapGesture {
-                                self.selectedDiary = diaries[index]
+                                self.selectedDiary = filteredDiaries[index]
                                 self.selectedIndex = index
                                 withAnimation{
                                     showDetailView.toggle()
                                 }
                                 
-                                diaries[index].isRead = true
+                                filteredDiaries[index].isRead = true
                                 
                                 do {
                                     try PersistentController.shared.container.viewContext.save()
