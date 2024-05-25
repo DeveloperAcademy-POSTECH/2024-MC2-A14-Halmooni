@@ -15,10 +15,7 @@ struct GrandMotherDetailView: View {
 //    @StateObject var audioPlayerViewModel = AudioPlayerViewModel()
     
     let diary: Diary
-    @State private var isPlaying: Bool = false
-    @State private var player: AVPlayer?
-    @State private var viewModel: TestModel = TestModel()
-    @State private var audioPlayerModel: AudioPlayer = AudioPlayer()
+    let index: Int
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -48,9 +45,10 @@ struct GrandMotherDetailView: View {
                     if let imageData = diary.image, let imageData = UIImage(data: imageData) {
                         Image(uiImage: imageData)
                             .resizable()
+                            .matchedGeometryEffect(id: "\(index)", in: animationNamespace)
                             .scaledToFit()
                             .frame(width: 450, height: 600)
-                            .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
+//                            .matchedGeometryEffect(id: "photo\(String(describing: diary.id))", in: animationNamespace)
                     } else {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color.gray)
@@ -136,7 +134,6 @@ struct GrandMotherDetailView: View {
         
     }
 }
-
 
 //struct GrandMotherDetailView_Previews: PreviewProvider {
 //    @State static var showDetailView = true
