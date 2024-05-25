@@ -38,7 +38,6 @@ struct CurrentStamp: View {
         .onChange(of: tokenSum, initial: true) { oldValue, newValue in
                     UserDefaults.standard.tokenSum = newValue
         }
-        .shadow(color: .gry2, radius: 10, x: 0, y: 5)
     }
 }
 

@@ -33,7 +33,6 @@ struct AddStamp: View {
         .sheet(isPresented: $showModal) {
             AddStampDetail(tokenSum: $tokenSum, tokenUsed: $tokenUsed)
         }
-        .shadow(color: .gry2, radius: 10, x: 0, y: 5)
     }
 }
 

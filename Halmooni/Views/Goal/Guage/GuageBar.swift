@@ -35,7 +35,6 @@ struct GaugeBar: View {
         .padding(16)
         .background(.section)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .gry2, radius: 10, x: 0, y: 5)
     }
 }
 
