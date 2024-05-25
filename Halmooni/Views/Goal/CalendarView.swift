@@ -34,7 +34,6 @@ struct CalendarView: View {
         .padding(16)
         .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        //.shadow(color: .black, radius: 15, x: 0, y: 2)
         .gesture(
             DragGesture()
                 .onChanged { gesture in self.offset = gesture.translation }
