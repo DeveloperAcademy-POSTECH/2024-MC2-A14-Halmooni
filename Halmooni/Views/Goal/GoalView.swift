@@ -34,11 +34,9 @@ struct GoalView: View {
             }
             .navigationTitle(Title.goal.name)
         }
-        .onChange(of: tokenSum, initial: true) { oldValue, newValue in
-                    UserDefaults.standard.tokenSum = newValue
-        }
-        .onChange(of: tokenUsed, initial: true) { oldValue, newValue in
-                    UserDefaults.standard.tokenUsed = newValue
+        .onAppear {
+            self.tokenSum = UserDefaults.standard.tokenSum
+            self.tokenUsed = UserDefaults.standard.tokenUsed
         }
     }
 }
