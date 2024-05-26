@@ -84,6 +84,14 @@ extension AudioController {
         
         self.isPlaying = false
     }
+    public func pauseAudio() {
+            self.timer?.invalidate()
+            self.audioPlayer?.pause()
+            
+            stopMonitoring()
+            
+            self.isPlaying = false
+        }
 }
 
 // MARK: - 녹음 기능 메소드
@@ -170,6 +178,16 @@ extension AudioController {
     
     private func stopMonitoring() {
         timer?.invalidate()
+    }
+    
+    public func updateCurrentTime(to time: TimeInterval) {
+        audioPlayer?.currentTime = time
+        }
+    public func seek(to time: TimeInterval) {
+        if let player = audioPlayer {
+            player.currentTime = time
+            audioPlayer?.currentTime = time
+        }
     }
 }
 
