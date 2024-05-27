@@ -145,6 +145,18 @@ struct GrandMotherDetailView: View {
         .onDisappear {
             self.audioController.stopAudio()
         }
+        .onChange(of: viewModel.status) {
+            if viewModel.status == .success {
+                guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
+                    return
+                }
+                let fileName = diary.recordUrl!.split(separator: "/").last!
+                let fileUrl = path.appendingPathComponent(String(fileName))
+                
+                audioController.startAudio(filePath: fileUrl)
+            }
+        }
+        
     }
     
     @ViewBuilder
