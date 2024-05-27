@@ -11,6 +11,8 @@ struct GrandMotherDetailView: View {
     @State private var viewModel: AudioViewModel = AudioViewModel()
     @State private var audioController: AudioController = AudioController()
     @Binding var showDetailView: Bool
+    @State private var dragOffset: CGFloat = 0.0
+    @State private var isDragging = false
     
     var animationNamespace: Namespace.ID
     
@@ -72,57 +74,75 @@ struct GrandMotherDetailView: View {
                     ProgressView()
                         .progressViewStyle(.circular)
                 case .success:
-                    Button("재생") {
-                        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+                    Button(action: {
+                        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
                             return
                         }
                         let fileName = diary.recordUrl!.split(separator: "/").last!
-                        let fileUrl = path.appending(path: fileName)
+                        let fileUrl = path.appendingPathComponent(String(fileName))
                         
-                        audioController.startAudio(filePath: fileUrl)
+                        if audioController.isPlaying {
+                            audioController.pauseAudio()
+                        } else {
+                            audioController.startAudio(filePath: fileUrl)
+                        }
+                        
+                    }) {
+                        Image(systemName: audioController.isPlaying ? "pause.fill" : "play.fill")
+                            .imageScale(.large)
+                            .foregroundColor(Color.prim)
                     }
+                    if let duration = audioController.audioLength, let currentTime = audioController.time {
+                        /* ProgressBar(value: CGFloat(currentTime / duration))
+                         .frame(height: 4)
+                         .padding(.horizontal, 20)
+                         .padding(.top, 8)*/
+                        //ProgressBarBar(diary: diary)
+                        //수정 버전
+                        ProgressView(value: audioController.time, total: duration)
+                            .accentColor(Color.gry)
+                            .progressViewStyle(LinearProgressViewStyle())
+                            .overlay(
+                                GeometryReader { geometry in
+                                    Circle()
+                                        .frame(width: 10, height: 10)
+                                        .foregroundColor(.gry)
+                                        .offset(x: CGFloat(currentTime / duration) * geometry.size.width - 9, y: -3)
+                                        .gesture(
+                                            DragGesture()
+                                                .onChanged { value in
+                                                    isDragging = true
+                                                    dragOffset = min(max(0, value.location.x), geometry.size.width)
+                                                    let newTime = TimeInterval(dragOffset / geometry.size.width) * duration
+                                                    audioController.updateCurrentTime(to: newTime)
+                                                }
+                                                .onEnded { value in
+                                                    isDragging = false
+                                                    let newTime = TimeInterval(dragOffset / geometry.size.width) * duration
+                                                    audioController.seek(to: newTime)
+                                                }
+                                        )
+                                    
+                                }
+                            )
+                            .padding(.vertical, 30)
+                            .padding(.horizontal, 233)
+                        
+                        
+                    }
+                    
+                
+            
                 case .failed:
                     Text("저장 실패 ㅋ")
                 }
                 
-//                Button(action: {
-//                    if isPlaying {
-//                        // Pause the audio
-//                        player?.pause()
-//                    } else {
-//                        isPlaying = false
-//                        // Start playing the audio
-//                        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
-//                            return
-//                        }
-//                        let fileName = diary.recordUrl!.split(separator: "/").last!
-//                        let fileUrl = path.appending(path: fileName)
-//                        
-//                        if FileManager.default.fileExists(atPath: path.relativePath) {
-//                            print("444444444")
-//                        }
-//                        
-//                        try! FileManager.default.startDownloadingUbiquitousItem(at: fileUrl)
-//                        
-//                        player = AVPlayer(url: fileUrl)
-//                        player?.play()
-//                    }
-//                    // Toggle the state
-//                    isPlaying.toggle()
-//                }, label: {
-//                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-//                        .imageScale(.large)
-//                        .foregroundColor(Color.prim)
-//                })
-                
-//                AudioPlayView(audioRecorder: audioRecorder)
             }
         }
         .onAppear {
             viewModel.downloadRecordFile(url: self.diary.recordUrl!)
         }
         .onDisappear {
-            // Stop the audio when view disappears
             self.audioController.stopAudio()
         }
     }
@@ -133,3 +153,93 @@ struct GrandMotherDetailView: View {
     }
 }
 
+struct ProgressBar: View {
+    var value: CGFloat
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .foregroundColor(Color.gray.opacity(0.3))
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                
+                Rectangle()
+                    .foregroundColor(.prim)
+                    .frame(width: min(self.value * geometry.size.width, geometry.size.width), height: geometry.size.height)
+                    .animation(.linear)
+            }
+        }
+    }
+}
+/*
+
+struct ProgressBarBar: View {
+    //@ObservedObject var audioController: AudioController // Ensure you have an ObservableObject named AudioController
+    
+    @State private var audioController: AudioController = AudioController()
+    @State private var isDragging = false
+    @State private var dragOffset: CGFloat = 0
+    
+    var diary: Diary // Ensure Diary has a property `recordUrl`
+    
+    var body: some View {
+        VStack {
+            if let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents"),
+               let recordUrl = diary.recordUrl {
+                let fileName = recordUrl.split(separator: "/").last!
+                let fileUrl = path.appendingPathComponent(String(fileName))
+                
+                ProgressView(value: audioController.time, total: audioController.audioLength ?? 1)
+                    .accentColor(Color.gray)
+                    .progressViewStyle(LinearProgressViewStyle())
+                    .overlay(
+                        GeometryReader { geometry in
+                            Circle()
+                                .frame(width: 10, height: 10)
+                                .foregroundColor(.gray)
+                                .offset(x: (CGFloat(audioController.time!) / CGFloat(audioController.audioLength ?? 1)) * geometry.size.width - 5, y: -5)
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { value in
+                                            isDragging = true
+                                            dragOffset = min(max(0, value.location.x), geometry.size.width)
+                                            let newTime = TimeInterval(dragOffset / geometry.size.width) * (audioController.audioLength ?? 1)
+                                            audioController.updateCurrentTime(to: newTime)
+                                        }
+                                        .onEnded { value in
+                                            isDragging = false
+                                            let newTime = TimeInterval(dragOffset / geometry.size.width) * (audioController.audioLength ?? 1)
+                                            audioController.seek(to: newTime)
+                                        }
+                                )
+                        }
+                    )
+                    .padding(.horizontal)
+                
+                HStack {
+                    if audioController.isPlaying {
+                        Button(action: {
+                            audioController.pauseAudio()
+                        }) {
+                            Image(systemName: "pause.fill")
+                                .imageScale(.large)
+                                .foregroundColor(Color.primary)
+                        }
+                    } else {
+                        Button(action: {
+                            audioController.startAudio(filePath: fileUrl)
+                        }) {
+                            Image(systemName: "play.fill")
+                                .imageScale(.large)
+                                .foregroundColor(Color.primary)
+                        }
+                    }
+                }
+            } else {
+                Text("Unable to load audio file.")
+            }
+        }
+        .padding()
+    }
+}
+*/
