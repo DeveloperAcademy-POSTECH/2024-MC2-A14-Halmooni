@@ -182,8 +182,12 @@ struct MainAddDiaryView: View {
         }
         .task(id: pickedPhoto) {
             do {
-                self.image = try await pickedPhoto?.loadTransferable(type: Image.self)
-                self.imageData = try await pickedPhoto?.loadTransferable(type: Data.self)
+                guard let imageData = try await pickedPhoto?.loadTransferable(type: Data.self) else {
+                    return
+                }
+                let uiImage = UIImage(data: imageData)
+                self.image = Image(uiImage: uiImage!)
+                self.imageData = imageData
             } catch {
                 print("Can't load image!")
             }
@@ -191,7 +195,6 @@ struct MainAddDiaryView: View {
         .tint(.prim)
         .onAppear {
             guard let diary = self.diary else {
-                print("1111")
                 return
             }
             self.stampCount = Int(diary.tokenCount)
