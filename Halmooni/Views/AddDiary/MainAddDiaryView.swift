@@ -88,6 +88,9 @@ struct MainAddDiaryView: View {
                                         .font(.system(size: 17))
                                         .foregroundStyle(.gry)
                                 }
+                                else {
+                                    Text("")
+                                }
                             }
                         }
                         

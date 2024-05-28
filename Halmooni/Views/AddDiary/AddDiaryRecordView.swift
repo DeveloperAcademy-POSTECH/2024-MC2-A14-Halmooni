@@ -147,6 +147,7 @@ extension AddDiaryRecordView {
                 Button {
                     if !viewModel.isRecording {
                         viewModel.resetRecording()
+                        recordTime = nil
                     } else {
                         viewModel.stopRecording()
                     }
