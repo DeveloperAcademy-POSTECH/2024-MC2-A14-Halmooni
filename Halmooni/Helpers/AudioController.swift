@@ -94,6 +94,40 @@ extension AudioController {
         self.isPlaying = false
     }
     
+    public func backwardFifteen() {
+        guard let player = self.audioPlayer else {
+            return
+        }
+        let currentTime = player.currentTime
+        
+        if currentTime < 15 {
+            player.pause()
+            player.currentTime = 0
+            player.play()
+        } else {
+            player.pause()
+            player.currentTime = currentTime - 15
+            player.play()
+        }
+    }
+    
+    public func forwardFifteen() {
+        guard let player = self.audioPlayer else {
+            return
+        }
+        let currentTime = player.currentTime
+
+        if currentTime + 15 > player.duration {
+            let duration = player.duration
+            stopAudio()
+            self.time = duration
+        } else {
+            player.pause()
+            player.currentTime = currentTime + 15
+            player.play()
+        }
+    }
+    
     public func startAudioWithLetter() {
         guard let url = self.fileURL else {
             print("Invaild url")

@@ -197,10 +197,6 @@ struct MainAddDiaryView: View {
         }
         .tint(.prim)
         .onAppear {
-            let letter = Letter(context: self.context)
-            letter.id = UUID()
-            letter.recordUrl = "123"
-            letter.savedDate = Date()
             guard let diary = self.diary else {
                 return
             }
