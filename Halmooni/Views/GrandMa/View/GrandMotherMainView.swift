@@ -13,6 +13,23 @@ extension UserDefaults {
     }
 }
 
+//HEX code 색상
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.currentIndex = hex.startIndex
+        
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+        
+        let red = Double((rgbValue & 0xFF0000) >> 16) / 255.0
+        let green = Double((rgbValue & 0x00FF00) >> 8) / 255.0
+        let blue = Double(rgbValue & 0x0000FF) / 255.0
+        
+        self.init(red: red, green: green, blue: blue)
+    }
+}
+
 
 //detailView 호출시 블러 처리하는 것
 struct VisualEffectView: UIViewRepresentable {
@@ -30,7 +47,8 @@ struct VisualEffectView: UIViewRepresentable {
 struct GrandMotherMainView: View {
     @State private var select: Bool = false
     @State private var showDetailView: Bool = false
-    @State private var gifClicked = UserDefaults.standard.gifClicked
+    @State private var isSaveClicked: Bool = false
+    @State private var isSendClicked: Bool = false
     @Namespace private var animationNameSpace
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
@@ -52,49 +70,180 @@ struct GrandMotherMainView: View {
     @State var selectedDiary: Diary?
     @State var selectedIndex: Int?
     
+    @State private var audioController: AudioController = AudioController()
+    
     var body: some View {
         
         ZStack {
             
-
+            Color.section.ignoresSafeArea()
             
-            Color.bg.ignoresSafeArea()
-            
-            imageColorScheme
-
+            //            imageColorScheme
             VStack {
-                    
-                    // TODO: 전화 연결 클라우드 사용 방안으로 변경
+                Rectangle()
+                    .frame(height: 246)
+                    .foregroundStyle(Color.bg)
+                    .ignoresSafeArea()
+                
+                Spacer()
+            }
+            VStack {
+                HStack {
                     Button(action: {
-                        makeFaceTimeAudioCall(phoneNumber: phoneNumber)
+                        let id = UUID()
+                        audioController.startRecording(id: id)
+                        
                     }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
                                 .fill(.section)
                                 .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 2)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 50)
+                                        .stroke(Color.black, lineWidth: 5)
+                                )
+                            
                             
                             HStack {
-                                Text("인범이에게 전화하기")
+                                Text("인범이에게 목소리 남기기")
                                     .dynamicTypeSize(.xxxLarge)
                                     .font(.largeTitle.bold())
                                     .foregroundColor(.text)
-                                    .padding(.leading, 44)
-
+                                    .padding(.trailing, 12)
                                 
-                                Image(systemName: "phone.circle.fill")
-                                    .foregroundColor(.green)
+                                Image(systemName: "mic.circle.fill")
+                                    .foregroundColor(.blue)
                                     .dynamicTypeSize(.xxxLarge)
                                     .font(.largeTitle)
-                                    .padding(.trailing, 44)
+                                    .padding()
                             }
                             
                         }
-                        .frame(width: 502, height: 92)
+                        .frame(width: 573, height: 92)
                         
                     }
-                    .padding(.top, 90)
-                    .padding(.trailing, 140)
-                    .padding(.leading, 750)
+                    .padding(.top, 81)
+                    //                    .padding(.trailing, 106)
+                    .padding(.leading, 77)
+                    // TODO: 전화 연결 클라우드 사용 방안으로 변경
+                    
+                    Spacer()
+                    
+                    if !audioController.isRecording {
+                        Button(action: {
+                            makeFaceTimeAudioCall(phoneNumber: phoneNumber)
+                        }) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .fill(.section)
+                                    .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 2)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 50)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                
+                                
+                                HStack {
+                                    Text("인범이에게 전화하기")
+                                        .dynamicTypeSize(.xxxLarge)
+                                        .font(.largeTitle.bold())
+                                        .foregroundColor(.text)
+                                        .padding(.leading, 44)
+                                    
+                                    
+                                    
+                                    Image(systemName: "phone.circle.fill")
+                                        .foregroundColor(.green)
+                                        .dynamicTypeSize(.xxxLarge)
+                                        .font(.largeTitle)
+                                        .padding(.trailing, 44)
+                                }
+                                
+                            }
+                            .frame(width: 573, height: 92)
+                            
+                        }
+                        .padding(.top, 90)
+                        .padding(.trailing, 77)
+                    } else {
+                        HStack {
+                            Button {
+                                
+                            } label: {
+                                Text("취소")
+                                    .padding()
+                                    .foregroundStyle(Color.text)
+                                    .frame(width: 179, height: 92)
+                                    .dynamicTypeSize(.xxxLarge)
+                                    .font(.largeTitle.bold())
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 90)
+                                            .fill(Color.white)
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 90)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                
+                            }
+                            
+                            Spacer()
+                                .frame(width: 69)
+                            
+                            
+                            if isSaveClicked {
+                                Button {
+                                    
+                                } label: {
+                                    Text("보내기")
+                                        .padding()
+                                        .foregroundStyle(Color.white)
+                                        .frame(width: 179, height: 92)
+                                        .dynamicTypeSize(.xxxLarge)
+                                        .font(.largeTitle.bold())
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 90)
+                                                .fill(Color.prim)
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 90)
+                                                .stroke(Color.str, lineWidth: 5)
+                                        )
+                                }
+                            }
+                            else {
+                                Button {
+                                    isSaveClicked.toggle()
+                                    
+                                } label: {
+                                    Text("저장")
+                                        .padding()
+                                        .foregroundStyle(Color.text)
+                                        .frame(width: 179, height: 92)
+                                        .dynamicTypeSize(.xxxLarge)
+                                        .font(.largeTitle.bold())
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 90)
+                                                .fill(Color.white)
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 90)
+                                                .stroke(Color.black, lineWidth: 5)
+                                        )
+                                    
+                                }
+                            }
+                            
+                            Spacer()
+                                .frame(width: 101)
+                            
+                        }
+                        .padding(.top, 90)
+                        
+                    }
+                    
+                }
+                
                 
                 Spacer()
                     .frame(height: 65)
@@ -118,14 +267,36 @@ struct GrandMotherMainView: View {
                                         .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 0)
                                         .overlay {
                                             if !filteredDiaries[index].isRead {
-                                                GifView(gifName: "NewMessage")
-                                                    .frame(width: 502, height: 670)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                                ZStack {
+                                                    RoundedRectangle(cornerRadius: 20)
+                                                        .frame(width: 502, height: 670)
+                                                        .foregroundStyle(Color.white)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 20)
+                                                                .strokeBorder(lineWidth: 5)
+                                                        )
+                                                    
+                                                    VStack {
+                                                        Text("엽서 왔어요!")
+                                                            .dynamicTypeSize(.accessibility2)
+                                                            .font(.largeTitle.bold())
+                                                        Text("누르시면 엽서와 내용을\n볼 수 있습니다.")
+                                                            .multilineTextAlignment(.center)
+                                                            .dynamicTypeSize(.accessibility2)
+                                                            .font(.headline.bold())
+                                                            .foregroundStyle(Color(hex: "9C273C"))
+                                                        Image(systemName: "envelope.fill")
+                                                            .foregroundStyle(Color.prim)
+                                                            .opacity(0.15)
+                                                            .font(.system(size:320))
+                                                            .frame(width: 382, height: 273)
+                                                    }
+                                                }
                                             }
                                         }
                                     
                                 }
-
+                                
                             }
                             .onTapGesture {
                                 self.selectedDiary = filteredDiaries[index]
@@ -142,12 +313,12 @@ struct GrandMotherMainView: View {
                                     print("Failed")
                                 }
                             }
-                        
-        
+                            
+                            
                         }
-
+                        
                     }
-
+                    
                 } //ScrollView
             }
             if showDetailView {
@@ -158,6 +329,10 @@ struct GrandMotherMainView: View {
                 GrandMotherDetailView(showDetailView: $showDetailView, animationNamespace: animationNameSpace, diary: self.selectedDiary!, index: self.selectedIndex!)
                     .frame(width:1026, height: 912)
                     .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.text, lineWidth: 5)
+                    )
             }
         }
         
