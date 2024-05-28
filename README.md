@@ -6,12 +6,14 @@
 할머니께서 주신 용돈을 무니가 어떻게 사용했는지 기록하여 할머니께서 사랑을 느끼게 하자
 
 ## :fireworks: Screenshots
-
-Attach photos if you are available
+| 목표관리뷰 | 모아보기뷰 | 편지작성뷰 | From.할머니뷰 | 
+|--|--|--|--|
+| <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/17d0be62-c644-4d86-95bf-b59ef590622c" width=200> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/1151714d-ab74-44bf-a29e-e0a1cb78985c" width=200> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/212e4a42-0b79-4614-82ed-e02562dce057" width=200> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/16b66521-2981-4b03-8a89-f8708515fc69" width=200> |
 
 ## :framed_picture: Demo (optional)
 
-Attach videos if you are available
+
+
 
 
 ## :pushpin: Features
@@ -41,5 +43,4 @@ Attach videos if you are available
 
 | [임규(루카스)](https://github.com/kyu0122)   | [추서연(세이디)](https://github.com/seoyeon-choo)   | [조민경(파이)](https://github.com/happier0609) | 
 | :--------------: | :--------------: | :--------------: | 
-| <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/630655cd-1e95-4bc9-9b07-9b5e0c54e481" width=150> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/1cfb4d63-41d7-429f-b84c-d7f77a7b9dff" width=150> | <img src="" width=150> | 
-
+| <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/630655cd-1e95-4bc9-9b07-9b5e0c54e481" width=150> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/1cfb4d63-41d7-429f-b84c-d7f77a7b9dff" width=150> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/0f203828-9f16-4cb8-b0d6-bc5106059707" width=150> | 
