@@ -84,14 +84,36 @@ extension AudioController {
         
         self.isPlaying = false
     }
+    
     public func pauseAudio() {
-            self.timer?.invalidate()
-            self.audioPlayer?.pause()
-            
-            stopMonitoring()
-            
-            self.isPlaying = false
+        self.timer?.invalidate()
+        self.audioPlayer?.pause()
+        
+        stopMonitoring()
+        
+        self.isPlaying = false
+    }
+    
+    public func startAudioWithLetter() {
+        guard let url = self.fileURL else {
+            print("Invaild url")
+            return
         }
+        
+        let session = AVAudioSession.sharedInstance()
+        
+        do {
+            try session.setCategory(.playAndRecord, mode: .default)
+            try session.overrideOutputAudioPort(.speaker)
+            
+            self.audioPlayer = try AVAudioPlayer(contentsOf: url)
+            self.audioPlayer?.delegate = self
+            self.audioPlayer?.play()
+            self.isPlaying = true
+        } catch {
+            print("Failed to playing audio in Letter, \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: - 녹음 기능 메소드
