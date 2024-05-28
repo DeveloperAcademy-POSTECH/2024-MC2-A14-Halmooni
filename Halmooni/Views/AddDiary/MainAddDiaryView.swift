@@ -27,8 +27,7 @@ struct MainAddDiaryView: View {
     private let uuid = UUID()
     private let openedDate = Date()
     
-    static let randomThemes: [String] = ["오늘 기분은 어떤가요?", "오늘 누구와 함께 했나요?", "오늘 무엇을 했나요?", "내일 무엇을 할 예정인가요?", "할머니의 건강 안부를 물어보세요!"]
-    var key = randomThemes.randomElement()
+    @State private var key = randomThemes.randomElement()
     
     var diary: Diary?
     
@@ -80,9 +79,7 @@ struct MainAddDiaryView: View {
                 List {
                     Section {
                         NavigationLink {
-                            if let key = key {
-                                AddDiaryRecordView(viewModel: $viewModel, recordURL: $recordURL, recordTime: $recordTime, uuid: uuid, randomTheme: key)
-                            }
+                                AddDiaryRecordView(viewModel: $viewModel, recordURL: $recordURL, recordTime: $recordTime,  randomTheme: $key, uuid: uuid)
                         } label: {
                             HStack {
                                 Text("메시지 녹음")

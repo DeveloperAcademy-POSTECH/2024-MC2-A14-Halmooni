@@ -51,6 +51,7 @@
 		B9434F392BFF75BD00D598C6 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9434F382BFF75BD00D598C6 /* SelectView.swift */; };
 		B9434F3C2BFF75C400D598C6 /* IphoneSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9434F3A2BFF75C400D598C6 /* IphoneSelectView.swift */; };
 		B9434F3D2BFF75C400D598C6 /* IpadSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9434F3B2BFF75C400D598C6 /* IpadSelectView.swift */; };
+		B9A21BA12C05D0E700DAFD69 /* RandomThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A21BA02C05D0E700DAFD69 /* RandomThemes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		B9434F382BFF75BD00D598C6 /* SelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		B9434F3A2BFF75C400D598C6 /* IphoneSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IphoneSelectView.swift; sourceTree = "<group>"; };
 		B9434F3B2BFF75C400D598C6 /* IpadSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpadSelectView.swift; sourceTree = "<group>"; };
+		B9A21BA02C05D0E700DAFD69 /* RandomThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomThemes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			children = (
 				2C639AF02BF9CC3000420610 /* DiaryModel.xcdatamodeld */,
 				B93C32982BFB34A1007699BB /* Title.swift */,
+				B9A21BA02C05D0E700DAFD69 /* RandomThemes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				9D2A77152BFCDF690006794B /* GifView.swift in Sources */,
 				464117E32BFB270100259B3F /* GuageBar.swift in Sources */,
 				464118072BFCDC8F00259B3F /* AudioPlayer.swift in Sources */,
+				B9A21BA12C05D0E700DAFD69 /* RandomThemes.swift in Sources */,
 				B9434F3D2BFF75C400D598C6 /* IpadSelectView.swift in Sources */,
 				B93C32992BFB34A1007699BB /* Title.swift in Sources */,
 				2CF752BA2BFDFAC50023BD2B /* Template.swift in Sources */,
