@@ -34,14 +34,25 @@ struct GrandMotherDetailView: View {
                             showDetailView = false
                         }
                     }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .dynamicTypeSize(.xxxLarge)
-                            .font(.title)
-                            .foregroundColor(.prim)
-                            .padding(.trailing, 50)
+                        Text("나가기")
+                            .padding()
+                            .foregroundStyle(Color.white)
+                            .frame(width: 240, height: 95)
+                            .dynamicTypeSize(.accessibility2)
+                            .font(.largeTitle.bold())
+                            .background(
+                                RoundedRectangle(cornerRadius: 50)
+                                    .fill(Color.prim)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 50)
+                                    .stroke(Color.str, lineWidth: 5)
+                                )
+
                     })
                 }
                 .padding(.top, 50)
+                .padding(.trailing, 57)
                 
                 HStack {
                     if let imageData = diary.image, let imageData = UIImage(data: imageData) {
@@ -88,9 +99,10 @@ struct GrandMotherDetailView: View {
                         }
                         
                     }) {
-                        Image(systemName: audioController.isPlaying ? "pause.fill" : "play.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.prim)
+                        //TODO: 다시듣기 비활성화 & 활성화 시키기
+//                        Image(systemName: audioController.isPlaying ? "pause.fill" : "play.fill")
+//                            .imageScale(.large)
+//                            .foregroundColor(Color.prim)
                     }
                     if let duration = audioController.audioLength, let currentTime = audioController.time {
                         /* ProgressBar(value: CGFloat(currentTime / duration))
