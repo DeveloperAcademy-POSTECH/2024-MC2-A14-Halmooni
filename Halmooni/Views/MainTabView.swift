@@ -25,6 +25,13 @@ struct MainTabView: View {
                     Text(Title.list.name)
                 }
                 .tag(1)
+            
+            GrandMaLetterView()
+                .tabItem {
+                    Image(systemName: "heart.text.square.fill")
+                    Text(Title.letter.name)
+                }
+                .tag(2)
         }
         .tint(Color(.prim))
     }

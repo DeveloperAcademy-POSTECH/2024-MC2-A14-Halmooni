@@ -23,6 +23,7 @@
 		2CF2DBF02BFB3BB9008D2B4E /* AddDiaryRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBEF2BFB3BB9008D2B4E /* AddDiaryRecordView.swift */; };
 		2CF2DBF22BFB3BC6008D2B4E /* AddDiaryTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2DBF12BFB3BC6008D2B4E /* AddDiaryTemplateView.swift */; };
 		2CF752BA2BFDFAC50023BD2B /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF752B92BFDFAC50023BD2B /* Template.swift */; };
+		43AF279A2C05A46A002C87CB /* GrandMaLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AF27992C05A46A002C87CB /* GrandMaLetterView.swift */; };
 		464117E32BFB270100259B3F /* GuageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DA2BFB270100259B3F /* GuageBar.swift */; };
 		464117E42BFB270100259B3F /* AddStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DC2BFB270100259B3F /* AddStamp.swift */; };
 		464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464117DD2BFB270100259B3F /* AddStampDetail.swift */; };
@@ -73,6 +74,7 @@
 		2CF2DBEF2BFB3BB9008D2B4E /* AddDiaryRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryRecordView.swift; sourceTree = "<group>"; };
 		2CF2DBF12BFB3BC6008D2B4E /* AddDiaryTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryTemplateView.swift; sourceTree = "<group>"; };
 		2CF752B92BFDFAC50023BD2B /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
+		43AF27992C05A46A002C87CB /* GrandMaLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandMaLetterView.swift; sourceTree = "<group>"; };
 		464117DA2BFB270100259B3F /* GuageBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuageBar.swift; sourceTree = "<group>"; };
 		464117DC2BFB270100259B3F /* AddStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStamp.swift; sourceTree = "<group>"; };
 		464117DD2BFB270100259B3F /* AddStampDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStampDetail.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		2C639AEC2BF9C92C00420610 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43AF27982C05A43F002C87CB /* GrandMaLetter */,
 				EA50452E2BFF0D5600A16DD2 /* SelectMode */,
 				9D2A76FF2BFCBFAA0006794B /* GrandMa */,
 				B91FEB382BFC872A00C78843 /* DiaryCollection */,
@@ -199,6 +202,14 @@
 				2CF752B92BFDFAC50023BD2B /* Template.swift */,
 			);
 			path = AddDiary;
+			sourceTree = "<group>";
+		};
+		43AF27982C05A43F002C87CB /* GrandMaLetter */ = {
+			isa = PBXGroup;
+			children = (
+				43AF27992C05A46A002C87CB /* GrandMaLetterView.swift */,
+			);
+			path = GrandMaLetter;
 			sourceTree = "<group>";
 		};
 		464117DB2BFB270100259B3F /* Guage */ = {
@@ -399,6 +410,7 @@
 				B9434F3C2BFF75C400D598C6 /* IphoneSelectView.swift in Sources */,
 				2CBBD54F2BFC90C1005A2367 /* AudioController.swift in Sources */,
 				2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */,
+				43AF279A2C05A46A002C87CB /* GrandMaLetterView.swift in Sources */,
 				2C639AF22BF9CC3000420610 /* DiaryModel.xcdatamodeld in Sources */,
 				9D17C1CF2BFF690F005FEA11 /* GrandMotherPhotos.swift in Sources */,
 				464117E52BFB270100259B3F /* AddStampDetail.swift in Sources */,

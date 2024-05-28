@@ -10,6 +10,7 @@ import Foundation
 enum Title {
     case goal
     case list
+    case letter
     
     var name: String {
         switch self {
@@ -17,6 +18,8 @@ enum Title {
             return "목표 관리"
         case .list:
             return "모아 보기"
+        case .letter:
+            return "From. 할머니"
         }
     }
 }
