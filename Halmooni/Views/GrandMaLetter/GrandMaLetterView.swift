@@ -15,7 +15,7 @@ struct GrandMaLetterView: View {
 
     // 클라우드 데이터 받아오기
     @FetchRequest(entity: Letter.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Letter.savedDate, ascending: false)])
-    var Letters: FetchedResults<Letter>
+    private var Letters: FetchedResults<Letter>
     
     var body: some View {
         NavigationStack{
