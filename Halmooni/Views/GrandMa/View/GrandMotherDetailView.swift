@@ -85,32 +85,46 @@ struct GrandMotherDetailView: View {
                     ProgressView()
                         .progressViewStyle(.circular)
                 case .success:
-                    Button(action: {
-                        guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
-                            return
-                        }
-                        let fileName = diary.recordUrl!.split(separator: "/").last!
-                        let fileUrl = path.appendingPathComponent(String(fileName))
-                        
-                        if audioController.isPlaying {
-                            audioController.pauseAudio()
-                        } else {
+                    if audioController.isPlaying {
+                        Text("다시 듣기")
+                            .padding()
+                            .foregroundStyle(Color.white)
+                            .frame(width: 297, height: 95)
+                            .dynamicTypeSize(.accessibility2)
+                            .font(.largeTitle.bold())
+                            .background(
+                                RoundedRectangle(cornerRadius: 50)
+                                    .fill(Color.gry)
+                            )
+
+                    } else {
+                        Button {
+                            guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
+                                return
+                            }
+                            let fileName = diary.recordUrl!.split(separator: "/").last!
+                            let fileUrl = path.appendingPathComponent(String(fileName))
+                            
                             audioController.startAudio(filePath: fileUrl)
+                        } label: {
+                            Text("다시 듣기")
+                                .padding()
+                                .foregroundStyle(Color.white)
+                                .frame(width: 297, height: 95)
+                                .dynamicTypeSize(.accessibility2)
+                                .font(.largeTitle.bold())
+                                .background(
+                                    RoundedRectangle(cornerRadius: 50)
+                                        .fill(Color.prim)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 50)
+                                        .stroke(Color.str, lineWidth: 5)
+                                    )
                         }
-                        
-                    }) {
-                        //TODO: 다시듣기 비활성화 & 활성화 시키기
-//                        Image(systemName: audioController.isPlaying ? "pause.fill" : "play.fill")
-//                            .imageScale(.large)
-//                            .foregroundColor(Color.prim)
                     }
+                
                     if let duration = audioController.audioLength, let currentTime = audioController.time {
-                        /* ProgressBar(value: CGFloat(currentTime / duration))
-                         .frame(height: 4)
-                         .padding(.horizontal, 20)
-                         .padding(.top, 8)*/
-                        //ProgressBarBar(diary: diary)
-                        //수정 버전
                         ProgressView(value: audioController.time, total: duration)
                             .accentColor(Color.gry)
                             .progressViewStyle(LinearProgressViewStyle())
