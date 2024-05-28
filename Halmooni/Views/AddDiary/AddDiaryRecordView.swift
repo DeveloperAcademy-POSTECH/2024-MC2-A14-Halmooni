@@ -13,6 +13,7 @@ struct AddDiaryRecordView: View {
     
     @Binding var recordURL: URL?
     @Binding var recordTime: TimeInterval?
+    @Binding var randomTheme: String?
     
     let uuid: UUID
     
@@ -26,23 +27,35 @@ struct AddDiaryRecordView: View {
                         AudioVisualizerView(value: 30)
                     } else {
                         AudioVisualizerView(value: nomalizeSoundLevel(level: level))
-//                            .padding(.horizontal, 16)
                     }
                 }
             }
             .frame(height: 250)
 
+            if let randomTheme = randomTheme {
+                Text(randomTheme)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.text)
+            }
+            
+            
+            Text("사용자에게 있어서 할머니와의 소통 주제를\nTo.Halmooni가 자동으로 제안하여\n메시지 녹음을 더 쉽게 시작할 수 있도록 돕습니다.")
+                .font(.caption)
+                .foregroundStyle(.gry)
+                .multilineTextAlignment(.center)
+                .padding(.top, 6)
+                .padding(.bottom, 27)
+
             if viewModel.time == nil {
                 Text("00:00.00")
                     .font(.largeTitle)
                     .bold()
-                    .padding(.top, 80)
                     .padding(.bottom, 40)
             } else {
                 Text(viewModel.time!.getTimeString())
                     .font(.largeTitle)
                     .bold()
-                    .padding(.top, 80)
                     .padding(.bottom, 40)
             }
             
@@ -131,6 +144,11 @@ extension AddDiaryRecordView {
                 Button {
                     if !viewModel.isRecording {
                         viewModel.resetRecording()
+                        recordTime = nil
+                        // 초기화 진행 시 새로운 랜덤 변수 생성
+                        if let random = randomThemes.randomElement() {
+                            randomTheme = random
+                        }
                     } else {
                         viewModel.stopRecording()
                     }

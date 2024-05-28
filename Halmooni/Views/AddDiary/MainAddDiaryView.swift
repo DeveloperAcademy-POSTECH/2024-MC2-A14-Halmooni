@@ -27,6 +27,8 @@ struct MainAddDiaryView: View {
     private let uuid = UUID()
     private let openedDate = Date()
     
+    @State private var key = randomThemes.randomElement()
+    
     var diary: Diary?
     
     private var possibleTokens: Int {
@@ -44,7 +46,6 @@ struct MainAddDiaryView: View {
                             .frame(width: 150)
                             .foregroundStyle(.sec)
                             .overlay {
-                                // TODO: - 이미지 회전해서 보이는 것 수정 필요
                                 image?
                                     .resizable()
                                     .frame(width: 150, height: 150)
@@ -78,7 +79,7 @@ struct MainAddDiaryView: View {
                 List {
                     Section {
                         NavigationLink {
-                            AddDiaryRecordView(viewModel: $viewModel, recordURL: $recordURL, recordTime: $recordTime, uuid: uuid)
+                                AddDiaryRecordView(viewModel: $viewModel, recordURL: $recordURL, recordTime: $recordTime,  randomTheme: $key, uuid: uuid)
                         } label: {
                             HStack {
                                 Text("메시지 녹음")
@@ -87,6 +88,9 @@ struct MainAddDiaryView: View {
                                     Text(recordTime!.getTimeString())
                                         .font(.system(size: 17))
                                         .foregroundStyle(.gry)
+                                }
+                                else {
+                                    Text("")
                                 }
                             }
                         }
@@ -159,7 +163,6 @@ struct MainAddDiaryView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        // TODO: - diary 저장 구현
                         AddDiary()
                     } label: {
                         Text("완료")

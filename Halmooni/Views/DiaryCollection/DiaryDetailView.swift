@@ -89,36 +89,37 @@ struct ImageCard: View {
                 //날짜, 음성재생 버튼
                 VStack{
                     HStack{
-                        let dateSting = dateNumberFormatter.string(from: (diary.uploadDate ?? diary.savedDate)!)
-                        Text("\(dateSting)")
-                            .font(.title2)
-                            .bold()
-                            .padding(.leading, 32)
-                        Spacer()
-                        
-                        switch viewModel.status {
-                        case .loading:
-                            ProgressView()
-                                .progressViewStyle(.circular)
-                                .padding(.trailing, 32)
-                        case .success:
-                            Button(action: {
-                                guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
-                                    return
-                                }
-                                let url = path.appending(path: "\(diary.id!.uuidString).m4a")
-                                
-                                AudioController().startAudio(filePath: url)
-                            }, label: {
-                                PlayButton()
-                                    .foregroundStyle(.text)
+                        if let date = diary.uploadDate ?? diary.savedDate {
+                            let dateString = dateNumberFormatter.string(from: date)
+                            
+                            Text("\(dateString)")
+                                .font(.title2)
+                                .bold()
+                                .padding(.leading, 32)
+                            Spacer()
+                            
+                            switch viewModel.status {
+                            case .loading:
+                                ProgressView()
+                                    .progressViewStyle(.circular)
                                     .padding(.trailing, 32)
-                            })
-                        case .failed:
-                            Text("로딩 실패")
+                            case .success:
+                                Button(action: {
+                                    guard let path = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents") else {
+                                        return
+                                    }
+                                    let url = path.appending(path: "\(diary.id!.uuidString).m4a")
+                                    
+                                    AudioController().startAudio(filePath: url)
+                                }, label: {
+                                    PlayButton()
+                                        .foregroundStyle(.text)
+                                        .padding(.trailing, 32)
+                                })
+                            case .failed:
+                                Text("로딩 실패")
+                            }
                         }
-                        
-                        
                     }
                     .padding(.top, 30)
                     Spacer()
