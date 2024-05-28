@@ -35,11 +35,11 @@ Attach videos if you are available
 ## :people_hugging: Authors
 
 
-| 최서연(구리스) | 이원선(타이니) | 문인범(무니) | 유동환(토피아) |
+| [최서연(구리스)](https://github.com/Guryss) | [이원선(타이니)](https://github.com/onesunny2) | [문인범(무니)](https://github.com/mooninbeom) | [유동환(토피아)](https://github.com/TopiaYu) |
 | :--------------: | :----------------: | :--------------: | :--------------: |
 | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/8aa3a123-ee5a-41c2-a9d8-43a4ab9e6665" width=150> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/25a17d89-1e7d-4484-b66d-cbec0f4a9a84" width=150> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/84df1132-3ddc-4bae-86ea-5ca7d1a53347" width=150> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/eeb640cb-89cb-4dbd-90fe-0f8a2521d72a8d-ea59-4a84-beaf-0615a8fd4a08" width=150> |
 
-| 임규(루카스)   | 추서연(세이디)   | 조민경(파이) | 
+| [임규(루카스)](https://github.com/kyu0122)   | [추서연(세이디)](https://github.com/seoyeon-choo)   | [조민경(파이)](https://github.com/happier0609) | 
 | :--------------: | :--------------: | :--------------: | 
 | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/630655cd-1e95-4bc9-9b07-9b5e0c54e481" width=150> | <img src="https://github.com/DeveloperAcademy-POSTECH/2024-MC2-A14-Halmooni/assets/102604192/1cfb4d63-41d7-429f-b84c-d7f77a7b9dff" width=150> | <img src="" width=150> | 
 
