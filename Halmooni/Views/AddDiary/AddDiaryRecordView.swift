@@ -15,8 +15,7 @@ struct AddDiaryRecordView: View {
     @Binding var recordTime: TimeInterval?
     
     let uuid: UUID
-    private let randomTheme: [String] = ["오늘 기분은 어떤가요?", "오늘 누구와 함께 했나요?", "오늘 무엇을 했나요?", "내일 무엇을 할 예정인가요?", "할머니의 건강 안부를 물어보세요!"]
-    @State private var randomNumber: Int? = nil
+    let randomTheme: String
     
     var body: some View {
         VStack {
@@ -32,13 +31,12 @@ struct AddDiaryRecordView: View {
                 }
             }
             .frame(height: 250)
-            
-            if let randomNumber = randomNumber {
-                Text(randomTheme[randomNumber])
+
+                Text(randomTheme)
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundStyle(.text)
-            }
+            
             
             Text("사용자에게 있어서 할머니와의 소통 주제를\nTo.Halmooni가 자동으로 제안하여\n메시지 녹음을 더 쉽게 시작할 수 있도록 돕습니다.")
                 .font(.caption)
@@ -75,9 +73,6 @@ struct AddDiaryRecordView: View {
                 recordURL = viewModel.fileURL
                 recordTime = viewModel.audioLength
             }
-        }
-        .onAppear {
-            self.randomNumber = Int.random(in: 0..<randomTheme.count)
         }
     }
 }
@@ -148,6 +143,8 @@ extension AddDiaryRecordView {
                     if !viewModel.isRecording {
                         viewModel.resetRecording()
                         recordTime = nil
+                        // 초기화 진행 시 새로운 랜덤 변수 생성
+                        //randomTheme = MainAddDiaryView().randomThemes.randomElement()
                     } else {
                         viewModel.stopRecording()
                     }
