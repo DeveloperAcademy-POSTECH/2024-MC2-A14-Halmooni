@@ -49,7 +49,6 @@ struct GrandMotherMainView: View {
     @State private var showDetailView: Bool = false
     @State private var isSaveClicked: Bool = false
     @State private var isSendClicked: Bool = false
-    @State private var gifClicked = UserDefaults.standard.gifClicked
     @Namespace private var animationNameSpace
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
