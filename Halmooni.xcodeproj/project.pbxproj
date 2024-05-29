@@ -45,6 +45,7 @@
 		9D2A770D2BFCC1890006794B /* AVFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A770C2BFCC1890006794B /* AVFoundation.swift */; };
 		9D2A77152BFCDF690006794B /* GifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A77142BFCDF690006794B /* GifView.swift */; };
 		9D2A77172BFCDFC10006794B /* NewMessage.GIF in Resources */ = {isa = PBXBuildFile; fileRef = 9D2A77162BFCDFC10006794B /* NewMessage.GIF */; };
+		9D5B71782C0710D300BF10BE /* RippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5B71772C0710D300BF10BE /* RippleView.swift */; };
 		A9D48AEA2BFB91E400F250FF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D48AE92BFB91E400F250FF /* SplashView.swift */; };
 		B91FEB3A2BFC874D00C78843 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */; };
 		B91FEB3C2BFC875500C78843 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */; };
@@ -97,6 +98,7 @@
 		9D2A770C2BFCC1890006794B /* AVFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundation.swift; sourceTree = "<group>"; };
 		9D2A77142BFCDF690006794B /* GifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifView.swift; sourceTree = "<group>"; };
 		9D2A77162BFCDFC10006794B /* NewMessage.GIF */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = NewMessage.GIF; sourceTree = "<group>"; };
+		9D5B71772C0710D300BF10BE /* RippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleView.swift; sourceTree = "<group>"; };
 		A9D48AE92BFB91E400F250FF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		B91FEB392BFC874D00C78843 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B91FEB3B2BFC875500C78843 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				9D2A77082BFCC13A0006794B /* GrandMotherDetailView.swift */,
 				9D2A77162BFCDFC10006794B /* NewMessage.GIF */,
 				9D2A77142BFCDF690006794B /* GifView.swift */,
+				9D5B71772C0710D300BF10BE /* RippleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				9D2A770B2BFCC16B0006794B /* AudioPlayerView.swift in Sources */,
 				464117E82BFB270100259B3F /* GoalView.swift in Sources */,
 				B9434F3C2BFF75C400D598C6 /* IphoneSelectView.swift in Sources */,
+				9D5B71782C0710D300BF10BE /* RippleView.swift in Sources */,
 				2CBBD54F2BFC90C1005A2367 /* AudioController.swift in Sources */,
 				2CF2DBEE2BFB3B7D008D2B4E /* MainAddDiaryView.swift in Sources */,
 				43AF279A2C05A46A002C87CB /* GrandMaLetterView.swift in Sources */,
