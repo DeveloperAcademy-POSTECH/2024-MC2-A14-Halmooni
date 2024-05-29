@@ -71,6 +71,8 @@ struct GrandMotherMainView: View {
     @State var selectedIndex: Int?
     
     @State private var audioController: AudioController = AudioController()
+    @State private var isStopSelected: Bool = false
+    @State private var id: UUID?
     
     var body: some View {
         
@@ -90,8 +92,8 @@ struct GrandMotherMainView: View {
             VStack {
                 HStack {
                     Button(action: {
-                        let id = UUID()
-                        audioController.startRecording(id: id)
+                        self.id = UUID()
+                        audioController.startRecording(id: self.id!)
                         
                     }) {
                         ZStack {
@@ -123,13 +125,12 @@ struct GrandMotherMainView: View {
                         
                     }
                     .padding(.top, 81)
-                    //                    .padding(.trailing, 106)
                     .padding(.leading, 77)
                     // TODO: 전화 연결 클라우드 사용 방안으로 변경
                     
                     Spacer()
                     
-                    if !audioController.isRecording {
+                    if !audioController.isRecording && !self.isStopSelected {
                         Button(action: {
                             makeFaceTimeAudioCall(phoneNumber: phoneNumber)
                         }) {
@@ -168,7 +169,10 @@ struct GrandMotherMainView: View {
                     } else {
                         HStack {
                             Button {
-                                
+                                audioController.stopRecording()
+                                audioController.resetRecording()
+                                self.isSaveClicked = false
+                                self.isStopSelected = false
                             } label: {
                                 Text("취소")
                                     .padding()
@@ -193,7 +197,22 @@ struct GrandMotherMainView: View {
                             
                             if isSaveClicked {
                                 Button {
+                                    guard let id = self.id else {
+                                        return
+                                    }
                                     
+                                    guard let url = audioController.fileURL else {
+                                        return
+                                    }
+                                    let date = Date()
+                                    PersistentController.shared.saveLetter(id: id, date: date, url: url)
+                                    
+//                                    audioController.resetRecording()
+                                    self.isSaveClicked = false
+                                    self.isStopSelected = false
+
+                                    
+                                    print("Save Success")
                                 } label: {
                                     Text("보내기")
                                         .padding()
@@ -214,7 +233,9 @@ struct GrandMotherMainView: View {
                             else {
                                 Button {
                                     isSaveClicked.toggle()
-                                    
+                                    self.isStopSelected = true
+                                    self.isSaveClicked = true
+                                    audioController.stopRecording()
                                 } label: {
                                     Text("저장")
                                         .padding()

@@ -69,7 +69,22 @@ extension PersistentController {
     }
 }
 
-
+extension PersistentController {
+    public func saveLetter(id: UUID, date: Date, url: URL) {
+        let letter = Letter(context: self.container.viewContext)
+        let urlString = url.relativeString
+        
+        letter.id = id
+        letter.savedDate = date
+        letter.recordUrl = urlString
+        
+        do {
+            try self.container.viewContext.save()
+        } catch {
+            print("Failed to save, \(error.localizedDescription)")
+        }
+    }
+}
 
 enum CoreDataError: Error {
     case failedToGetURL
