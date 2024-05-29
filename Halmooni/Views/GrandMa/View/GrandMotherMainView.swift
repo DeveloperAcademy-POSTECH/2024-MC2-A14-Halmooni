@@ -1,6 +1,6 @@
 import SwiftUI
 import UIKit
-
+import AudioToolbox
 
 extension UserDefaults {
     var gifClicked: Bool {
@@ -74,6 +74,8 @@ struct GrandMotherMainView: View {
     @State private var isStopSelected: Bool = false
     @State private var id: UUID?
     
+    @State private var status: GrandMotherViewStatus = .none
+    
     var body: some View {
         
         ZStack {
@@ -90,47 +92,50 @@ struct GrandMotherMainView: View {
                 Spacer()
             }
             VStack {
-                HStack {
-                    Button(action: {
-                        self.id = UUID()
-                        audioController.startRecording(id: self.id!)
-                        
-                    }) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 50)
-                                .fill(.section)
-                                .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 2)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 50)
-                                        .stroke(Color.black, lineWidth: 5)
-                                )
-                            
-                            
+                
+                switch self.status {
+                case .none:
+                    HStack{
+                        Button(action: {
+                            self.id = UUID()
+                            audioController.startRecording(id: self.id!)
+                            status = .record
+                            AudioServicesPlaySystemSound(1113)
+                        }) {
                             HStack {
-                                Text("인범이에게 목소리 남기기")
-                                    .dynamicTypeSize(.xxxLarge)
-                                    .font(.largeTitle.bold())
-                                    .foregroundColor(.text)
-                                    .padding(.trailing, 12)
-                                
-                                Image(systemName: "mic.circle.fill")
-                                    .foregroundColor(.blue)
-                                    .dynamicTypeSize(.xxxLarge)
-                                    .font(.largeTitle)
-                                    .padding()
+                                ZStack {
+                                        RoundedRectangle(cornerRadius: 50)
+                                            .fill(.section)
+                                            .shadow(color:Color.black.opacity(0.15), radius: 15, x: 0, y: 2)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 50)
+                                                    .stroke(Color.black, lineWidth: 5)
+                                            )
+                                    
+                                        HStack {
+                                            Text("인범이에게 목소리 남기기")
+                                                .dynamicTypeSize(.xxxLarge)
+                                                .font(.largeTitle.bold())
+                                                .foregroundColor(.text)
+                                                .padding(.trailing, 12)
+                                            
+                                            Image(systemName: "mic.circle.fill")
+                                                .foregroundColor(.blue)
+                                                .dynamicTypeSize(.xxxLarge)
+                                                .font(.largeTitle)
+                                                .padding()
+                                        }
+                                        
+                                    }
+                                    .frame(width: 573, height: 92)
+                                    
+                                }
+                                .padding(.top, 81)
+                                .padding(.leading, 77)
                             }
-                            
-                        }
-                        .frame(width: 573, height: 92)
                         
-                    }
-                    .padding(.top, 81)
-                    .padding(.leading, 77)
-                    // TODO: 전화 연결 클라우드 사용 방안으로 변경
-                    
-                    Spacer()
-                    
-                    if !audioController.isRecording && !self.isStopSelected {
+                        Spacer()
+                        
                         Button(action: {
                             makeFaceTimeAudioCall(phoneNumber: phoneNumber)
                         }) {
@@ -164,108 +169,174 @@ struct GrandMotherMainView: View {
                             .frame(width: 573, height: 92)
                             
                         }
-                        .padding(.top, 90)
+                        .padding(.top, 81)
                         .padding(.trailing, 77)
-                    } else {
-                        HStack {
-                            Button {
-                                audioController.stopRecording()
-                                audioController.resetRecording()
-                                self.isSaveClicked = false
-                                self.isStopSelected = false
-                            } label: {
-                                Text("취소")
-                                    .padding()
-                                    .foregroundStyle(Color.text)
-                                    .frame(width: 179, height: 92)
-                                    .dynamicTypeSize(.xxxLarge)
-                                    .font(.largeTitle.bold())
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 90)
-                                            .fill(Color.white)
-                                    )
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 90)
-                                            .stroke(Color.black, lineWidth: 5)
-                                    )
-                                
-                            }
-                            
-                            Spacer()
-                                .frame(width: 69)
-                            
-                            
-                            if isSaveClicked {
-                                Button {
-                                    guard let id = self.id else {
-                                        return
-                                    }
-                                    
-                                    guard let url = audioController.fileURL else {
-                                        return
-                                    }
-                                    let date = Date()
-                                    PersistentController.shared.saveLetter(id: id, date: date, url: url)
-                                    
-//                                    audioController.resetRecording()
-                                    self.isSaveClicked = false
-                                    self.isStopSelected = false
-
-                                    
-                                    print("Save Success")
-                                } label: {
-                                    Text("보내기")
-                                        .padding()
-                                        .foregroundStyle(Color.white)
-                                        .frame(width: 179, height: 92)
-                                        .dynamicTypeSize(.xxxLarge)
-                                        .font(.largeTitle.bold())
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 90)
-                                                .fill(Color.prim)
-                                        )
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 90)
-                                                .stroke(Color.str, lineWidth: 5)
-                                        )
-                                }
-                            }
-                            else {
-                                Button {
-                                    isSaveClicked.toggle()
-                                    self.isStopSelected = true
-                                    self.isSaveClicked = true
-                                    audioController.stopRecording()
-                                } label: {
-                                    Text("저장")
-                                        .padding()
-                                        .foregroundStyle(Color.text)
-                                        .frame(width: 179, height: 92)
-                                        .dynamicTypeSize(.xxxLarge)
-                                        .font(.largeTitle.bold())
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 90)
-                                                .fill(Color.white)
-                                        )
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 90)
-                                                .stroke(Color.black, lineWidth: 5)
-                                        )
-                                    
-                                }
-                            }
-                            
-                            Spacer()
-                                .frame(width: 101)
-                            
-                        }
-                        .padding(.top, 90)
-                        
                     }
                     
+
+
+                    
+                case .record:
+                    HStack {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 50)
+                                .fill(.section)
+                            
+                            HStack {
+                                RippleView()
+                                    .frame(width: 70)
+                                
+                                Text("녹음중입니다...")
+                                    .dynamicTypeSize(.xxxLarge)
+                                    .font(.largeTitle.bold())
+                                    .foregroundColor(.text)
+                                    .padding(.trailing, 12)
+                            }
+                        }
+                        .frame(width: 573, height: 92)
+                        .padding(.top, 81)
+                        .padding(.leading, 77)
+                        
+                        
+                        Button {
+                            audioController.stopRecording()
+                            audioController.resetRecording()
+                            self.status = .none
+                        } label: {
+                            Text("취소")
+                                .padding()
+                                .foregroundStyle(Color.text)
+                                .frame(width: 253, height: 92)
+                                .dynamicTypeSize(.xxxLarge)
+                                .font(.largeTitle.bold())
+                                .background(
+                                    RoundedRectangle(cornerRadius: 90)
+                                        .fill(Color.white)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 90)
+                                        .stroke(Color.black, lineWidth: 5)
+                                )
+                            
+                        }
+                        .padding(.top, 81)
+                        .padding(.leading, 97)
+                        
+                        Spacer().frame(width: 36)
+                        
+                        Button {
+                            audioController.stopRecording()
+                            self.status = .sending
+                            AudioServicesPlaySystemSound(1114)
+                        } label: {
+                            Text("저장")
+                                .padding()
+                                .foregroundStyle(Color.text)
+                                .frame(width: 253, height: 92)
+                                .dynamicTypeSize(.xxxLarge)
+                                .font(.largeTitle.bold())
+                                .background(
+                                    RoundedRectangle(cornerRadius: 90)
+                                        .fill(Color.white)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 90)
+                                        .stroke(Color.black, lineWidth: 5)
+                                )
+                            
+                        }
+                        .padding(.trailing, 77)
+                        .padding(.top, 81)
+                    }
+                   
+                    
+                case .sending:
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 50)
+                            .fill(.section)
+                        
+                        HStack {
+                            Image(systemName: "checkmark.circle")
+                                .dynamicTypeSize(.xxxLarge)
+                                .font(.largeTitle.bold())
+                                .foregroundStyle(Color.prim)
+                            
+                            Text("녹음이 저장되었습니다!")
+                                .dynamicTypeSize(.xxxLarge)
+                                .font(.largeTitle.bold())
+                                .foregroundColor(.text)
+                                .padding(.trailing, 12)
+                        }
+                    }
+                    .frame(width: 573, height: 92)
+                    .padding(.top, 81)
+                    .padding(.leading, 77)
+
+                    Button {
+                        audioController.stopRecording()
+                        audioController.resetRecording()
+                        self.status = .none
+                    } label: {
+                        Text("취소")
+                            .padding()
+                            .foregroundStyle(Color.text)
+                            .frame(width: 253, height: 92)
+                            .dynamicTypeSize(.xxxLarge)
+                            .font(.largeTitle.bold())
+                            .background(
+                                RoundedRectangle(cornerRadius: 90)
+                                    .fill(Color.white)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 90)
+                                    .stroke(Color.black, lineWidth: 5)
+                            )
+                        
+                    }
+                    .padding(.leading, 97)
+                    .padding(.top, 81)
+                    
+                    Spacer().frame(width: 36)
+                    Button {
+                        guard let id = self.id else {
+                            return
+                        }
+                        
+                        guard let url = audioController.fileURL else {
+                            return
+                        }
+                        let date = Date()
+                        PersistentController.shared.saveLetter(id: id, date: date, url: url)
+                        self.status = .none
+                        AudioServicesPlaySystemSound(1003)
+                    } label: {
+                        Text("보내기")
+                            .padding()
+                            .foregroundStyle(Color.white)
+                            .frame(width: 253, height: 92)
+                            .dynamicTypeSize(.xxxLarge)
+                            .font(.largeTitle.bold())
+                            .background(
+                                RoundedRectangle(cornerRadius: 90)
+                                    .fill(Color.prim)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 90)
+                                    .stroke(Color.str, lineWidth: 5)
+                            )
+                    }
+
+                    .padding(.trailing, 77)
+                    .padding(.top, 81)
                 }
-                
-                
+
+
+                }
+
+                    
+
+                    // TODO: 전화 연결 클라우드 사용 방안으로 변경
                 Spacer()
                     .frame(height: 65)
                 
@@ -368,6 +439,12 @@ struct GrandMotherMainView: View {
             print("Cannot make FaceTime audio call")
         }
     }
+    
+    enum GrandMotherViewStatus {
+        case none
+        case record
+        case sending
+    }
 }
 
 
@@ -375,3 +452,5 @@ struct GrandMotherMainView: View {
 #Preview {
     GrandMotherMainView()
 }
+
+
