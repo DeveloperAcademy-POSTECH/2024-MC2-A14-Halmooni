@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct GrandMaLetterView: View {
-    // TODO: 모델 연결 완료 후 해당 배열 지워주세요
-    @State var recordUrlList: [String] = [
-        "1번", "2번", "3번"
-    ]
-    
+    @State private var audioController: AudioController = AudioController()
+    @State private var isPlayed: Bool = false
+    @State private var isLoading: Bool = false
+    @State private var selectedDate: Date?
+
     // 클라우드 데이터 받아오기
-    @FetchRequest(entity: Letter.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Letter.savedDate, ascending: true)])
-    var Letters: FetchedResults<Letter>
-    
-    // 음성 재생상태
-    @State var isPlayed: Bool = false
+    @FetchRequest(entity: Letter.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Letter.savedDate, ascending: false)])
+    private var Letters: FetchedResults<Letter>
     
     var body: some View {
         NavigationStack{
@@ -28,45 +25,64 @@ struct GrandMaLetterView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 // 녹음 리스트
-//                List{
-//                    ForEach(Letters) { letter in
-//                        HStack{
-//                            Text(dateNumberFormatter.string(from: letter.savedDate!))
-//                            
-//                            Button(action: {
-//                                isPlayed = true
-//                                // TODO: 녹음재생 기능 삽입 필요
-//                            }, label: {
-//                                Image(systemName: isPlayed ? "stop.fill" : "play.fill")
-//                                    .font(.system(size: 17))
-//                                    .foregroundStyle(Color.prim)
-//                            })
-//                        }
-//                    }
-//                }
-                
-                // TODO: 데이터 연결 후 아래는 지워주세요 (위에가 찐 데이터 연결 UI)
                 List{
-                    ForEach(recordUrlList, id: \.self) { letter in
+                    ForEach(Letters) { letter in
+                        
                         HStack{
-                            Text(letter)
+                            Text(dateNumberFormatter.string(from: letter.savedDate!))
                             
                             Spacer()
                             
                             Button(action: {
-                                isPlayed.toggle()
-                                // TODO: 녹음재생 기능 삽입 필요
-                                
+                                if !audioController.isPlaying {
+                                    guard let urlString = letter.recordUrl else {
+                                        return
+                                    }
+                                    
+                                    do {
+                                        let filePath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appending(path: "Documents")
+                                        let name = urlString.split(separator: "/").last!
+                                        let file = filePath?.appending(path: name)
+                                        
+                                        self.selectedDate = letter.savedDate!
+                                        audioController.fileURL = file
+                                        
+                                        try FileManager.default.startDownloadingUbiquitousItem(at: file!)
+                                        isLoading = true
+                                    } catch {
+                                        print("Failed to download Item, \(error.localizedDescription)")
+                                    }
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        audioController.startAudioWithLetter()
+                                        isLoading = false
+                                    }
+                                } else {
+                                    audioController.stopAudio()
+                                }
                             }, label: {
-                                Image(systemName: isPlayed ? "stop.fill" : "play.fill")
-                                    .font(.system(size: 17))
-                                    .foregroundStyle(Color.prim)
+                                if letter.savedDate == self.selectedDate {
+                                    if audioController.isPlaying {
+                                        Image(systemName: "stop.fill")
+                                            .font(.system(size: 17))
+                                            .foregroundStyle(.prim)
+                                    } else if isLoading {
+                                        ProgressView()
+                                            .progressViewStyle(.circular)
+                                    } else {
+                                        Image(systemName: "play.fill")
+                                            .font(.system(size: 17))
+                                            .foregroundStyle(.prim)
+                                    }
+                                } else {
+                                    Image(systemName: "play.fill")
+                                        .font(.system(size: 17))
+                                        .foregroundStyle(.prim)
+                                }
                             })
                         }
                     }
                 }
-                
-                
                 .listStyle(.grouped)
                 .scrollContentBackground(.hidden)
                 .navigationTitle(Title.letter.name)
@@ -75,11 +91,11 @@ struct GrandMaLetterView: View {
     }
     
     // MARK: - 날짜 변환기
-    var dateNumberFormatter: DateFormatter {
+    let dateNumberFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY.MM.DD"
+        formatter.dateFormat = "yyyy.MM.dd"
         return formatter
-    }
+    }()
 }
 
 #Preview {

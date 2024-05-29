@@ -97,7 +97,7 @@ extension AddDiaryRecordView {
             VStack {
                 HStack {
                     Button {
-                        
+                        viewModel.backwardFifteen()
                     } label: {
                         Image(systemName: "gobackward.15")
                             .resizable()
@@ -130,7 +130,7 @@ extension AddDiaryRecordView {
                     .padding(.trailing, 30)
                     
                     Button {
-                        
+                        viewModel.forwardFifteen()
                     } label: {
                         Image(systemName: "goforward.15")
                             .resizable()

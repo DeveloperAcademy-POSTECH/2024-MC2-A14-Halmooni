@@ -84,14 +84,70 @@ extension AudioController {
         
         self.isPlaying = false
     }
+    
     public func pauseAudio() {
-            self.timer?.invalidate()
-            self.audioPlayer?.pause()
-            
-            stopMonitoring()
-            
-            self.isPlaying = false
+        self.timer?.invalidate()
+        self.audioPlayer?.pause()
+        
+        stopMonitoring()
+        
+        self.isPlaying = false
+    }
+    
+    public func backwardFifteen() {
+        guard let player = self.audioPlayer else {
+            return
         }
+        let currentTime = player.currentTime
+        
+        if currentTime < 15 {
+            player.pause()
+            player.currentTime = 0
+            player.play()
+        } else {
+            player.pause()
+            player.currentTime = currentTime - 15
+            player.play()
+        }
+    }
+    
+    public func forwardFifteen() {
+        guard let player = self.audioPlayer else {
+            return
+        }
+        let currentTime = player.currentTime
+
+        if currentTime + 15 > player.duration {
+            let duration = player.duration
+            stopAudio()
+            self.time = duration
+        } else {
+            player.pause()
+            player.currentTime = currentTime + 15
+            player.play()
+        }
+    }
+    
+    public func startAudioWithLetter() {
+        guard let url = self.fileURL else {
+            print("Invaild url")
+            return
+        }
+        
+        let session = AVAudioSession.sharedInstance()
+        
+        do {
+            try session.setCategory(.playAndRecord, mode: .default)
+            try session.overrideOutputAudioPort(.speaker)
+            
+            self.audioPlayer = try AVAudioPlayer(contentsOf: url)
+            self.audioPlayer?.delegate = self
+            self.audioPlayer?.play()
+            self.isPlaying = true
+        } catch {
+            print("Failed to playing audio in Letter, \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: - 녹음 기능 메소드
